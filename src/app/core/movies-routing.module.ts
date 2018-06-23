@@ -10,6 +10,10 @@ const routes: Routes = [
         component: MoviesComponent
     },
     {
+        path: 'recent/:page',
+        component: MoviesComponent
+    },
+    {
         path: 'watch/:movieId',
         component: MovieDetailsComponent
     },

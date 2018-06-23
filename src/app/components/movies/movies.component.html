@@ -1,6 +1,13 @@
-<div>
-    <header fxLayout="row" fxLayoutAlign="space-between center">
+<div class="movies">
+    <header class="movies-header" fxLayout="row" fxLayoutAlign="space-between center">
         <h1>Latest updates</h1>
-        <button mat-button>MORE</button>
     </header>
+    <main class="movies-content" *ngIf="movies && movies.data;">
+        <div *ngFor="let movie of movies.data; trackBy: trackMovie;">
+            {{movie.title}}
+        </div>
+        <footer class="movies-footer" fxLayout="row" fxLayoutAlign="center center">
+            <movies-pagination [total]="movies.total" [currentPage]="pageIndex" (changed)="changePage($event)"></movies-pagination>
+        </footer>
+    </main>
 </div>
