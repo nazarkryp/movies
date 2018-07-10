@@ -3,9 +3,19 @@
         <h1>Latest updates</h1>
     </header>
     <main class="movies-content" *ngIf="movies && movies.data;">
-        <div *ngFor="let movie of movies.data; trackBy: trackMovie;">
+        <!-- <div *ngFor="let movie of movies.data; trackBy: trackMovie;">
             {{movie.title}}
-        </div>
+        </div> -->
+        <mat-grid-list cols="3" rowHeight="4:3" gutterSize="20px">
+            <mat-grid-tile mat-ripple *ngFor="let movie of movies.data; trackBy: trackMovie;" style="box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26);">
+                <div style="position: relative; width: 100%; height: 100%;" fxLayout="column">
+                    <img [src]="movie.attachments[0].url" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; bottom: 0; padding: 1.4rem;">
+                        <span style="font-size: 1.2em; font-weight: bold; text-shadow: 1px 1px 4px #000000; color: white;">{{movie.title}}</span>
+                    </div>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
         <footer class="movies-footer" fxLayout="row" fxLayoutAlign="center center">
             <movies-pagination [total]="movies.total" [currentPage]="pageIndex" (changed)="changePage($event)"></movies-pagination>
         </footer>

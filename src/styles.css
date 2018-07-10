@@ -1,6 +1,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 html {
-    font-family: 'Karla', sans-serif;
+    /* font-family: 'Karla', sans-serif; */
+    font-family: 'Lora', serif;
     font-size: .9em;
     color: rgb(0, 0, 0, .86);
 }

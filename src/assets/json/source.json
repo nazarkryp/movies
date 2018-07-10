@@ -39,6 +39,123 @@
                 "id": 1,
                 "name": "Studio Name"
             }
+        },
+        {
+            "id": 4,
+            "title": "Movie Title",
+            "date": "Tue Jul 10 2018 13:05:15 GMT+0300 (Eastern European Summer Time)",
+            "attachments": [{
+                "id": 4,
+                "url": "https://webcomicshub.com/images/default-thumbnail.jpg"
+            }],
+            "studio": {
+                "id": 1,
+                "name": "Studio Name"
+            }
+        },
+        {
+            "id": 5,
+            "title": "Movie Title",
+            "date": "Tue Jul 10 2018 13:05:15 GMT+0300 (Eastern European Summer Time)",
+            "attachments": [{
+                "id": 5,
+                "url": "https://webcomicshub.com/images/default-thumbnail.jpg"
+            }],
+            "studio": {
+                "id": 1,
+                "name": "Studio Name"
+            }
+        },
+        {
+            "id": 6,
+            "title": "Movie Title",
+            "date": "Tue Jul 10 2018 13:05:15 GMT+0300 (Eastern European Summer Time)",
+            "attachments": [{
+                "id": 6,
+                "url": "https://webcomicshub.com/images/default-thumbnail.jpg"
+            }],
+            "studio": {
+                "id": 1,
+                "name": "Studio Name"
+            }
+        },
+        {
+            "id": 7,
+            "title": "Movie Title",
+            "date": "Tue Jul 10 2018 13:05:15 GMT+0300 (Eastern European Summer Time)",
+            "attachments": [{
+                "id": 7,
+                "url": "https://webcomicshub.com/images/default-thumbnail.jpg"
+            }],
+            "studio": {
+                "id": 1,
+                "name": "Studio Name"
+            }
+        },
+        {
+            "id": 8,
+            "title": "Movie Title",
+            "date": "Tue Jul 10 2018 13:05:15 GMT+0300 (Eastern European Summer Time)",
+            "attachments": [{
+                "id": 8,
+                "url": "https://webcomicshub.com/images/default-thumbnail.jpg"
+            }],
+            "studio": {
+                "id": 1,
+                "name": "Studio Name"
+            }
+        },
+        {
+            "id": 9,
+            "title": "Movie Title",
+            "date": "Tue Jul 10 2018 13:05:15 GMT+0300 (Eastern European Summer Time)",
+            "attachments": [{
+                "id": 9,
+                "url": "https://webcomicshub.com/images/default-thumbnail.jpg"
+            }],
+            "studio": {
+                "id": 1,
+                "name": "Studio Name"
+            }
+        },
+        {
+            "id": 10,
+            "title": "Movie Title",
+            "date": "Tue Jul 10 2018 13:05:15 GMT+0300 (Eastern European Summer Time)",
+            "attachments": [{
+                "id": 10,
+                "url": "https://webcomicshub.com/images/default-thumbnail.jpg"
+            }],
+            "studio": {
+                "id": 1,
+                "name": "Studio Name"
+            }
+        },
+        {
+            "id": 11,
+            "title": "Movie Title",
+            "date": "Tue Jul 10 2018 13:05:15 GMT+0300 (Eastern European Summer Time)",
+            "attachments": [{
+                "id": 11,
+                "url": "https://webcomicshub.com/images/default-thumbnail.jpg"
+            }],
+            "studio": {
+                "id": 1,
+                "name": "Studio Name"
+            }
+        },
+        {
+            "id": 12,
+            "title": "Movie Title",
+            "date": "Tue Jul 10 2018 13:05:15 GMT+0300 (Eastern European Summer Time)",
+            "attachments": [{
+                "id": 12,
+                "url": "https://webcomicshub.com/images/default-thumbnail.jpg"
+            }],
+            "studio": {
+                "id": 1,
+                "name": "Studio Name"
+            }
         }
     ]
 }

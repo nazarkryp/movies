@@ -8,7 +8,7 @@ import { Movie } from 'app/models/view';
 @Component({
     selector: 'movies-movies',
     templateUrl: './movies.component.html',
-    styleUrls: ['./movies.component.css']
+    styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
     private pageSize = 12;

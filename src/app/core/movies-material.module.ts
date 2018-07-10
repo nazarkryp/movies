@@ -1,13 +1,19 @@
 import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatRippleModule } from '@angular/material';
 
 @NgModule({
     imports: [
-        MatButtonModule
+        MatButtonModule,
+        MatGridListModule,
+        MatRippleModule,
     ],
     exports: [
-        MatButtonModule
+        MatButtonModule,
+        MatGridListModule,
+        MatRippleModule
     ]
 })
 export class MoviesMaterialModule { }

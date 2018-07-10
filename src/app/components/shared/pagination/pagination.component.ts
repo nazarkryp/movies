@@ -6,7 +6,7 @@ import { Page } from 'app/models/common';
 @Component({
     selector: 'movies-pagination',
     templateUrl: './pagination.component.html',
-    styleUrls: ['./pagination.component.css'],
+    styleUrls: ['./pagination.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnInit {
