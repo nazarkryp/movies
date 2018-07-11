@@ -1,5 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { interval, Subscription } from 'rxjs';
 
 import { MovieService } from 'app/services';
 import { Page } from 'app/models/common';
@@ -12,7 +14,7 @@ import { Movie } from 'app/models/view';
 })
 export class MoviesComponent implements OnInit {
     private pageSize = 12;
-    private pageIndex: number;
+    public pageIndex: number;
 
     private _movies: Page<Movie>;
 
@@ -29,15 +31,37 @@ export class MoviesComponent implements OnInit {
         this._movies = value;
     }
 
+    private intervalSubscription: Subscription;
+    public mouseenter(movie: Movie) {
+        if (movie.attachments.length > 1) {
+            movie.selectedAttachment = 1;
+            this.intervalSubscription = interval(500).subscribe(() => {
+                if (movie.selectedAttachment < movie.attachments.length - 1) {
+                    movie.selectedAttachment++;
+                } else {
+                    movie.selectedAttachment = 0;
+                }
+            });
+        }
+    }
+
+    public mouseleave(movie: Movie) {
+        if (movie.attachments.length > 1) {
+            this.intervalSubscription.unsubscribe();
+
+            movie.selectedAttachment = 0;
+        }
+    }
+
     private getMovies(pageIndex: number) {
         const offset = this.pageSize * pageIndex;
 
         this.movieService.getMovies(offset).subscribe(movies => {
             this.movies = movies;
-        }, error => { });
+        }, () => { });
     }
 
-    public trackMovie(index: number, movie: Movie) {
+    public trackMovie(movie: Movie) {
         return movie.id;
     }
 
@@ -50,7 +74,7 @@ export class MoviesComponent implements OnInit {
             let pageIndex = +params.get('page');
 
             if (!pageIndex) {
-                pageIndex = 0;
+                pageIndex = 1;
             }
 
             this.pageIndex = pageIndex;

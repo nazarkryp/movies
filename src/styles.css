@@ -6,7 +6,11 @@ html {
     color: rgb(0, 0, 0, .86);
 }
 
+body {
+    overflow-y: scroll;
+}
+
 .container {
-    max-width: 960px;
+    max-width: 1200px;
     width: 100%;
 }

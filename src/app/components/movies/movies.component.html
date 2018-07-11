@@ -6,13 +6,17 @@
         <!-- <div *ngFor="let movie of movies.data; trackBy: trackMovie;">
             {{movie.title}}
         </div> -->
-        <mat-grid-list cols="3" rowHeight="4:3" gutterSize="20px">
-            <mat-grid-tile mat-ripple *ngFor="let movie of movies.data; trackBy: trackMovie;" style="box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26);">
-                <div style="position: relative; width: 100%; height: 100%;" fxLayout="column">
-                    <img [src]="movie.attachments[0].url" style="width: 100%; height: 100%; object-fit: cover;">
-                    <div style="position: absolute; bottom: 0; padding: 1.4rem;">
-                        <span style="font-size: 1.2em; font-weight: bold; text-shadow: 1px 1px 4px #000000; color: white;">{{movie.title}}</span>
-                    </div>
+        <mat-grid-list cols="3" rowHeight="5:4" gutterSize="50px">
+            <mat-grid-tile *ngFor="let movie of movies.data; trackBy: trackMovie;">
+                <div class="movie-details" fxLayout="column">
+                    <mat-progress-bar class="movie-details-progressbar" mode="determinate" [value]="(movie.selectedAttachment * 100) / movie.attachments.length" *ngIf="movie.attachments.length > 1"></mat-progress-bar>
+                    <a class="attachment" [routerLink]="['/watch', movie.id]" mat-ripple (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)">
+                        <img [src]="movie.attachments[movie.selectedAttachment].url" style="width: 100%; height: 100%; object-fit: cover;">
+                        <!-- <img style="width: 100%; height: 100%; object-fit: cover;" src="https://instagram.flwo1-1.fna.fbcdn.net/vp/946c7325cb62cebd713968adea09c591/5BE08F3C/t51.2885-15/e35/36161176_2234290910164232_3781309952090439680_n.jpg"> -->
+                    </a>
+                    <footer>
+                        <a [routerLink]="['/watch', movie.id]">{{movie.title}}</a>
+                    </footer>
                 </div>
             </mat-grid-tile>
         </mat-grid-list>

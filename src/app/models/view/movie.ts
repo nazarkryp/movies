@@ -8,4 +8,5 @@ export class Movie {
     public date: Date;
     public attachments: Attachment[];
     public studio: Studio;
+    public selectedAttachment = 0;
 }

@@ -5,3 +5,42 @@
 .movies-footer {
     padding: 2.8rem 0 1.4rem;
 }
+
+.movie-details {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.movie-details .attachment {
+    position: relative;
+    height: 100%;
+    box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26);
+    border-radius: 2px;
+}
+
+.movie-details-progressbar {
+    position: absolute;
+    top: 0;
+    height: 3px;
+    z-index: 1;
+}
+
+::ng-deep .movie-details-progressbar .mat-progress-bar-background {
+    fill: transparent;
+}
+
+::ng-deep .movie-details-progressbar .mat-progress-bar-buffer {
+    background-color: transparent;
+}
+
+.movie-details footer {
+    padding: 1.4rem 0;
+}
+
+.movie-details footer a {
+    color: inherit;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+}
