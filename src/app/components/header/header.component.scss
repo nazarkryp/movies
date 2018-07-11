@@ -1,5 +1,28 @@
 .header {
-    background: white;
-    box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26);
+    background: white; // box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26);
     padding: 1.4rem .7rem;
+    position: relative;
+}
+
+.header a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.search {
+    border: none;
+    background-color: #f7f7f7;
+    border-radius: 2px;
+    padding: .7rem;
+    outline: none;
+    width: 150px;
+    -webkit-transition: width .25s ease-in-out;
+    -moz-transition: width .25s ease-in-out;
+    -ms-transition: width .25s ease-in-out;
+    -o-transition: width .25s ease-in-out;
+    transition: width .25s ease-in-out;
+}
+
+.search:focus {
+    width: 300px;
 }

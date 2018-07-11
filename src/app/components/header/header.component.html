@@ -1,6 +1,11 @@
-<div class="header" fxLayout="row" fxLayoutAlign="center center">
-    <div class="container" fxLayout="row">
-        <h1>Movies</h1>
+<header class="header" fxLayout="row" fxLayoutAlign="center center">
+    <div fxLayout="row" style="position: absolute; left: 1.4rem;">
+        <a routerLink="/">
+            <h1>Movies</h1>
+        </a>
         <span style="color: crimson; font-weight: bold; font-size: 2em;">.</span>
     </div>
-</div>
+    <div class="container" fxLayout="row" fxLayoutAlign="space-between center">
+        <input class="search" type="text" placeholder="Search">
+    </div>
+</header>
