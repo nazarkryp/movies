@@ -1,6 +1,6 @@
 .header {
     background: white; // box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26);
-    padding: 1.4rem .7rem;
+    padding: .7rem;
     position: relative;
 }
 
@@ -10,19 +10,28 @@
 }
 
 .search {
-    border: none;
-    background-color: #f7f7f7;
-    border-radius: 2px;
+    border: none; // background-color: #f7f7f7;
+    // border-radius: 2px;
+    // border-left: 1px solid #d8d8d8;
+    font-size: 1.1em;
     padding: .7rem;
     outline: none;
-    width: 150px;
-    -webkit-transition: width .25s ease-in-out;
-    -moz-transition: width .25s ease-in-out;
-    -ms-transition: width .25s ease-in-out;
-    -o-transition: width .25s ease-in-out;
-    transition: width .25s ease-in-out;
+    width: 0px;
+    opacity: 0;
+    -webkit-transition: width .35s ease-in-out;
+    -moz-transition: width .35s ease-in-out;
+    -ms-transition: width .35s ease-in-out;
+    -o-transition: width .35s ease-in-out;
+    transition: width .35s ease-in-out;
 }
 
-.search:focus {
-    width: 300px;
+.search.active {
+    opacity: 1;
+    width: 100%;
+}
+
+.navigation .active {
+    border-bottom: 2px solid crimson;
+    border-right: none;
+    border-radius: 0;
 }
