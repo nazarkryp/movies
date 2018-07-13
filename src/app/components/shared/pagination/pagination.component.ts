@@ -10,13 +10,14 @@ import { Page } from 'app/models/common';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent implements OnInit {
-    @Input() public total: number;
     private maxPages: number;
-    public range: number;
 
+    @Input() public pageSize: number;
+    @Input() public total: number;
     @Input() public currentPage: number;
     @Output() public changed = new EventEmitter<number>();
     public pages: number[];
+    public range: number;
 
     constructor(private router: Router) {
         this.maxPages = 10;
@@ -25,11 +26,11 @@ export class PaginationComponent implements OnInit {
 
     public showDots(page) {
         return (page === 2 && this.currentPage - page > this.range)
-            || (page === Math.ceil(this.total / 12) - 1 && page - this.currentPage > this.range);
+            || (page === Math.ceil(this.total / this.pageSize) - 1 && page - this.currentPage > this.range);
     }
 
     public displayPage(page: number) {
-        if (page === 1 || page === Math.ceil(this.total / 12)) {
+        if (page === 1 || page === Math.ceil(this.total / this.pageSize)) {
             return true;
         }
         if (page > this.currentPage) {
@@ -55,7 +56,7 @@ export class PaginationComponent implements OnInit {
     }
 
     public ngOnInit() {
-        const pagesCount = Math.ceil(this.total / 12);
+        const pagesCount = Math.ceil(this.total / this.pageSize);
 
         this.pages = new Array(pagesCount);
 

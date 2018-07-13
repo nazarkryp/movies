@@ -6,7 +6,7 @@
             </a>
             <span style="color: crimson; font-weight: bold; font-size: 2em;">.</span>
         </div>
-        <div class="navigation" fxLayout="row" fxLayoutAlign="space-around center" fxFlex>
+        <div class="navigation" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!showSearchBar" fxFlex>
             <button mat-button class="active">Home</button>
             <button mat-button>Sites</button>
             <button mat-button>Categories</button>

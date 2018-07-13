@@ -31,11 +31,22 @@ export class MoviesComponent implements OnInit {
         this._movies = value;
     }
 
-    private intervalSubscription: Subscription;
     public mouseenter(movie: Movie) {
         if (movie.attachments.length > 1) {
+
+            if (movie.subscription) {
+                movie.subscription.unsubscribe();
+                movie.subscription = null;
+                movie.selectedAttachment = 0;
+            }
+
             movie.selectedAttachment = 1;
-            this.intervalSubscription = interval(500).subscribe(() => {
+
+            if (this.isVideo(movie.attachments[movie.selectedAttachment].url)) {
+                return;
+            }
+
+            movie.subscription = interval(500).subscribe(() => {
                 if (movie.selectedAttachment < movie.attachments.length - 1) {
                     movie.selectedAttachment++;
                 } else {
@@ -46,19 +57,35 @@ export class MoviesComponent implements OnInit {
     }
 
     public mouseleave(movie: Movie) {
-        if (movie.attachments.length > 1) {
-            this.intervalSubscription.unsubscribe();
+        if (this.isVideo(movie.attachments[movie.selectedAttachment].url)) {
+            movie.selectedAttachment = 0;
+            return;
+        }
 
+        if (movie.subscription) {
+            console.log('movie.subscription.unsubscribe();');
+            movie.subscription.unsubscribe();
+            movie.subscription = null;
             movie.selectedAttachment = 0;
         }
     }
 
     private getMovies(pageIndex: number) {
-        const offset = this.pageSize * pageIndex;
+        // const offset = this.pageSize * pageIndex;
 
-        this.movieService.getMovies(offset).subscribe(movies => {
+        // this.movieService.getMovies(offset).subscribe(movies => {
+        //     this.movies = movies;
+        // }, () => { });
+
+        pageIndex++;
+        this.movieService.getMoviesDirect(pageIndex).subscribe(movies => {
             this.movies = movies;
+            this.movies.total = movies.pagesCount * movies.data.length;
         }, () => { });
+    }
+
+    public isVideo(url: string) {
+        return url.endsWith('.mp4');
     }
 
     public trackMovie(movie: Movie) {

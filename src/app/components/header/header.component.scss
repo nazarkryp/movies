@@ -10,19 +10,20 @@
 }
 
 .search {
+    font-family: sans-serif;
     border: none; // background-color: #f7f7f7;
     // border-radius: 2px;
     // border-left: 1px solid #d8d8d8;
     font-size: 1.1em;
     padding: .7rem;
     outline: none;
-    width: 0px;
+    width: 90%;
     opacity: 0;
-    -webkit-transition: width .35s ease-in-out;
-    -moz-transition: width .35s ease-in-out;
-    -ms-transition: width .35s ease-in-out;
-    -o-transition: width .35s ease-in-out;
-    transition: width .35s ease-in-out;
+    -webkit-transition: width 1.35s ease-in-out;
+    -moz-transition: width 1.35s ease-in-out;
+    -ms-transition: width 1.35s ease-in-out;
+    -o-transition: width 1.35s ease-in-out;
+    transition: width 1.35s ease-in-out;
 }
 
 .search.active {

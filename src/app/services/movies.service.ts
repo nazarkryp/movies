@@ -24,9 +24,27 @@ export class MovieService {
     }
 
     public getMovies(offset: number): Observable<Page<Movie>> {
-        return this.client.get<Page<MovieResponse>>(`http://localhost:4200/assets/json/source.json`)
-            .pipe(map(response => this.pageMapper.map(response)));
-        // return this.webApiService.get<Page<MovieResponse>>(`v1/movies/direct`)
+        // return this.client.get<Page<MovieResponse>>(`http://localhost:4200/assets/json/source.json`)
         //     .pipe(map(response => this.pageMapper.map(response)));
+        return this.webApiService.get<Page<MovieResponse>>(`v1/movies/direct`)
+            .pipe(map(response => this.pageMapper.map(response)));
+    }
+
+    public getMoviesDirect(page: number): Observable<Page<Movie>> {
+        if (!page) {
+            page = 1;
+        }
+
+        const requestUri = `v1/movies/direct?page=${page}`;
+        // return this.client.get<Page<MovieResponse>>(`http://localhost:4200/assets/json/source.json`)
+        //     .pipe(map(response => this.pageMapper.map(response)));
+        return this.webApiService.get<Page<MovieResponse>>(requestUri)
+            .pipe(map(response => this.pageMapper.map(response)));
+    }
+
+    public getMovie(identifier: string): Observable<any> {
+        // return this.client.get<Page<MovieResponse>>(`http://localhost:4200/assets/json/source.json`)
+        //     .pipe(map(response => this.pageMapper.map(response)));
+        return this.webApiService.get<any>(`v1/movies/watch?uri=${identifier}`);
     }
 }

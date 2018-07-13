@@ -9,20 +9,23 @@
         <mat-grid-list cols="3" rowHeight="5:4" gutterSize="25px">
             <mat-grid-tile *ngFor="let movie of movies.data; trackBy: trackMovie;">
                 <div class="movie-details" fxLayout="column">
-                    <mat-progress-bar class="movie-details-progressbar" mode="determinate" [value]="(movie.selectedAttachment * 100) / movie.attachments.length" *ngIf="movie.attachments.length > 1"></mat-progress-bar>
-                    <a class="attachment" [routerLink]="['/watch', movie.id]" mat-ripple (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)">
+                    <!-- <mat-progress-bar class="movie-details-progressbar" mode="determinate" [value]="(movie.selectedAttachment * 100) / movie.attachments.length" *ngIf="movie.attachments.length > 1"></mat-progress-bar> -->
+                    <a class="attachment" [routerLink]="['/watch', movie.link]" mat-ripple (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)">
                         <div class="movie-details-overlay"></div>
-                        <img [src]="movie.attachments[movie.selectedAttachment].url" style="width: 100%; height: 100%; object-fit: cover;">
-                        <!-- <img style="width: 100%; height: 100%; object-fit: cover;" src="https://instagram.flwo1-1.fna.fbcdn.net/vp/946c7325cb62cebd713968adea09c591/5BE08F3C/t51.2885-15/e35/36161176_2234290910164232_3781309952090439680_n.jpg"> -->
+                        <img class="thumbnail" [src]="movie.attachments[movie.selectedAttachment]?.url" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)">
+                        <video class="thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.url)" loop autoplay muted>
+                            <source src="{{movie.attachments[movie.selectedAttachment]?.url}}">
+                        </video>
+                        <!-- <img class="thumbnail" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)" src="https://instagram.flwo1-1.fna.fbcdn.net/vp/946c7325cb62cebd713968adea09c591/5BE08F3C/t51.2885-15/e35/36161176_2234290910164232_3781309952090439680_n.jpg"> -->
                     </a>
                     <footer>
-                        <a [routerLink]="['/watch', movie.id]">{{movie.title}}</a>
+                        <a [routerLink]="['/watch', movie.id]" title="{{movie.title}}">{{movie.title | truncate:50 }}</a>
                     </footer>
                 </div>
             </mat-grid-tile>
         </mat-grid-list>
         <footer class="movies-footer" fxLayout="row" fxLayoutAlign="center center">
-            <movies-pagination [total]="movies.total" [currentPage]="pageIndex" (changed)="changePage($event)"></movies-pagination>
+            <movies-pagination [total]="movies.total" [currentPage]="pageIndex" [pageSize]="movies.data.length" (changed)="changePage($event)"></movies-pagination>
         </footer>
     </main>
 </div>

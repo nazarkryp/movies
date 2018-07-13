@@ -10,7 +10,9 @@ import { MoviesLayoutComponent } from 'app/layout/movies-layout.component';
 import { MoviesComponent } from 'app/components/movies/movies.component';
 import { HeaderComponent } from 'app/components/header/header.component';
 import { MovieDetailsComponent } from 'app/components/movie-details/movie-details.component';
-import { PaginationComponent } from '../components/shared/pagination/pagination.component';
+import { PaginationComponent } from 'app/components/shared/pagination/pagination.component';
+
+import { TruncatePipe } from 'app/pipes/truncate.pipe';
 
 @NgModule({
     declarations: [
@@ -18,7 +20,8 @@ import { PaginationComponent } from '../components/shared/pagination/pagination.
         MoviesComponent,
         HeaderComponent,
         MovieDetailsComponent,
-        PaginationComponent
+        PaginationComponent,
+        TruncatePipe
     ],
     imports: [
         BrowserModule,

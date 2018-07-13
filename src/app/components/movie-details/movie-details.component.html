@@ -1,9 +1,9 @@
-<div class="watch-container">
+<div class="watch-container" *ngIf="movie">
     <div class="video-container">
         <video controls>
-            <source src="https://www.w3schools.com/htmL/mov_bbb.mp4">
+            <!-- <source src="https://www.w3schools.com/htmL/mov_bbb.mp4"> -->
+            <source src="{{movie.directUri}}">
         </video>
-        <h1>Video Title</h1>
+        <h1>{{movie.title}}</h1>
     </div>
 </div>
-

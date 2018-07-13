@@ -12,6 +12,7 @@ export class PageMapper<TSource, TResult> {
         page.size = responsePage.size;
         page.total = responsePage.total;
         page.data = this.mapper.mapFromResponseArray(responsePage.data);
+        page.pagesCount = responsePage.pagesCount;
 
         return page;
     }
