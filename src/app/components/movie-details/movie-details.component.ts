@@ -10,18 +10,20 @@ import { MovieService } from 'app/services';
 })
 export class MovieDetailsComponent implements OnInit {
     public movie: any;
-
+    public stream: any;
     constructor(
         private route: ActivatedRoute,
         private movieService: MovieService) { }
 
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
-            const identifier = params.get('movieId');
+            const studio = params.get('studio');
+            const movie = params.get('movie');
 
-            this.movieService.getMovie(identifier)
-                .subscribe(movie => {
-                    this.movie = movie;
+            this.movieService.getMovie(studio, movie)
+                .subscribe(movieDetails => {
+                    this.movie = movieDetails;
+                    this.stream = this.movieService.getStream(movieDetails.directUri);
                 });
         });
     }

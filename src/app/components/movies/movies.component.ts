@@ -78,10 +78,13 @@ export class MoviesComponent implements OnInit {
         // }, () => { });
 
         pageIndex++;
-        this.movieService.getMoviesDirect(pageIndex).subscribe(movies => {
-            this.movies = movies;
-            this.movies.total = movies.pagesCount * movies.data.length;
-        }, () => { });
+
+        this.movieService.getDirectMovies(pageIndex)
+            .subscribe(movies => {
+                console.log(movies);
+                this.movies = movies;
+                this.movies.total = movies.pagesCount * movies.data.length;
+            }, () => { });
     }
 
     public isVideo(url: string) {

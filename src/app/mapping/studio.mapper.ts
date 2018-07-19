@@ -13,6 +13,7 @@ export class StudioMapper implements IMapper<StudioResponse, Studio> {
 
         studio.id = response.id;
         studio.name = response.name;
+        studio.objectId = response.objectId;
 
         return studio;
     }

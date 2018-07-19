@@ -18,9 +18,14 @@ export class MovieMapper implements IMapper<MovieResponse, Movie> {
         const movie = new Movie();
 
         movie.id = response.id;
+        movie.objectId = response.objectId;
         movie.date = response.date;
         movie.link = response.link;
-        movie.studio = this.studioMapper.mapFromResponse(response.studio);
+
+        if (response.studio) {
+            movie.studio = this.studioMapper.mapFromResponse(response.studio);
+        }
+
         movie.attachments = this.attachmentMapper.mapFromResponseArray(response.attachments);
         movie.title = response.title;
 

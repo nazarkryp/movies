@@ -14,7 +14,7 @@ const routes: Routes = [
         component: MoviesComponent
     },
     {
-        path: 'watch/:movieId',
+        path: 'watch/:studio/:movie',
         component: MovieDetailsComponent
     },
     {

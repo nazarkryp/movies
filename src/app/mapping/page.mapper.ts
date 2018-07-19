@@ -3,17 +3,22 @@ import { Page } from 'app/models/common';
 
 export class PageMapper<TSource, TResult> {
     constructor(
-        private mapper: IMapper<TSource, TResult>) { }
+        protected movieMapper: IMapper<TSource, TResult>) { }
 
     public map(responsePage: Page<TSource>): Page<TResult> {
-        const page = new Page<TResult>();
+        try {
+            const page = new Page<TResult>();
 
-        page.offset = responsePage.offset;
-        page.size = responsePage.size;
-        page.total = responsePage.total;
-        page.data = this.mapper.mapFromResponseArray(responsePage.data);
-        page.pagesCount = responsePage.pagesCount;
+            page.currentPage = responsePage.currentPage;
+            page.pageSize = responsePage.pageSize;
+            page.total = responsePage.total;
+            page.data = this.movieMapper.mapFromResponseArray(responsePage.data);
+            page.pagesCount = responsePage.pagesCount;
 
-        return page;
+            return page;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     }
 }
