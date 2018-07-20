@@ -1,0 +1,10 @@
+<div>
+    <header style="padding-bottom: 1.4rem;">
+        <h1>Studios</h1>
+    </header>
+    <main fxLayout="column">
+        <div *ngFor="let studio of studios | async">
+            {{studio.name}}
+        </div>
+    </main>
+</div>

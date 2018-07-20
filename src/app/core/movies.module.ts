@@ -13,6 +13,7 @@ import { MovieDetailsComponent } from 'app/components/movie-details/movie-detail
 import { PaginationComponent } from 'app/components/shared/pagination/pagination.component';
 
 import { TruncatePipe } from 'app/pipes/truncate.pipe';
+import { StudioListComponent } from '../components/studio-list/studio-list.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { TruncatePipe } from 'app/pipes/truncate.pipe';
         HeaderComponent,
         MovieDetailsComponent,
         PaginationComponent,
-        TruncatePipe
+        TruncatePipe,
+        StudioListComponent
     ],
     imports: [
         BrowserModule,

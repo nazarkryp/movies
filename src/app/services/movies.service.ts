@@ -42,12 +42,6 @@ export class MovieService {
         return this.webApiService.get<any>(`v1/movies/${studio}/${movie}`);
     }
 
-    public getStream(url: string) {
-        return this.webApiService.post<Stream>(`v1/movies/stream`, {
-            url: url
-        });
-    }
-
     // public parse() {
     //     return this.client.get<string>('https://yourporn.sexy/post/5b504285ff492.html')
     //         .pipe(mergeMap(html => {
