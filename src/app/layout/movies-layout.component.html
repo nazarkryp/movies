@@ -23,11 +23,9 @@
                     </div>
                 </footer>
             </mat-sidenav>
-            <mat-sidenav-content style="max-height: calc(100vh - 65px); padding: 1.4rem; box-sizing: border-box;">
-                <div fxLayout="row" fxLayoutAlign="center start">
-                    <div class="container">
-                        <router-outlet></router-outlet>
-                    </div>
+            <mat-sidenav-content style="height: calc(100vh - 65px); padding: 1.4rem 0; max-height: calc(100vh - 65px); box-sizing: border-box;" fxLayout="row" fxLayoutAlign="center start">
+                <div class="container">
+                    <router-outlet></router-outlet>
                 </div>
             </mat-sidenav-content>
         </mat-sidenav-container>

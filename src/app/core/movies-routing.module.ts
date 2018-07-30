@@ -14,6 +14,10 @@ const routes: Routes = [
         component: MoviesComponent
     },
     {
+        path: 'search/:searchQuery/:page',
+        component: MoviesComponent
+    },
+    {
         path: 'watch/:studio/:movie',
         component: MovieDetailsComponent
     },

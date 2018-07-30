@@ -1,8 +1,9 @@
 <div class="watch-container" *ngIf="movie">
     <div class="video-container">
-        <video controls autoplay>
-            <source src="http://movie-api.azurewebsites.net/v1/movies/stream?url={{movie.directUri}}">
+        <video controls>
+            <source src="{{directUri}}">
         </video>
-        <!-- <h1>{{movie.title}}</h1> -->
+        <h1>{{movie.title}}</h1>
+        <input type="text" value="{{movie.link}}" style="width: 100%;">
     </div>
 </div>

@@ -36,3 +36,7 @@
     position: relative;
     box-sizing: border-box;
 }
+
+.mat-drawer-content {
+    overflow-y: overlay;
+}

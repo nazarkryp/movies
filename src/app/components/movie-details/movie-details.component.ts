@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { MovieService } from 'app/services';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'movies-movie-details',
@@ -10,7 +11,7 @@ import { MovieService } from 'app/services';
 })
 export class MovieDetailsComponent implements OnInit {
     public movie: any;
-    public stream: any;
+    public directUri: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -24,7 +25,11 @@ export class MovieDetailsComponent implements OnInit {
             this.movieService.getMovie(studio, movie)
                 .subscribe(movieDetails => {
                     this.movie = movieDetails;
-                    console.log(movieDetails);
+                    if (environment.baseAddress.includes('localhost')) {
+                        this.directUri = this.movie.directUri;
+                    } else {
+                        this.directUri = `${environment.baseAddress}v1/movies/stream?url={{movie.directUri}}`;
+                    }
                 });
         });
     }

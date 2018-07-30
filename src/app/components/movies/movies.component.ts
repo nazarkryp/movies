@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { interval, Subscription } from 'rxjs';
+import { interval } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
 import { MovieService } from 'app/services';
 import { Page } from 'app/models/common';
@@ -13,12 +14,13 @@ import { Movie } from 'app/models/view';
     styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-    private pageSize = 12;
     public pageIndex: number;
+    public searchQuery: string;
 
     private _movies: Page<Movie>;
 
     constructor(
+        private store: Store<any>,
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private movieService: MovieService) { }
@@ -57,38 +59,34 @@ export class MoviesComponent implements OnInit {
     }
 
     public mouseleave(movie: Movie) {
+        if (!movie.attachments.length) {
+            return;
+        }
         if (this.isVideo(movie.attachments[movie.selectedAttachment].url)) {
             movie.selectedAttachment = 0;
             return;
         }
 
         if (movie.subscription) {
-            console.log('movie.subscription.unsubscribe();');
             movie.subscription.unsubscribe();
             movie.subscription = null;
             movie.selectedAttachment = 0;
         }
     }
 
-    private getMovies(pageIndex: number) {
-        // const offset = this.pageSize * pageIndex;
-
-        // this.movieService.getMovies(offset).subscribe(movies => {
-        //     this.movies = movies;
-        // }, () => { });
-
+    private getMovies(pageIndex: number, searchQuery: string = null) {
         pageIndex++;
 
-        this.movieService.getDirectMovies(pageIndex)
-            .subscribe(movies => {
-                console.log(movies);
-                this.movies = movies;
-                this.movies.total = movies.pagesCount * movies.data.length;
-            }, () => { });
+        this.movieService.getDirectMovies(pageIndex, searchQuery)
+            .subscribe();
     }
 
     public isVideo(url: string) {
-        return url.endsWith('.mp4');
+        if (url) {
+            return url.endsWith('.mp4');
+        }
+
+        return false;
     }
 
     public trackMovie(movie: Movie) {
@@ -96,19 +94,37 @@ export class MoviesComponent implements OnInit {
     }
 
     public changePage(pageIndex: number) {
-        this.router.navigate(['recent', pageIndex]);
+        if (this.searchQuery) {
+            this.router.navigate(['search', this.searchQuery, pageIndex]);
+        } else {
+            this.router.navigate(['recent', pageIndex]);
+        }
     }
 
     public ngOnInit() {
+        this.store.pipe(select('movies')).subscribe(payload => {
+            if (payload && payload.movies) {
+                this.movies = payload.movies;
+                this.movies.total = payload.movies.pagesCount * payload.movies.data.length;
+            } else if (this.movies) {
+                this.movies.data = null;
+            }
+        });
+
         this.activatedRoute.paramMap.subscribe(params => {
             let pageIndex = +params.get('page');
+            const searchQuery = params.get('searchQuery');
+
+            console.log(`pageIndex: ${pageIndex}; searchQuery: ${searchQuery}`);
+
+            this.searchQuery = searchQuery;
 
             if (!pageIndex) {
                 pageIndex = 1;
             }
 
             this.pageIndex = pageIndex;
-            this.getMovies(pageIndex - 1);
+            this.getMovies(pageIndex - 1, searchQuery);
         });
     }
 }

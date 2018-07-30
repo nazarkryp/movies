@@ -2,7 +2,6 @@
     background: white;
     box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26);
     padding: .7rem;
-    position: relative;
 }
 
 .header a {
@@ -10,21 +9,24 @@
     text-decoration: none;
 }
 
+form {
+    width: 100%;
+}
+
 .search {
     font-family: sans-serif;
-    border: none; // background-color: #f7f7f7;
-    // border-radius: 2px;
-    // border-left: 1px solid #d8d8d8;
-    font-size: 1.1em;
+    border: none;
+    font-size: 1.2em;
     padding: .7rem;
     outline: none;
-    width: 90%;
+    font-weight: lighter;
+    width: 0%;
     opacity: 0;
-    -webkit-transition: width 1.35s ease-in-out;
-    -moz-transition: width 1.35s ease-in-out;
-    -ms-transition: width 1.35s ease-in-out;
-    -o-transition: width 1.35s ease-in-out;
-    transition: width 1.35s ease-in-out;
+    -webkit-transition: width opacity .1s ease-in-out;
+    -moz-transition: width opacity .1s ease-in-out;
+    -ms-transition: width opacity .1s ease-in-out;
+    -o-transition: width opacity .1s ease-in-out;
+    transition: width opacity .1s ease-in-out;
 }
 
 .search.active {
