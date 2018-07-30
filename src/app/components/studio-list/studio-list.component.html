@@ -1,10 +1,12 @@
-<div>
-    <header style="padding-bottom: 1.4rem;">
+<div style="padding: 1.4rem 0;">
+    <header style="padding: 0 .7rem 1.4rem;">
         <h1>Studios</h1>
     </header>
     <main fxLayout="column">
-        <div *ngFor="let studio of studios | async">
-            {{studio.name}}
-        </div>
+        <mat-selection-list>
+            <mat-list-option *ngFor="let studio of studios | async">
+                {{studio.name}}
+            </mat-list-option>
+        </mat-selection-list>
     </main>
 </div>

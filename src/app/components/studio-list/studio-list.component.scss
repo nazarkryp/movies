@@ -1,0 +1,12 @@
+::ng-deep .mat-list .mat-list-item .mat-list-item-content-reverse,
+::ng-deep .mat-list .mat-list-option .mat-list-item-content-reverse,
+::ng-deep .mat-nav-list .mat-list-item .mat-list-item-content-reverse,
+::ng-deep .mat-nav-list .mat-list-option .mat-list-item-content-reverse,
+::ng-deep .mat-selection-list .mat-list-item .mat-list-item-content-reverse,
+::ng-deep .mat-selection-list .mat-list-option .mat-list-item-content-reverse {
+    padding: 0 .7rem !important;
+}
+
+.mat-list-option {
+    font-size: 1em;
+}

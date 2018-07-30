@@ -6,6 +6,7 @@ import { MatRippleModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
         MatRippleModule,
         MatProgressBarModule,
         MatIconModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatListModule
     ],
     exports: [
         MatButtonModule,
@@ -22,7 +24,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
         MatRippleModule,
         MatProgressBarModule,
         MatIconModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatListModule
     ]
 })
 export class MoviesMaterialModule { }

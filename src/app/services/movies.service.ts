@@ -11,7 +11,6 @@ import { Movie } from 'app/models/view/movie';
 import { Page } from 'app/models/common';
 import { StudioPageMapper } from '../mapping/studio-page.mapper';
 import { StudioPageResponse } from '../models/response/studio-page';
-import { Stream } from 'stream';
 
 @Injectable({
     providedIn: 'root'

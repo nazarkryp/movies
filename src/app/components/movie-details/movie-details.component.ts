@@ -11,6 +11,7 @@ import { MovieService } from 'app/services';
 export class MovieDetailsComponent implements OnInit {
     public movie: any;
     public stream: any;
+
     constructor(
         private route: ActivatedRoute,
         private movieService: MovieService) { }
@@ -23,7 +24,7 @@ export class MovieDetailsComponent implements OnInit {
             this.movieService.getMovie(studio, movie)
                 .subscribe(movieDetails => {
                     this.movie = movieDetails;
-                    this.stream = this.movieService.getStream(movieDetails.directUri);
+                    console.log(movieDetails);
                 });
         });
     }

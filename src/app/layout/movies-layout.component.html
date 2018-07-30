@@ -14,11 +14,16 @@
         </div>
     </main> -->
     <main class="main">
-        <mat-sidenav-container style="min-height: calc(100vh - 65px * 2); background: white;">
+        <mat-sidenav-container class="sidenav-container">
             <mat-sidenav #sidenav mode="side" opened="true" style="width: 300px; background: rgb(245, 245, 245);">
                 <movies-studio-list></movies-studio-list>
+                <footer class="footer" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="container">
+                        <span class="copyright">© 2018 Movies</span>
+                    </div>
+                </footer>
             </mat-sidenav>
-            <mat-sidenav-content style="max-height: calc(100vh - 65px * 2); padding: 1.4rem 0; box-sizing: border-box;">
+            <mat-sidenav-content style="max-height: calc(100vh - 65px); padding: 1.4rem; box-sizing: border-box;">
                 <div fxLayout="row" fxLayoutAlign="center start">
                     <div class="container">
                         <router-outlet></router-outlet>
@@ -27,9 +32,4 @@
             </mat-sidenav-content>
         </mat-sidenav-container>
     </main>
-    <footer class="footer" fxLayout="row" fxLayoutAlign="center center">
-        <div class="container">
-            <span class="copyright">© 2018 Movies</span>
-        </div>
-    </footer>
 </div>
