@@ -10,3 +10,17 @@
 .mat-list-option {
     font-size: 1em;
 }
+
+.mat-nav-list .mat-list-item {
+    -webkit-transition: border-color .2s ease-in-out;
+    -moz-transition: border-color .2s ease-in-out;
+    -ms-transition: border-color .2s ease-in-out;
+    -o-transition: border-color .2s ease-in-out;
+    transition: border-color .2s ease-in-out;
+    border-right: 3px solid transparent;
+}
+
+.mat-nav-list .mat-list-item.active {
+    border-right: 3px solid crimson;
+    background-color: rgba(220, 20, 60, .1);
+}

@@ -17,21 +17,20 @@ form {
     font-family: sans-serif;
     border: none;
     font-size: 1.2em;
-    padding: .7rem;
+    padding: .7rem 0;
     outline: none;
     font-weight: lighter;
-    width: 0%;
+    width: 100%;
     opacity: 0;
-    -webkit-transition: width opacity .1s ease-in-out;
-    -moz-transition: width opacity .1s ease-in-out;
-    -ms-transition: width opacity .1s ease-in-out;
-    -o-transition: width opacity .1s ease-in-out;
-    transition: width opacity .1s ease-in-out;
+    -webkit-transition: opacity .2s ease-in-out;
+    -moz-transition: opacity .2s ease-in-out;
+    -ms-transition: opacity .2s ease-in-out;
+    -o-transition: opacity .2s ease-in-out;
+    transition: opacity .2s ease-in-out;
 }
 
 .search.active {
     opacity: 1;
-    width: 100%;
 }
 
 .navigation .active {

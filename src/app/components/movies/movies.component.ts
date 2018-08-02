@@ -7,6 +7,9 @@ import { Store, select } from '@ngrx/store';
 import { MovieService } from 'app/services';
 import { Page } from 'app/models/common';
 import { Movie } from 'app/models/view';
+import { StudioPage } from 'app/models/view/studio-page';
+
+import * as fromRoot from '../../movies/infrastructure/state/reducer';
 
 @Component({
     selector: 'movies-movies',
@@ -16,22 +19,13 @@ import { Movie } from 'app/models/view';
 export class MoviesComponent implements OnInit {
     public pageIndex: number;
     public searchQuery: string;
-
-    private _movies: Page<Movie>;
+    public movies: StudioPage;
 
     constructor(
         private store: Store<any>,
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private movieService: MovieService) { }
-
-    public get movies(): Page<Movie> {
-        return this._movies;
-    }
-
-    public set movies(value: Page<Movie>) {
-        this._movies = value;
-    }
 
     public mouseenter(movie: Movie) {
         if (movie.attachments.length > 1) {
@@ -74,13 +68,6 @@ export class MoviesComponent implements OnInit {
         }
     }
 
-    private getMovies(pageIndex: number, searchQuery: string = null) {
-        pageIndex++;
-
-        this.movieService.getDirectMovies(pageIndex, searchQuery)
-            .subscribe();
-    }
-
     public isVideo(url: string) {
         if (url) {
             return url.endsWith('.mp4');
@@ -93,7 +80,7 @@ export class MoviesComponent implements OnInit {
         return movie.id;
     }
 
-    public changePage(pageIndex: number) {
+    public pageChanged(pageIndex: number) {
         if (this.searchQuery) {
             this.router.navigate(['search', this.searchQuery, pageIndex]);
         } else {
@@ -102,29 +89,28 @@ export class MoviesComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.store.pipe(select('movies')).subscribe(payload => {
-            if (payload && payload.movies) {
-                this.movies = payload.movies;
-                this.movies.total = payload.movies.pagesCount * payload.movies.data.length;
-            } else if (this.movies) {
-                this.movies.data = null;
+        this.store.pipe(select(fromRoot.getMoviesPage)).subscribe(movies => {
+            if (movies) {
+                this.movies = movies;
+                this.movies.total = movies.pagesCount * movies.data.length;
             }
         });
 
         this.activatedRoute.paramMap.subscribe(params => {
-            let pageIndex = +params.get('page');
+            const pageIndex = +params.get('page');
             const searchQuery = params.get('searchQuery');
 
-            console.log(`pageIndex: ${pageIndex}; searchQuery: ${searchQuery}`);
-
             this.searchQuery = searchQuery;
-
-            if (!pageIndex) {
-                pageIndex = 1;
-            }
-
-            this.pageIndex = pageIndex;
-            this.getMovies(pageIndex - 1, searchQuery);
+            this.pageIndex = pageIndex ? pageIndex : 1;
+            this.getMovies(pageIndex, searchQuery);
         });
+    }
+
+    private getMovies(pageIndex: number, searchQuery: string = null) {
+        this.movieService.getMovies({
+            page: pageIndex,
+            search: searchQuery,
+            studio: 'WW91cnBvcm5TZXh5'
+        }).subscribe();
     }
 }
