@@ -1,29 +1,6 @@
-<!-- <header class="header" fxLayout="row" fxLayoutAlign="center center">
-    <div class="container" fxLayout="row" fxLayoutAlign="space-between center">
-        <div fxLayout="row" style="padding-right: 3rem;">
-            <a routerLink="/">
-                <h1>Movies</h1>
-            </a>
-            <span style="color: crimson; font-weight: bold; font-size: 2em;">.</span>
-        </div>
-        <div class="navigation" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!showSearchBar" fxFlex>
-            <button mat-button class="active">Home</button>
-            <button mat-button>Sites</button>
-            <button mat-button>Categories</button>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
-            <input class="search" [class.active]="showSearchBar" type="text" placeholder="Search">
-            <button mat-icon-button (click)="showSearch()">
-                <mat-icon *ngIf="!showSearchBar">search</mat-icon>
-                <mat-icon *ngIf="showSearchBar">clear</mat-icon>
-            </button>
-        </div>
-    </div>
-</header> -->
-
 <header class="header" fxLayout="row" fxLayoutAlign="center center">
-    <div style="width: 300px;" fxLayout="row" fxLayoutAlign="space-between center">
-        <div fxLayout="row" style="padding-right: 3rem;">
+    <div style="width: 300px;" fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="row">
             <a routerLink="/">
                 <h1>Movies</h1>
             </a>
@@ -32,11 +9,11 @@
     </div>
     <div style="box-sizing: border-box;" fxLayout="row" fxLayoutAlign="center center" fxFlex>
         <div class="container">
-            <div class="navigation" fxLayout="row" fxLayoutAlign="start center" *ngIf="!showSearchBar" fxFlex>
+            <!-- <div class="navigation" fxLayout="row" fxLayoutAlign="start center" *ngIf="!showSearchBar" fxFlex>
                 <button mat-button class="active">Home</button>
                 <button mat-button>Sites</button>
                 <button mat-button>Categories</button>
-            </div>
+            </div> -->
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
                 <form (ngSubmit)="searchMovies()" [formGroup]="formGroup">
                     <input formControlName="searchQuery" class="search" [class.active]="showSearchBar" type="text" placeholder="Search">

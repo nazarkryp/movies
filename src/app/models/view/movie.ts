@@ -12,4 +12,5 @@ export class Movie {
     public studio: Studio;
     public selectedAttachment = 0;
     public subscription: Subscription;
+    public duration: string;
 }

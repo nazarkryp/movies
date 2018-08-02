@@ -9,4 +9,5 @@ export class MovieResponse {
     public date: Date;
     public attachments: AttachmentResponse[];
     public studio: StudioResponse;
+    public duration: string;
 }

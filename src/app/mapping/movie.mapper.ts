@@ -21,6 +21,7 @@ export class MovieMapper implements IMapper<MovieResponse, Movie> {
         movie.objectId = response.objectId;
         movie.date = response.date;
         movie.link = response.link;
+        movie.duration = response.duration;
 
         if (response.studio) {
             movie.studio = this.studioMapper.mapFromResponse(response.studio);

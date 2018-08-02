@@ -77,6 +77,10 @@ footer.movie-details a {
     grid-gap: 30px;
 }
 
+.movies-gallery.loading {
+    opacity: .2;
+}
+
 .movie-item {
     position: relative;
     overflow: hidden;

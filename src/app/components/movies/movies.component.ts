@@ -20,6 +20,7 @@ export class MoviesComponent implements OnInit {
     public pageIndex: number;
     public searchQuery: string;
     public movies: StudioPage;
+    public isLoading = false;
 
     constructor(
         private store: Store<any>,
@@ -107,10 +108,16 @@ export class MoviesComponent implements OnInit {
     }
 
     private getMovies(pageIndex: number, searchQuery: string = null) {
+        this.isLoading = true;
         this.movieService.getMovies({
             page: pageIndex,
             search: searchQuery,
             studio: 'WW91cnBvcm5TZXh5'
-        }).subscribe();
+        }).subscribe(() => {
+            window.scrollTo(0, 0);
+            this.isLoading = false;
+        }, () => {
+            this.isLoading = false;
+        });
     }
 }

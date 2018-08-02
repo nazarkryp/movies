@@ -3,40 +3,27 @@
     <h1 *ngIf="searchQuery">Results for: {{searchQuery}}</h1>
 </header>
 <main *ngIf="movies && movies.data;">
-    <!-- <mat-grid-list cols="3" rowHeight="5:4" gutterSize="25px">
-            <mat-grid-tile *ngFor="let movie of movies.data; trackBy: trackMovie;">
-                <div class="movie-details" fxLayout="column">
-                    <a class="attachment" [routerLink]="['/watch', movies.studio.objectId, movie.objectId]" mat-ripple (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)">
-                        <div class="movie-details-overlay"></div>
-                        <video class="thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.url)" loop autoplay muted>
-                            <source src="https://res.cloudinary.com/dpfmyl1mn/video/upload/v1507137526/photocloud/prod/lanafeshchuk/svug6bgevnebjbndgfpt.mp4">
-                        </video>
-                        <img class="thumbnail" src="https://res.cloudinary.com/dpfmyl1mn/image/upload/v1531688331/photocloud/prod/lanafeshchuk/hn8swc9taiasrctj1mqz.jpg" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)">
-                    </a>
-                    <footer>
-                        <a [routerLink]="['/watch', movie.id]" title="{{movie.title}}">{{movie.title | truncate:50 }}</a>
-                    </footer>
-                </div>
-            </mat-grid-tile>
-        </mat-grid-list> -->
-    <div class="movies-gallery">
+    <div class="movies-gallery" [class.loading]="isLoading">
         <div *ngFor="let movie of movies.data; trackBy: trackMovie;">
             <div class="movie-item" (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)">
-                <!-- <img class="movie-thumbnail" [src]="movie.attachments[movie.selectedAttachment]?.url" alt="media-image" *ngIf="media?.attachments[0].type !== 1" (click)="openPostDialog(media)">
-                    <video class="movie-thumbnail" *ngIf="media?.attachments[0].type === 1" (click)="openPostDialog(media)">
-                        <source src="{{movie.attachments[movie.selectedAttachment]?.url}}">
-                    </video> -->
-                <img class="movie-thumbnail" src="https://res.cloudinary.com/dpfmyl1mn/image/upload/v1531688331/photocloud/prod/lanafeshchuk/hn8swc9taiasrctj1mqz.jpg" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)">
+                <img class="movie-thumbnail" [src]="movie.attachments[movie.selectedAttachment]?.url" alt="media-image" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)">
+                <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.url)" loop autoplay muted>
+                    <source src="{{movie.attachments[movie.selectedAttachment]?.url}}">
+                </video>
+                <div style="position: absolute; top: .5rem; right: .5rem; border-radius: 2px; background-color: rgba(0, 0, 0, .26); color: rgba(255, 255, 255, .86); padding: .25rem;">
+                    <span>{{movie.duration}}</span>
+                </div>
+                <!-- <img class="movie-thumbnail" src="https://res.cloudinary.com/dpfmyl1mn/image/upload/v1531688331/photocloud/prod/lanafeshchuk/hn8swc9taiasrctj1mqz.jpg" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)">
                 <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.url)" loop autoplay muted>
                     <source src="https://res.cloudinary.com/dpfmyl1mn/video/upload/v1507137526/photocloud/prod/lanafeshchuk/svug6bgevnebjbndgfpt.mp4">
-                </video>
+                </video> -->
             </div>
             <footer class="movie-details">
-                <a [routerLink]="['/watch', movie.id]" title="{{movie.title}}">{{movie.title | truncate:50 }}</a>
+                <a [routerLink]="['/watch', movies.studio.objectId, movie.objectId]" title="{{movie.title}}">{{movie.title | truncate:50 }}</a>
             </footer>
         </div>
     </div>
 </main>
-<footer class="movies-footer" fxLayout="row" fxLayoutAlign="center center" *ngIf="movies && movies.data;">
-    <movies-pagination [total]="movies.total" [currentPage]="pageIndex" [pageSize]="movies.data.length" (changed)="pageChanged($event)"></movies-pagination>
+<footer class="movies-footer" fxLayout="row" fxLayoutAlign="center center" *ngIf="movies && movies.data && movies.pagesCount;">
+    <movies-pagination [pagesCount]="movies.pagesCount" [currentPage]="pageIndex" (changed)="pageChanged($event)"></movies-pagination>
 </footer>
