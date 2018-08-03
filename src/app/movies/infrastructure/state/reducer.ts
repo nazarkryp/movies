@@ -2,6 +2,7 @@ import { MovieAction } from './action';
 import * as fromRoot from '../../../state/app.state';
 import { StudioPage } from '../../../models/view/studio-page';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Studio } from '../../../models/view';
 
 export interface State extends fromRoot.State {
     movies: MovieState;
@@ -9,6 +10,7 @@ export interface State extends fromRoot.State {
 
 export interface MovieState {
     movies: StudioPage;
+    currentStudio: Studio;
 }
 
 const getMoviesFeatureState = createFeatureSelector<MovieState>('movies');
@@ -16,6 +18,11 @@ const getMoviesFeatureState = createFeatureSelector<MovieState>('movies');
 export const getMoviesPage = createSelector(
     getMoviesFeatureState,
     state => state.movies
+);
+
+export const getCurrentStudio = createSelector(
+    getMoviesFeatureState,
+    state => state.currentStudio
 );
 
 // const initialState: MovieState = {
@@ -30,7 +37,8 @@ export const getMoviesPage = createSelector(
 // };
 
 const initialState: MovieState = {
-    movies: null
+    movies: null,
+    currentStudio: null
 };
 
 export function reducer(state = initialState, action): MovieState {
@@ -39,6 +47,11 @@ export function reducer(state = initialState, action): MovieState {
             return {
                 ...state,
                 movies: action.payload
+            };
+        case MovieAction.SET_STUDIO:
+            return {
+                ...state,
+                currentStudio: action.payload
             };
         default:
             return state;

@@ -1,26 +1,41 @@
-::ng-deep .mat-list .mat-list-item .mat-list-item-content-reverse,
-::ng-deep .mat-list .mat-list-option .mat-list-item-content-reverse,
-::ng-deep .mat-nav-list .mat-list-item .mat-list-item-content-reverse,
-::ng-deep .mat-nav-list .mat-list-option .mat-list-item-content-reverse,
-::ng-deep .mat-selection-list .mat-list-item .mat-list-item-content-reverse,
-::ng-deep .mat-selection-list .mat-list-option .mat-list-item-content-reverse {
-    padding: 0 .7rem !important;
+.studios-header {
+    padding: 0 .75rem 1.4rem 1rem;
+}
+
+.studios-title {
+    font-weight: normal;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, .65);
+}
+
+.mat-list .mat-list-item,
+.mat-list .mat-list-option,
+.mat-nav-list .mat-list-item,
+.mat-nav-list .mat-list-option,
+.mat-selection-list .mat-list-item,
+.mat-selection-list .mat-list-option {
+    height: 40px;
 }
 
 .mat-list-option {
     font-size: 1em;
 }
 
+.mat-nav-list {
+    padding-top: 0;
+}
+
 .mat-nav-list .mat-list-item {
+    font-size: 1em; // padding: .75rem 0;
     -webkit-transition: border-color .2s ease-in-out;
     -moz-transition: border-color .2s ease-in-out;
     -ms-transition: border-color .2s ease-in-out;
     -o-transition: border-color .2s ease-in-out;
     transition: border-color .2s ease-in-out;
-    border-right: 3px solid transparent;
+    border-left: 2px solid transparent;
 }
 
 .mat-nav-list .mat-list-item.active {
-    border-right: 3px solid crimson;
+    border-left-color: crimson;
     background-color: rgba(220, 20, 60, .1);
 }

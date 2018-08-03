@@ -15,7 +15,17 @@
     </main> -->
     <main class="main">
         <mat-sidenav-container class="sidenav-container">
-            <mat-sidenav #sidenav mode="side" opened="true" style="width: 300px; background: rgb(245, 245, 245);">
+            <mat-sidenav #sidenav mode="side" opened="true" style="width: 240px; background: rgb(245, 245, 245);">
+                <!-- <div style="padding-top: 2.8rem; border-bottom: 1px solid #eaeaea;">
+                    <mat-nav-list>
+                        <mat-list-item>
+                            Home
+                        </mat-list-item>
+                        <mat-list-item>
+                            Trending
+                        </mat-list-item>
+                    </mat-nav-list>
+                </div> -->
                 <div style="padding-top: 2.8rem;">
                     <movies-studio-list></movies-studio-list>
                 </div>
@@ -25,7 +35,7 @@
                     </div>
                 </footer>
             </mat-sidenav>
-            <mat-sidenav-content style="height: calc(100vh - 65px); padding: 2.8rem 0 1.4rem 0; max-height: calc(100vh - 65px); box-sizing: border-box;" fxLayout="row" fxLayoutAlign="center start">
+            <mat-sidenav-content style="height: calc(100vh - 60px); padding: 2.8rem 0 1.4rem 0; box-sizing: border-box;" fxLayout="row" fxLayoutAlign="center start">
                 <div class="container">
                     <router-outlet></router-outlet>
                 </div>

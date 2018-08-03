@@ -1,6 +1,6 @@
 .header {
-    background: white;
-    box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26);
+    background: white; // box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26);
+    border-bottom: 1px solid #eaeaea;
     padding: .7rem;
 }
 
@@ -14,7 +14,7 @@ form {
 }
 
 .search {
-    font-family: sans-serif;
+    font-family: 'Open Sans', sans-serif;
     border: none;
     font-size: 1.2em;
     padding: .7rem 0;

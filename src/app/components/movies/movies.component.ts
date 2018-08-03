@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { interval } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+import { take } from 'rxjs/operators';
 
 import { MovieService } from 'app/services';
-import { Page } from 'app/models/common';
-import { Movie } from 'app/models/view';
+import { Movie, Studio } from 'app/models/view';
 import { StudioPage } from 'app/models/view/studio-page';
 
 import * as fromRoot from '../../movies/infrastructure/state/reducer';
@@ -17,13 +17,15 @@ import * as fromRoot from '../../movies/infrastructure/state/reducer';
     styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
+    private studio: Studio;
+
     public pageIndex: number;
     public searchQuery: string;
     public movies: StudioPage;
     public isLoading = false;
 
     constructor(
-        private store: Store<any>,
+        private store: Store<fromRoot.MovieState>,
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private movieService: MovieService) { }
@@ -97,27 +99,44 @@ export class MoviesComponent implements OnInit {
             }
         });
 
-        this.activatedRoute.paramMap.subscribe(params => {
-            const pageIndex = +params.get('page');
-            const searchQuery = params.get('searchQuery');
+        this.store.pipe(select(fromRoot.getCurrentStudio))
+            .subscribe(studio => {
+                if (studio) {
+                    this.studio = studio;
 
-            this.searchQuery = searchQuery;
-            this.pageIndex = pageIndex ? pageIndex : 1;
-            this.getMovies(pageIndex, searchQuery);
-        });
+                    this.activatedRoute.paramMap.subscribe(params => {
+                        const pageIndex = +params.get('page');
+                        const searchQuery = params.get('searchQuery');
+
+                        this.searchQuery = searchQuery;
+                        this.pageIndex = pageIndex ? pageIndex : 1;
+                        this.getMovies(pageIndex, searchQuery);
+                    });
+                }
+            });
     }
 
     private getMovies(pageIndex: number, searchQuery: string = null) {
         this.isLoading = true;
+
         this.movieService.getMovies({
             page: pageIndex,
             search: searchQuery,
-            studio: 'WW91cnBvcm5TZXh5'
+            studio: this.studio.id
         }).subscribe(() => {
-            window.scrollTo(0, 0);
             this.isLoading = false;
         }, () => {
             this.isLoading = false;
         });
+
+        // this.movieService.getMovies({
+        //     page: pageIndex,
+        //     search: searchQuery,
+        //     studio: 'WW91cnBvcm5TZXh5'
+        // }).subscribe(() => {
+        //     this.isLoading = false;
+        // }, () => {
+        //     this.isLoading = false;
+        // });
     }
 }
