@@ -1,16 +1,15 @@
 <header class="movies-header" fxLayout="row" fxLayoutAlign="space-between center">
-    <h1 *ngIf="!searchQuery">Latest updates</h1>
-    <h1 *ngIf="searchQuery">Results for: {{searchQuery}}</h1>
+    <h3 class="movies-title">{{searchQuery ? 'SEARCH RESULTS FOR: ' + searchQuery : 'LATEST UPDATES'}}</h3>
 </header>
 <main *ngIf="movies && movies.data;">
     <div class="movies-gallery" [class.loading]="isLoading">
-        <div *ngFor="let movie of movies.data; trackBy: trackMovie;" (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)">
-            <div mat-ripple class="movie-item">
+        <div *ngFor="let movie of movies.data; trackBy: trackMovie;">
+            <div mat-ripple class="movie-item" (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)">
                 <!-- <img class="movie-thumbnail" [src]="movie.attachments[movie.selectedAttachment]?.url" alt="media-image" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)">
                 <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.url)" loop autoplay muted>
                     <source src="{{movie.attachments[movie.selectedAttachment]?.url}}">
                 </video> -->
-                <img class="movie-thumbnail" src="https://res.cloudinary.com/dpfmyl1mn/image/upload/v1531688331/photocloud/prod/lanafeshchuk/hn8swc9taiasrctj1mqz.jpg" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)">
+                <img class="movie-thumbnail" src="https://res.cloudinary.com/dpfmyl1mn/image/upload/v1531688331/photocloud/prod/lanafeshchuk/hn8swc9taiasrctj1mqz.jpg" [hidden]="isVideo(movie.attachments[movie.selectedAttachment]?.url)">
                 <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.url)" loop autoplay muted>
                     <source src="https://res.cloudinary.com/dpfmyl1mn/video/upload/v1507137526/photocloud/prod/lanafeshchuk/svug6bgevnebjbndgfpt.mp4">
                 </video>
@@ -19,7 +18,7 @@
                 </div>
             </div>
             <footer class="movie-details">
-                <a [routerLink]="['/watch', movies.studio.objectId, movie.objectId]" title="{{movie.title}}">{{movie.title | truncate:50 }}</a>
+                <a class="movie-link" [routerLink]="['/watch', movies.studio.objectId, movie.objectId]" title="{{movie.title}}">{{movie.title | truncate:50 }}</a>
             </footer>
         </div>
     </div>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { take } from 'rxjs/operators';
+import { take, mergeMap, tap } from 'rxjs/operators';
 
 import { MovieService } from 'app/services';
 import { Movie, Studio } from 'app/models/view';
@@ -17,12 +17,13 @@ import * as fromRoot from '../../movies/infrastructure/state/reducer';
     styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-    private studio: Studio;
-
     public pageIndex: number;
     public searchQuery: string;
     public movies: StudioPage;
     public isLoading = false;
+    public studio: Studio;
+
+    private routeSubscription: Subscription;
 
     constructor(
         private store: Store<fromRoot.MovieState>,
@@ -36,7 +37,6 @@ export class MoviesComponent implements OnInit {
             if (movie.subscription) {
                 movie.subscription.unsubscribe();
                 movie.subscription = null;
-                movie.selectedAttachment = 0;
             }
 
             movie.selectedAttachment = 1;
@@ -80,49 +80,53 @@ export class MoviesComponent implements OnInit {
     }
 
     public trackMovie(movie: Movie) {
-        return movie.id;
+        return movie.objectId;
     }
 
     public pageChanged(pageIndex: number) {
         if (this.searchQuery) {
             this.router.navigate(['search', this.searchQuery, pageIndex]);
         } else {
-            this.router.navigate(['recent', pageIndex]);
+            this.router.navigate([this.studio.id, 'recent', pageIndex]);
         }
     }
 
     public ngOnInit() {
-        this.store.pipe(select(fromRoot.getMoviesPage)).subscribe(movies => {
-            if (movies) {
-                this.movies = movies;
-                this.movies.total = movies.pagesCount * movies.data.length;
-            }
-        });
+        this.store.pipe(select(fromRoot.getMoviesPage))
+            .subscribe(movies => {
+                if (movies) {
+                    this.movies = movies;
+                    this.movies.total = movies.pagesCount * movies.data.length;
+                }
+            });
 
         this.store.pipe(select(fromRoot.getCurrentStudio))
             .subscribe(studio => {
                 if (studio) {
                     this.studio = studio;
+                    this.router.navigate([this.studio.id, 'recent', 1]);
+                }
 
-                    this.activatedRoute.paramMap.subscribe(params => {
+                if (studio && !this.routeSubscription) {
+                    this.routeSubscription = this.activatedRoute.paramMap.subscribe(params => {
                         const pageIndex = +params.get('page');
                         const searchQuery = params.get('searchQuery');
 
                         this.searchQuery = searchQuery;
                         this.pageIndex = pageIndex ? pageIndex : 1;
-                        this.getMovies(pageIndex, searchQuery);
+                        this.getMovies(this.studio, pageIndex, searchQuery);
                     });
                 }
             });
     }
 
-    private getMovies(pageIndex: number, searchQuery: string = null) {
+    private getMovies(studio: Studio, pageIndex: number, searchQuery: string = null) {
         this.isLoading = true;
 
         this.movieService.getMovies({
             page: pageIndex,
             search: searchQuery,
-            studio: this.studio.id
+            studio: studio.id
         }).subscribe(() => {
             this.isLoading = false;
         }, () => {
