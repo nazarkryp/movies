@@ -1,6 +1,6 @@
 .header {
-    background: white; // box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26);
-    border-bottom: 1px solid #eaeaea;
+    background: white;
+    box-shadow: 0 3px 8px -4px rgba(0, 0, 0, .26); // border-bottom: 1px solid #eaeaea;
     padding: .7rem 1.4rem;
 }
 
@@ -22,14 +22,16 @@ form {
     font-weight: lighter;
     width: 100%;
     opacity: 0;
-    -webkit-transition: opacity .2s ease-in-out;
-    -moz-transition: opacity .2s ease-in-out;
-    -ms-transition: opacity .2s ease-in-out;
-    -o-transition: opacity .2s ease-in-out;
-    transition: opacity .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    transform: scaleX(0);
 }
 
 .search.active {
+    transform: scaleX(1);
     opacity: 1;
 }
 

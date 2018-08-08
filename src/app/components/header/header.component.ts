@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { MovieService } from 'app/services';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
     public showSearchBar: boolean;
     public formGroup: FormGroup;
+    @ViewChild('searchInput')
+    public searchInput: ElementRef<any>;
 
     public get searchQuery(): FormControl {
         return this.formGroup.get('searchQuery') as FormControl;
@@ -28,6 +30,10 @@ export class HeaderComponent implements OnInit {
 
     public showSearch() {
         this.showSearchBar = !this.showSearchBar;
+
+        if (this.showSearchBar) {
+            this.searchInput.nativeElement.focus();
+        }
     }
 
     public searchMovies() {

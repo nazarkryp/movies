@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
-import { interval, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+import { interval, Subscription } from 'rxjs';
 import { take, mergeMap, tap } from 'rxjs/operators';
 
 import { MovieService } from 'app/services';
 import { Movie, Studio } from 'app/models/view';
 import { StudioPage } from 'app/models/view/studio-page';
 
-import * as fromRoot from '../../movies/infrastructure/state/reducer';
+import { MovieDialogComponent } from 'app/components/shared/movie-dialog';
+
+import * as fromRoot from 'app/movies/infrastructure/state/reducer';
 
 @Component({
     selector: 'movies-movies',
@@ -26,6 +29,7 @@ export class MoviesComponent implements OnInit {
     private routeSubscription: Subscription;
 
     constructor(
+        private dialog: MatDialog,
         private store: Store<fromRoot.MovieState>,
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -69,6 +73,16 @@ export class MoviesComponent implements OnInit {
             movie.subscription = null;
             movie.selectedAttachment = 0;
         }
+    }
+
+    public preview(movie: Movie) {
+        this.dialog.open(MovieDialogComponent, {
+            maxWidth: '960px',
+            maxHeight: 'calc(100vh - 24px)',
+            data: movie,
+            panelClass: 'custom-dialog-container',
+            autoFocus: false
+        });
     }
 
     public isVideo(url: string) {

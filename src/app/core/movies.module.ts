@@ -17,6 +17,8 @@ import { TruncatePipe } from 'app/pipes/truncate.pipe';
 
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import { reducer } from 'app/movies/infrastructure/state';
+import { MovieDialogComponent } from '../components/shared/movie-dialog/movie-dialog.component';
+import { PromptComponent } from '../components/shared/prompt/prompt.component';
 
 export const reducers: ActionReducerMap<any> = {
     movies: reducer
@@ -28,6 +30,12 @@ export const reducers: ActionReducerMap<any> = {
         MovieDetailsComponent,
         TruncatePipe,
         PaginationComponent,
+        MovieDialogComponent,
+        PromptComponent,
+    ],
+    entryComponents: [
+        MovieDialogComponent,
+        PromptComponent
     ],
     imports: [
         MoviesRoutingModule,

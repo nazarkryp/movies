@@ -4,7 +4,7 @@
 <main *ngIf="movies && movies.data;">
     <div class="movies-gallery" [class.loading]="isLoading">
         <div *ngFor="let movie of movies.data; trackBy: trackMovie;">
-            <div mat-ripple class="movie-item" (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)">
+            <div mat-ripple class="movie-item" (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)" (click)="preview(movie)">
                 <!-- <img class="movie-thumbnail" [src]="movie.attachments[movie.selectedAttachment]?.url" alt="media-image" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)">
                 <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.url)" loop autoplay muted>
                     <source src="{{movie.attachments[movie.selectedAttachment]?.url}}">

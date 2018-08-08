@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, ActivationEnd } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
@@ -15,6 +16,8 @@ export class StudioListComponent implements OnInit {
     public activeStudio: Studio;
 
     constructor(
+        private router: Router,
+        private route: ActivatedRoute,
         private studioService: StudioService
     ) { }
 
@@ -24,12 +27,24 @@ export class StudioListComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.studios = this.studioService.getStudios();
+        let currentStudio: string = null;
+        this.router.events.subscribe(event => {
+            if (event instanceof ActivationEnd) {
+                currentStudio = event.snapshot.paramMap.get('studio');
+            }
+        });
 
+        this.studios = this.studioService.getStudios();
         this.studios.subscribe(studios => {
-            const lastStudio = studios[studios.length - 1];
-            this.activeStudio = lastStudio;
-            this.studioService.setCurrentStudio(lastStudio);
+            let studio: Studio;
+            if (currentStudio) {
+                studio = studios.find(e => e.id === currentStudio);
+            } else {
+                studio = studios[studios.length - 1];
+            }
+
+            this.activeStudio = studio;
+            this.studioService.setCurrentStudio(studio);
         });
     }
 }

@@ -1,0 +1,14 @@
+.custom-dialog-container .mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+}
+
+.video-preview {
+    position: relative;
+}
+
+.video-preview--video {
+    margin: -1px;
+    max-height: calc(100vh - 25px);
+    vertical-align: bottom;
+}
