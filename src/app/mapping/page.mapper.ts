@@ -17,7 +17,6 @@ export class PageMapper<TSource, TResult> {
 
             return page;
         } catch (err) {
-            console.log(err);
             throw err;
         }
     }

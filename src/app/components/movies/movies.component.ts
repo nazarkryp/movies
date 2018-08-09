@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
@@ -19,7 +19,7 @@ import * as fromRoot from 'app/movies/infrastructure/state/reducer';
     templateUrl: './movies.component.html',
     styleUrls: ['./movies.component.scss']
 })
-export class MoviesComponent implements OnInit {
+export class MoviesComponent implements OnInit, OnDestroy {
     public pageIndex: number;
     public searchQuery: string;
     public movies: StudioPage;
@@ -27,6 +27,8 @@ export class MoviesComponent implements OnInit {
     public studio: Studio;
 
     private routeSubscription: Subscription;
+    private studioSubscription: Subscription;
+    private moviesSubscription: Subscription;
 
     constructor(
         private dialog: MatDialog,
@@ -77,10 +79,10 @@ export class MoviesComponent implements OnInit {
 
     public preview(movie: Movie) {
         this.dialog.open(MovieDialogComponent, {
-            maxWidth: '960px',
+            maxWidth: '1230px',
             maxHeight: 'calc(100vh - 24px)',
             data: movie,
-            panelClass: 'custom-dialog-container',
+            panelClass: 'movie-dialog-container',
             autoFocus: false
         });
     }
@@ -99,14 +101,15 @@ export class MoviesComponent implements OnInit {
 
     public pageChanged(pageIndex: number) {
         if (this.searchQuery) {
-            this.router.navigate(['search', this.searchQuery, pageIndex]);
+            this.router.navigate(['search', this.studio.id, this.searchQuery, pageIndex]);
         } else {
             this.router.navigate([this.studio.id, 'recent', pageIndex]);
         }
     }
 
     public ngOnInit() {
-        this.store.pipe(select(fromRoot.getMoviesPage))
+        console.log('ngOnInit');
+        this.moviesSubscription = this.store.pipe(select(fromRoot.getMoviesPage))
             .subscribe(movies => {
                 if (movies) {
                     this.movies = movies;
@@ -114,33 +117,50 @@ export class MoviesComponent implements OnInit {
                 }
             });
 
-        this.store.pipe(select(fromRoot.getCurrentStudio))
-            .subscribe(studio => {
-                if (studio) {
-                    this.studio = studio;
-                    this.router.navigate([this.studio.id, 'recent', 1]);
-                }
+        // this.studioSubscription = this.store.pipe(select(fromRoot.getCurrentStudio))
+        //     .subscribe(studio => {
+        //         if (studio && (!this.studio || this.studio.id !== studio.id)) {
+        //             this.studio = studio;
+        //             this.router.navigate([this.studio.id, 'recent', 1]);
+        //         }
 
-                if (studio && !this.routeSubscription) {
-                    this.routeSubscription = this.activatedRoute.paramMap.subscribe(params => {
-                        const pageIndex = +params.get('page');
-                        const searchQuery = params.get('searchQuery');
+        //         if (studio && !this.routeSubscription) {
 
-                        this.searchQuery = searchQuery;
-                        this.pageIndex = pageIndex ? pageIndex : 1;
-                        this.getMovies(this.studio, pageIndex, searchQuery);
-                    });
-                }
-            });
+        //         }
+        //     });
+
+        this.routeSubscription = this.activatedRoute.paramMap.subscribe(params => {
+            const pageIndex = +params.get('page');
+            const searchQuery = params.get('searchQuery');
+            const studio = params.get('studio');
+
+            this.searchQuery = searchQuery;
+            this.pageIndex = pageIndex ? pageIndex : 1;
+            this.getMovies(studio, pageIndex, searchQuery);
+        });
     }
 
-    private getMovies(studio: Studio, pageIndex: number, searchQuery: string = null) {
+    public ngOnDestroy() {
+        if (this.routeSubscription && !this.routeSubscription.closed) {
+            this.routeSubscription.unsubscribe();
+        }
+
+        // if (this.studioSubscription && !this.studioSubscription.closed) {
+        //     this.studioSubscription.unsubscribe();
+        // }
+
+        if (this.moviesSubscription && !this.moviesSubscription.closed) {
+            this.moviesSubscription.unsubscribe();
+        }
+    }
+
+    private getMovies(studio: string, pageIndex: number, searchQuery: string = null) {
         this.isLoading = true;
 
         this.movieService.getMovies({
             page: pageIndex,
             search: searchQuery,
-            studio: studio.id
+            studio: studio
         }).subscribe(() => {
             this.isLoading = false;
         }, () => {

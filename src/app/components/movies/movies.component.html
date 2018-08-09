@@ -1,5 +1,6 @@
 <header class="movies-header" fxLayout="row" fxLayoutAlign="space-between center">
     <h3 class="movies-title">{{searchQuery ? 'SEARCH RESULTS FOR: ' + searchQuery : 'LATEST UPDATES'}}</h3>
+    <button class="button" mat-button>REFRESH</button>
 </header>
 <main *ngIf="movies && movies.data;">
     <div class="movies-gallery" [class.loading]="isLoading">

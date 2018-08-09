@@ -24,6 +24,7 @@ export class StudioListComponent implements OnInit {
     public select(studio: Studio) {
         this.studioService.setCurrentStudio(studio);
         this.activeStudio = studio;
+        this.router.navigate([studio.id, 'recent', 1]);
     }
 
     public ngOnInit() {
@@ -35,6 +36,7 @@ export class StudioListComponent implements OnInit {
         });
 
         this.studios = this.studioService.getStudios();
+
         this.studios.subscribe(studios => {
             let studio: Studio;
             if (currentStudio) {

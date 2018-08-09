@@ -1,8 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output } from '@angular/core';
 
 import { MovieService } from 'app/services';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EventEmitter } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Store } from '@ngrx/store';
+import { MovieState, getCurrentStudio } from '../../movies/infrastructure/state';
+import { select } from '@ngrx/store';
+import { Studio } from '../../models/view';
 
 @Component({
     selector: 'movies-header',
@@ -10,10 +16,17 @@ import { Router } from '@angular/router';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+    private studio: Studio;
+
     public showSearchBar: boolean;
+    public mobile: boolean;
+
     public formGroup: FormGroup;
     @ViewChild('searchInput')
     public searchInput: ElementRef<any>;
+
+    @Output('menuOpened')
+    public menuOpened = new EventEmitter();
 
     public get searchQuery(): FormControl {
         return this.formGroup.get('searchQuery') as FormControl;
@@ -22,10 +35,21 @@ export class HeaderComponent implements OnInit {
     constructor(
         private router: Router,
         private builder: FormBuilder,
+        private breakpointObserver: BreakpointObserver,
+        private store: Store<MovieState>,
         private movieService: MovieService) {
         this.formGroup = this.builder.group({
             searchQuery: new FormControl('', Validators.compose([Validators.maxLength(50)]))
         });
+
+        this.breakpointObserver.observe(['(max-width: 500px)'])
+            .subscribe(state => {
+                this.mobile = state.matches;
+            });
+    }
+
+    public showMenu() {
+        this.menuOpened.next();
     }
 
     public showSearch() {
@@ -40,10 +64,20 @@ export class HeaderComponent implements OnInit {
         const value = this.searchQuery.value;
 
         if (value) {
-            this.router.navigate(['search', value, 1]);
+            this.router.navigate(['search', this.studio.id, value, 1]);
+        }
+    }
+
+    public searchFocusLost() {
+        if (!this.formGroup.get('searchQuery').value) {
+            // this.showSearchBar = false;
         }
     }
 
     public ngOnInit() {
+        this.store.pipe(select(getCurrentStudio))
+            .subscribe((studio) => {
+                this.studio = studio;
+            });
     }
 }

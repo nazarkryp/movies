@@ -8,6 +8,11 @@
     color: rgba(0, 0, 0, .65);
 }
 
+.movies-header .button {
+    color: rgba(0, 0, 0, .65);
+    background-color: #eaeaea;
+}
+
 .movie-details-overlay {
     position: absolute;
     width: 100%;
@@ -28,7 +33,7 @@
 .movies-gallery {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 30px;
 }
 
@@ -39,8 +44,10 @@
 .movie-item {
     position: relative;
     overflow: hidden;
-    width: 300px;
-    height: 200px; // box-shadow: 0 3px 8px -3px rgba(0, 0, 0, 0.26);
+    width: 100%;
+    height: 200px; // width: 300px;
+    // height: 200px;
+    // box-shadow: 0 3px 8px -3px rgba(0, 0, 0, 0.26);
     cursor: pointer;
 }
 
@@ -61,7 +68,7 @@
 
 .movie-duration {
     position: absolute;
-    top: .5rem;
+    bottom: .5rem;
     right: .5rem;
     border-radius: 2px;
     background-color: rgba(0, 0, 0, .26);
@@ -83,8 +90,8 @@ footer.movie-details {
 }
 
 .movie-link:hover {
-    text-decoration: underline;
-    color: rgba(0, 0, 0, .87);
+    text-decoration: underline; // color: rgba(0, 0, 0, .87);
+    color: rgba(220, 20, 60, .87);
 }
 
 .movies-footer {

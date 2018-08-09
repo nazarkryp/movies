@@ -37,6 +37,11 @@
     box-sizing: border-box;
 }
 
+.sidenav {
+    width: 240px;
+    background: rgb(245, 245, 245);
+}
+
 .mat-drawer-content {
     overflow-y: overlay;
 }

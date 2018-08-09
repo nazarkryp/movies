@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MovieService } from 'app/services';
 import { environment } from 'environments/environment';
+import { Store, select } from '@ngrx/store';
+import { MovieState, getMoviesPage, getCurrentStudio } from 'app/movies/infrastructure/state';
 
 @Component({
     selector: 'movies-movie-details',
@@ -12,17 +14,23 @@ import { environment } from 'environments/environment';
 export class MovieDetailsComponent implements OnInit {
     public movie: any;
     public directUri: any;
+    public studio: string;
 
     constructor(
         private route: ActivatedRoute,
+        private store: Store<MovieState>,
         private movieService: MovieService) { }
 
-    ngOnInit() {
+    public tags = ['stockings', 'heels', 'sexy', 'legs', 'nudestockings', 'highheels', 'legs', 'beforesex'];
+
+    public ngOnInit() {
+        // this.store.pipe(select(getCurrentStudio));
+
         this.route.paramMap.subscribe(params => {
-            const studio = params.get('studio');
+            this.studio = params.get('studio');
             const movie = params.get('movie');
 
-            this.movieService.getMovie(studio, movie)
+            this.movieService.getMovie(this.studio, movie)
                 .subscribe(movieDetails => {
                     this.movie = movieDetails;
                     if (environment.baseAddress.includes('localhost')) {
