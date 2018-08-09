@@ -10,10 +10,11 @@
 
 <div class="video-container" *ngIf="movie">
     <video controls>
-        <source src="https://res.cloudinary.com/dpfmyl1mn/video/upload/v1507137526/photocloud/prod/lanafeshchuk/svug6bgevnebjbndgfpt.mp4">
+        <!-- <source src="https://res.cloudinary.com/dpfmyl1mn/video/upload/v1507137526/photocloud/prod/lanafeshchuk/svug6bgevnebjbndgfpt.mp4"> -->
+        <source src="{{directUri}}">
     </video>
     <div class="video-container__details" fxLayout="row" fxLayoutAlign="space-between center">
-        <span class="title">Sex in red heels and stockings</span>
+        <span class="title">{{movie.title}}</span>
         <a mat-button color=primary>OPEN SOURCE</a>
     </div>
     <div>

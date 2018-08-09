@@ -12,16 +12,17 @@ export class StudioPageMapper extends PageMapper<MovieResponse, Movie> {
         super(movieMapper);
     }
 
-    public map(responsePage: StudioPageResponse): StudioPage {
+    public map(response: StudioPageResponse): StudioPage {
         try {
             const page = new StudioPage();
 
-            page.studio = this.studioMapper.mapFromResponse(responsePage.studio);
-            page.currentPage = responsePage.currentPage;
-            page.pageSize = responsePage.pageSize;
-            page.total = responsePage.total;
-            page.data = this.movieMapper.mapFromResponseArray(responsePage.data);
-            page.pagesCount = responsePage.pagesCount;
+            page.studio = this.studioMapper.mapFromResponse(response.studio);
+            page.currentPage = response.currentPage;
+            page.totalCount = response.totalCount;
+            page.pageSize = response.pageSize;
+            page.total = response.total;
+            page.data = this.movieMapper.mapFromResponseArray(response.data);
+            page.pagesCount = response.pagesCount;
 
             return page;
         } catch (err) {

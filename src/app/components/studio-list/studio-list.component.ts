@@ -17,9 +17,7 @@ export class StudioListComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private route: ActivatedRoute,
-        private studioService: StudioService
-    ) { }
+        private studioService: StudioService) { }
 
     public select(studio: Studio) {
         this.studioService.setCurrentStudio(studio);
@@ -47,6 +45,10 @@ export class StudioListComponent implements OnInit {
 
             this.activeStudio = studio;
             this.studioService.setCurrentStudio(studio);
+
+            if (!currentStudio) {
+                this.router.navigate([studio.id, 'recent', 1]);
+            }
         });
     }
 }

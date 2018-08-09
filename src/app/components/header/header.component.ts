@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Output } from '@angular/core'
 
 import { MovieService } from 'app/services';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivationEnd } from '@angular/router';
 import { EventEmitter } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Store } from '@ngrx/store';
@@ -75,6 +75,20 @@ export class HeaderComponent implements OnInit {
     }
 
     public ngOnInit() {
+        this.router.events.subscribe(event => {
+            if (event instanceof ActivationEnd) {
+                const search = event.snapshot.paramMap.get('searchQuery');
+
+                if (!search) {
+                    this.formGroup.get('searchQuery').setValue('');
+                    this.showSearchBar = false;
+                } else {
+                    this.formGroup.get('searchQuery').setValue(search);
+                    this.showSearchBar = true;
+                }
+            }
+        });
+
         this.store.pipe(select(getCurrentStudio))
             .subscribe((studio) => {
                 this.studio = studio;

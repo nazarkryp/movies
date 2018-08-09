@@ -108,7 +108,6 @@ export class MoviesComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
-        console.log('ngOnInit');
         this.moviesSubscription = this.store.pipe(select(fromRoot.getMoviesPage))
             .subscribe(movies => {
                 if (movies) {
@@ -117,26 +116,23 @@ export class MoviesComponent implements OnInit, OnDestroy {
                 }
             });
 
-        // this.studioSubscription = this.store.pipe(select(fromRoot.getCurrentStudio))
-        //     .subscribe(studio => {
-        //         if (studio && (!this.studio || this.studio.id !== studio.id)) {
-        //             this.studio = studio;
-        //             this.router.navigate([this.studio.id, 'recent', 1]);
-        //         }
-
-        //         if (studio && !this.routeSubscription) {
-
-        //         }
-        //     });
+        this.studioSubscription = this.store.pipe(select(fromRoot.getCurrentStudio))
+            .subscribe(studio => {
+                this.studio = studio;
+            });
 
         this.routeSubscription = this.activatedRoute.paramMap.subscribe(params => {
             const pageIndex = +params.get('page');
             const searchQuery = params.get('searchQuery');
             const studio = params.get('studio');
 
+            if (!studio && !this.studio) {
+                return;
+            }
+
             this.searchQuery = searchQuery;
             this.pageIndex = pageIndex ? pageIndex : 1;
-            this.getMovies(studio, pageIndex, searchQuery);
+            this.getMovies(studio || this.studio.id, pageIndex, searchQuery);
         });
     }
 

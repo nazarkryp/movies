@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MovieService } from 'app/services';
 import { environment } from 'environments/environment';
-import { Store, select } from '@ngrx/store';
-import { MovieState, getMoviesPage, getCurrentStudio } from 'app/movies/infrastructure/state';
+import { Store } from '@ngrx/store';
+import { MovieState } from 'app/movies/infrastructure/state';
 
 @Component({
     selector: 'movies-movie-details',
@@ -18,7 +18,6 @@ export class MovieDetailsComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private store: Store<MovieState>,
         private movieService: MovieService) { }
 
     public tags = ['stockings', 'heels', 'sexy', 'legs', 'nudestockings', 'highheels', 'legs', 'beforesex'];
