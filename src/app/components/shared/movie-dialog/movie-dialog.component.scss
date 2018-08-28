@@ -22,6 +22,10 @@
     font-size: 1.2em;
 }
 
+.video-preview--title:hover {
+    text-decoration: underline;
+}
+
 .video-preview--video {
     margin: -1px;
     max-height: calc(100vh - 25px);

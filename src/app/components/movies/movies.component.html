@@ -1,21 +1,23 @@
-<header class="movies-header" fxLayout="row" fxLayoutAlign="space-between center">
+<header class="movies-header" fxLayout="row" fxLayoutAlign="space-between start">
     <h3 class="movies-title">{{searchQuery ? 'SEARCH RESULTS FOR: ' + searchQuery : 'LATEST UPDATES'}}
         <ng-container *ngIf="movies && movies.totalCount">({{movies.totalCount}})</ng-container>
     </h3>
-    <button class="button" mat-button>REFRESH</button>
+    <!-- <button mat-button color="primary" (click)="refresh()">
+        REFRESH
+    </button> -->
 </header>
 <main *ngIf="movies && movies.data;">
     <div class="movies-gallery" [class.loading]="isLoading">
         <div *ngFor="let movie of movies.data; trackBy: trackMovie;">
             <div mat-ripple class="movie-item" (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)" (click)="preview(movie)">
-                <img class="movie-thumbnail" [src]="movie.attachments[movie.selectedAttachment]?.url" alt="media-image" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)">
+                <!-- <img class="movie-thumbnail" [src]="movie.attachments[movie.selectedAttachment]?.url" alt="media-image" *ngIf="!isVideo(movie.attachments[movie.selectedAttachment]?.url)">
                 <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.url)" loop autoplay muted>
                     <source src="{{movie.attachments[movie.selectedAttachment]?.url}}">
-                </video>
-                <!-- <img class="movie-thumbnail" src="https://res.cloudinary.com/dpfmyl1mn/image/upload/v1531688331/photocloud/prod/lanafeshchuk/hn8swc9taiasrctj1mqz.jpg" [hidden]="isVideo(movie.attachments[movie.selectedAttachment]?.url)">
+                </video> -->
+                <img class="movie-thumbnail" src="https://res.cloudinary.com/dpfmyl1mn/image/upload/v1531688331/photocloud/prod/lanafeshchuk/hn8swc9taiasrctj1mqz.jpg" [hidden]="isVideo(movie.attachments[movie.selectedAttachment]?.url)">
                 <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.url)" loop autoplay muted>
                     <source src="https://res.cloudinary.com/dpfmyl1mn/video/upload/v1507137526/photocloud/prod/lanafeshchuk/svug6bgevnebjbndgfpt.mp4">
-                </video> -->
+                </video>
                 <div class="movie-duration">
                     <span>{{movie.duration}}</span>
                 </div>

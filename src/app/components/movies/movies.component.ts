@@ -136,6 +136,15 @@ export class MoviesComponent implements OnInit, OnDestroy {
         });
     }
 
+    refresh() {
+        this.movies.data = [];
+        this.movies.currentPage = null;
+        this.movies.pagesCount = null;
+        this.movies.pageSize = null;
+        this.movies.totalCount = null;
+        this.movies.total = null;
+    }
+
     public ngOnDestroy() {
         if (this.routeSubscription && !this.routeSubscription.closed) {
             this.routeSubscription.unsubscribe();
