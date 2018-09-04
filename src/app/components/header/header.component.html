@@ -1,5 +1,5 @@
 <header class="header" fxLayout="row" fxLayoutAlign="center center">
-    <div style="min-width: 240px;" fxLayout="row" fxLayoutAlign="start center" *ngIf="!showSearchBar || !mobile">
+    <div style="min-width: 250px;" fxLayout="row" fxLayoutAlign="start center" *ngIf="!showSearchBar || !mobile">
         <div style="padding-right: .7rem;">
             <button mat-icon-button (click)="showMenu()">
                 <mat-icon>menu</mat-icon>
@@ -12,7 +12,7 @@
             <span style="color: crimson; font-weight: bold; font-size: 2em;">.</span>
         </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" style="width: 100%;">
+    <!-- <div fxLayout="row" fxLayoutAlign="center center" style="width: 100%;">
         <div class="container">
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
                 <form (ngSubmit)="searchMovies()" [formGroup]="formGroup">
@@ -22,6 +22,18 @@
                     <mat-icon *ngIf="!showSearchBar">search</mat-icon>
                     <mat-icon *ngIf="showSearchBar">clear</mat-icon>
                 </button>
+            </div>
+        </div>
+    </div> -->
+    <div fxLayout="row" fxLayoutAlign="center center" style="width: 100%;">
+        <div class="container">
+            <div style="max-width: 50%;">
+                <form (ngSubmit)="searchMovies()" [formGroup]="formGroup" style="display: inline-flex;">
+                    <input class="search" #searchInput formControlName="searchQuery" type="text" placeholder="Search" (blur)="searchFocusLost()">
+                    <button type="submit" style="border: none;">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
