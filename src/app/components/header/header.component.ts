@@ -74,6 +74,10 @@ export class HeaderComponent implements OnInit {
         }
     }
 
+    public signIn() {
+        location.href = 'https://localhost:44397/v1/account';
+    }
+
     public ngOnInit() {
         this.router.events.subscribe(event => {
             if (event instanceof ActivationEnd) {

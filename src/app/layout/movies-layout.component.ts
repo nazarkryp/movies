@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
@@ -6,7 +6,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
     templateUrl: './movies-layout.component.html',
     styleUrls: ['./movies-layout.component.scss']
 })
-export class MoviesLayoutComponent {
+export class MoviesLayoutComponent implements OnInit {
     public menuOpened = true;
     public menuMode = MenuMode.side;
 
@@ -21,6 +21,10 @@ export class MoviesLayoutComponent {
 
     public openMenu() {
         this.menuOpened = !this.menuOpened;
+    }
+
+    ngOnInit(): void {
+        console.log(location.href);
     }
 }
 

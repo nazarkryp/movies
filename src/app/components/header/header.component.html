@@ -1,4 +1,4 @@
-<header class="header" fxLayout="row" fxLayoutAlign="center center">
+<header class="header" fxLayout="row" fxLayoutAlign="space-between center">
     <div style="min-width: 250px;" fxLayout="row" fxLayoutAlign="start center" *ngIf="!showSearchBar || !mobile">
         <div style="padding-right: .7rem;">
             <button mat-icon-button (click)="showMenu()">
@@ -36,5 +36,8 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div>
+        <button mat-button (click)="signIn()" color="primary">Sign In</button>
     </div>
 </header>

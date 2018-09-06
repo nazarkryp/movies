@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import { MovieService } from 'app/services';
 import { environment } from 'environments/environment';
@@ -17,12 +18,15 @@ export class MovieDetailsComponent implements OnInit {
     public studio: string;
 
     constructor(
+        private httpClient: HttpClient,
         private route: ActivatedRoute,
         private movieService: MovieService) { }
 
     public tags = ['stockings', 'heels', 'sexy', 'legs', 'nudestockings', 'highheels', 'legs', 'beforesex'];
+    public stream: any;
 
     public ngOnInit() {
+        this.stream = this.httpClient.get('https://c6.trafficdeposit.com/bvideo/gGdhavSPF2vLj1QfnTD2Qw/1535584173/57d2f694dd228/5b86dd5149319.mp4');
         // this.store.pipe(select(getCurrentStudio));
 
         this.route.paramMap.subscribe(params => {
@@ -39,5 +43,9 @@ export class MovieDetailsComponent implements OnInit {
                     }
                 });
         });
+    }
+
+    public getMovieStream() {
+        this.stream = this.httpClient.get('https://c6.trafficdeposit.com/bvideo/gGdhavSPF2vLj1QfnTD2Qw/1535584173/57d2f694dd228/5b86dd5149319.mp4');
     }
 }
