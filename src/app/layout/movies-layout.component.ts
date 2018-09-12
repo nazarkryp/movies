@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { URLSearchParams } from '@angular/http';
 
 @Component({
     selector: 'movies-layout',
@@ -11,6 +14,8 @@ export class MoviesLayoutComponent implements OnInit {
     public menuMode = MenuMode.side;
 
     constructor(
+        private route: ActivatedRoute,
+        private location: Location,
         private breakpointObserver: BreakpointObserver) {
         this.breakpointObserver.observe(['(min-width: 1200px)'])
             .subscribe(state => {
@@ -24,7 +29,20 @@ export class MoviesLayoutComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(location.href);
+        this.route.fragment.subscribe(fragment => {
+            if (!fragment) {
+                return;
+            }
+
+            const params: { [key: string]: string } = {};
+
+            fragment.split('&').forEach(e => {
+                params[e.split('=')[0]] = e.split('=')[1];
+            });
+
+            console.log(params['id_token']);
+
+        });
     }
 }
 

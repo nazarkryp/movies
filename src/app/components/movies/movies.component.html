@@ -15,8 +15,8 @@
                     <source src="{{movie.attachments[movie.selectedAttachment]?.url}}">
                 </video> -->
 
-                <img class="movie-thumbnail" src="https://instagram.fdnk1-1.fna.fbcdn.net/vp/d8279b3aadecd24f61ae23dd97958c9c/5C252492/t51.2885-15/e35/38833152_236321767077355_1624871769724682240_n.jpg?_nc_eui2=AeFDX-6PsBxXEMM_ktzVM8_43SVYpWVQA1IAFzcO5748QdwI9JSg0GoopvkNHzgzAFahbW-2mrsQJ7sUstfWaj9Fn_n3D_wfd1ewTDGh7o4MXg" [hidden]="isVideo(movie.attachments[movie.selectedAttachment]?.url)">
-                <!-- <img class="movie-thumbnail" src="https://res.cloudinary.com/dpfmyl1mn/image/upload/v1531688331/photocloud/prod/lanafeshchuk/hn8swc9taiasrctj1mqz.jpg" [hidden]="isVideo(movie.attachments[movie.selectedAttachment]?.url)"> -->
+                <!-- <img class="movie-thumbnail" src="https://instagram.fdnk1-1.fna.fbcdn.net/vp/d8279b3aadecd24f61ae23dd97958c9c/5C252492/t51.2885-15/e35/38833152_236321767077355_1624871769724682240_n.jpg?_nc_eui2=AeFDX-6PsBxXEMM_ktzVM8_43SVYpWVQA1IAFzcO5748QdwI9JSg0GoopvkNHzgzAFahbW-2mrsQJ7sUstfWaj9Fn_n3D_wfd1ewTDGh7o4MXg" [hidden]="isVideo(movie.attachments[movie.selectedAttachment]?.url)"> -->
+                <img class="movie-thumbnail" src="https://res.cloudinary.com/dpfmyl1mn/image/upload/v1531688331/photocloud/prod/lanafeshchuk/hn8swc9taiasrctj1mqz.jpg" [hidden]="isVideo(movie.attachments[movie.selectedAttachment]?.url)">
                 <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.url)" loop autoplay muted>
                     <source src="https://res.cloudinary.com/dpfmyl1mn/video/upload/v1507137526/photocloud/prod/lanafeshchuk/svug6bgevnebjbndgfpt.mp4">
                 </video>
