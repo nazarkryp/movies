@@ -15,8 +15,7 @@ import { Observable, merge } from 'rxjs';
 @Component({
     selector: 'movies-movie-dialog',
     templateUrl: './movie-dialog.component.html',
-    styleUrls: ['./movie-dialog.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['./movie-dialog.component.scss']
 })
 export class MovieDialogComponent implements OnInit {
     @ViewChild('video')

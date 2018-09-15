@@ -1,4 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 html {
     /* font-family: 'Karla', sans-serif; */
     /* font-family: 'Lora', serif; */
@@ -61,4 +62,13 @@ body {
     transition: border-color .2s ease-in-out;
     border-left: 2px solid transparent;
     box-sizing: border-box;
+}
+
+.movie-dialog-container .mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+}
+
+.movie-dialog-backdrop {
+    background: rgba(255, 255, 255, .5);
 }

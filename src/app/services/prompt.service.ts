@@ -18,7 +18,8 @@ export class PromptService {
             width: '420px',
             autoFocus: false,
             data: prompt,
-            panelClass: 'prompt-dialog-container'
+            panelClass: 'prompt-dialog-container',
+            hasBackdrop: true
         }).afterClosed();
     }
 }

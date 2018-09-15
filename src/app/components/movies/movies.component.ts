@@ -82,6 +82,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
             maxWidth: '1230px',
             maxHeight: 'calc(100vh - 24px)',
             data: movie,
+            backdropClass: 'movie-dialog-backdrop',
             panelClass: 'movie-dialog-container',
             autoFocus: false
         });
