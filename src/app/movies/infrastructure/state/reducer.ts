@@ -41,7 +41,7 @@ const initialState: MovieState = {
     currentStudio: null
 };
 
-export function reducer(state = initialState, action): MovieState {
+export function movieReducer(state = initialState, action): MovieState {
     switch (action.type) {
         case MovieAction.SET_MOVIES:
             return {

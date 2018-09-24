@@ -1,4 +1,4 @@
-export { reducer } from './reducer';
+export { movieReducer } from './reducer';
 export { MovieAction } from './action';
 export { MovieState } from './reducer';
 export { getMoviesPage } from './reducer';

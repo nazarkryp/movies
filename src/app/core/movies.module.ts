@@ -16,12 +16,12 @@ import { PaginationComponent } from 'app/components/shared/pagination/pagination
 import { TruncatePipe } from 'app/pipes/truncate.pipe';
 
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
-import { reducer } from 'app/movies/infrastructure/state';
+import { movieReducer } from 'app/movies/infrastructure/state';
 import { MovieDialogComponent } from '../components/shared/movie-dialog/movie-dialog.component';
 import { PromptComponent } from '../components/shared/prompt/prompt.component';
 
 export const reducers: ActionReducerMap<any> = {
-    movies: reducer
+    movies: movieReducer
 };
 
 @NgModule({
@@ -44,7 +44,7 @@ export const reducers: ActionReducerMap<any> = {
         ReactiveFormsModule,
         MoviesMaterialModule,
         FlexLayoutModule,
-        StoreModule.forFeature('movies', reducer)
+        StoreModule.forFeature('movies', movieReducer)
     ],
     providers: []
 })

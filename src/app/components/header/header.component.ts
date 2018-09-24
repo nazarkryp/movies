@@ -9,6 +9,8 @@ import { Store } from '@ngrx/store';
 import { MovieState, getCurrentStudio } from '../../movies/infrastructure/state';
 import { select } from '@ngrx/store';
 import { Studio } from '../../models/view';
+import { UserService } from '../../core/security/user.service';
+import { User } from '../../core/security/models';
 
 @Component({
     selector: 'movies-header',
@@ -16,6 +18,7 @@ import { Studio } from '../../models/view';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+    private currentUser: User;
     private studio: Studio;
 
     public showSearchBar: boolean;
@@ -37,6 +40,7 @@ export class HeaderComponent implements OnInit {
         private builder: FormBuilder,
         private breakpointObserver: BreakpointObserver,
         private store: Store<MovieState>,
+        private userService: UserService,
         private movieService: MovieService) {
         this.formGroup = this.builder.group({
             searchQuery: new FormControl('', Validators.compose([Validators.maxLength(50)]))
@@ -75,7 +79,7 @@ export class HeaderComponent implements OnInit {
     }
 
     public signIn() {
-        location.href = 'https://localhost:44397/v1/account';
+        location.href = 'https://localhost:44397/v1/account/authorize';
     }
 
     public ngOnInit() {
@@ -97,5 +101,9 @@ export class HeaderComponent implements OnInit {
             .subscribe((studio) => {
                 this.studio = studio;
             });
+
+        this.userService.getCurrentUser().subscribe((currentUser) => {
+            this.currentUser = currentUser;
+        });
     }
 }

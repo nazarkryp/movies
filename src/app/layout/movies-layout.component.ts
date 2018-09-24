@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { URLSearchParams } from '@angular/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../core/security/user.service';
+import { TokenProvider } from '../core/security/token.provider';
 
 @Component({
     selector: 'movies-layout',
@@ -15,7 +15,8 @@ export class MoviesLayoutComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private location: Location,
+        private userService: UserService,
+        private tokenProvider: TokenProvider,
         private breakpointObserver: BreakpointObserver) {
         this.breakpointObserver.observe(['(min-width: 1200px)'])
             .subscribe(state => {
@@ -28,20 +29,29 @@ export class MoviesLayoutComponent implements OnInit {
         this.menuOpened = !this.menuOpened;
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
+        this.userService.setCurrentUser();
+
         this.route.fragment.subscribe(fragment => {
             if (!fragment) {
                 return;
             }
 
-            const params: { [key: string]: string } = {};
+            this.tokenProvider.setToken(fragment);
 
-            fragment.split('&').forEach(e => {
-                params[e.split('=')[0]] = e.split('=')[1];
-            });
+            // const params: { [key: string]: string } = {};
 
-            console.log(params['id_token']);
+            // fragment.split('&').forEach(e => {
+            //     params[e.split('=')[0]] = e.split('=')[1];
+            // });
 
+            // const token = params['token'];
+
+            // if (token) {
+            //     const accessToken = new AccessToken();
+            //     accessToken.jwtToken = token;
+            //     this.storageService.set('session', accessToken);
+            // }
         });
     }
 }
