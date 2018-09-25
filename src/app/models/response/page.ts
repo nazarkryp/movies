@@ -1,6 +1,6 @@
-export class Page<T> {
+export class PageResponse<T> {
     public data: T[];
-    public total: number;
     public page: number;
     public size: number;
+    public total: number;
 }

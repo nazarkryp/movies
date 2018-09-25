@@ -72,3 +72,7 @@ body {
 .movie-dialog-backdrop {
     background: rgba(255, 255, 255, 0.5);
 }
+
+.cdk-global-scrollblock {
+    overflow-y: hidden !important;
+}

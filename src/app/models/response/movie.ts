@@ -2,10 +2,10 @@ import { AttachmentResponse } from './attachment';
 import { StudioResponse } from './studio';
 
 export class MovieResponse {
-    public id: number;
-    public objectId: string;
+    public movieId: number;
     public title: string;
-    public link: string;
+    public description: string;
+    public uri: string;
     public date: Date;
     public attachments: AttachmentResponse[];
     public studio: StudioResponse;

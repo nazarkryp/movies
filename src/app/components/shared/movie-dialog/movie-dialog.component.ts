@@ -39,14 +39,6 @@ export class MovieDialogComponent implements OnInit {
     }
 
     public ngOnInit() {
-        // this.store.select(fromRoot.getCurrentStudio)
-        //     .subscribe(studio => {
-        //         this.movieService.getMovie(studio.id, this.movie.objectId)
-        //             .subscribe(movie => {
-
-        //             });
-        //     });
-
         const escapeEvents = this.dialogRef.keydownEvents().pipe(filter(e => e.key === 'Escape'));
 
         merge(escapeEvents, this.dialogRef.backdropClick())

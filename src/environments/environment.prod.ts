@@ -1,4 +1,5 @@
 export const environment = {
     production: true,
-    baseAddress: 'http://localhost:40420/'
+    baseAddress: 'https://localhost:44397/',
+    loginUrl: 'https://localhost:44397/v1/account/authorize'
 };

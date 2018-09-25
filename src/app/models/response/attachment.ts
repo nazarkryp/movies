@@ -1,4 +1,4 @@
 export class AttachmentResponse {
-    public id: number;
-    public url: string;
+    public attachmentId: number;
+    public uri: string;
 }

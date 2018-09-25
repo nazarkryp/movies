@@ -3,10 +3,10 @@ import { Studio } from './studio';
 import { Subscription } from 'rxjs';
 
 export class Movie {
-    public id: number;
-    public objectId: string;
+    public movieId: number;
     public title: string;
-    public link: string;
+    public uri: string;
+    public description: string;
     public date: Date;
     public attachments: Attachment[];
     public studio: Studio;

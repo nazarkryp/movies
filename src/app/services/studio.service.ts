@@ -11,6 +11,7 @@ import { MovieAction } from 'app/movies/infrastructure/state';
 import { Studio } from 'app/models/view';
 import { StudioResponse } from '../models/response';
 import { StudioMapper } from 'app/mapping';
+import { DataResponse } from '../models/response/data';
 
 @Injectable({
     providedIn: 'root'
@@ -22,9 +23,9 @@ export class StudioService {
         private studioMapper: StudioMapper) { }
 
     public getStudios(): Observable<Studio[]> {
-        return this.webApiService.get<StudioResponse[]>('v1/studios')
-            .pipe(map(studios => {
-                return this.studioMapper.mapFromResponseArray(studios);
+        return this.webApiService.get<DataResponse<StudioResponse>>('v1/studios')
+            .pipe(map(response => {
+                return this.studioMapper.mapFromDataResponse(response);
             }));
     }
 

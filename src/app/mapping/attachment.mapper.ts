@@ -11,8 +11,8 @@ export class AttachmentMapper implements IMapper<AttachmentResponse, Attachment>
     public mapFromResponse(response: AttachmentResponse): Attachment {
         const attachment = new Attachment();
 
-        attachment.id = response.id;
-        attachment.url = response.url;
+        attachment.id = response.attachmentId;
+        attachment.uri = response.uri;
 
         return attachment;
     }

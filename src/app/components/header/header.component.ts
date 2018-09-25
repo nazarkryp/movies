@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit {
         const value = this.searchQuery.value;
 
         if (value) {
-            this.router.navigate(['search', this.studio.id, value, 1]);
+            this.router.navigate(['search', this.studio.studioId, value, 1]);
         }
     }
 

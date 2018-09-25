@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
 
-import { AttachmentResponse, StudioResponse } from 'app/models/response';
-import { Attachment, Studio } from 'app/models/view';
-import { IMapper } from './mapper';
+import { StudioResponse } from 'app/models/response';
+import { Studio } from 'app/models/view';
+import { IDataResponseMapper } from './mapper';
+import { DataResponse } from '../models/response/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class StudioMapper implements IMapper<StudioResponse, Studio> {
+export class StudioMapper implements IDataResponseMapper<StudioResponse, Studio> {
     public mapFromResponse(response: StudioResponse): Studio {
         const studio = new Studio();
 
-        studio.id = response.id;
+        studio.studioId = response.studioId;
         studio.name = response.name;
-        studio.objectId = response.objectId;
 
         return studio;
     }
 
-    public mapFromResponseArray(moviesResponse: StudioResponse[]): Studio[] {
-        return moviesResponse.map(response => this.mapFromResponse(response));
+    public mapFromDataResponse(studioResponse: DataResponse<StudioResponse>): Studio[] {
+        return studioResponse.data.map(response => this.mapFromResponse(response));
+    }
+
+    public mapFromResponseArray(studioResponse: StudioResponse[]): Studio[] {
+        return studioResponse.map(response => this.mapFromResponse(response));
     }
 }

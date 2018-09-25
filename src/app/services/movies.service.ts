@@ -1,62 +1,50 @@
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
-import { MovieMapper, StudioMapper } from 'app/mapping';
+import { MovieMapper, StudioMapper, PageMapper } from 'app/mapping';
 import { WebApiService } from 'app/core/communication';
-import { StudioPageMapper } from '../mapping/studio-page.mapper';
-import { StudioPageResponse } from '../models/response/studio-page';
-import { Store } from '@ngrx/store';
-import { MovieAction } from 'app/movies/infrastructure/state';
 import { QueryFilter } from 'app/models/common/query-filter';
-import { StudioPage } from '../models/view/studio-page';
+import { MovieResponse } from '../models/response';
+import { PageResponse } from 'app/models/response/page';
+import { Movie } from '../models/view';
+import { Page } from 'app/models/common/page';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MovieService {
-    private readonly pageMapper: StudioPageMapper;
+    private readonly pageMapper: PageMapper<MovieResponse, Movie>;
 
     constructor(
-        private store: Store<any>,
         private webApiService: WebApiService,
-        private movieMapper: MovieMapper,
-        private studioMapper: StudioMapper) {
-        this.pageMapper = new StudioPageMapper(this.movieMapper, this.studioMapper);
+        private movieMapper: MovieMapper) {
+        this.pageMapper = new PageMapper(this.movieMapper);
     }
 
-    public getMovies(options: any): Observable<StudioPage> {
-        const requestUri = this.buildRequestUri('v1/movies', options);
+    public getMovies(queryFilter: QueryFilter): Observable<Page<Movie>> {
+        const requestUri = this.buildQueryString('v1/movies', queryFilter);
 
-        return this.webApiService.get<StudioPageResponse>(requestUri)
-            .pipe(
-                map(response => this.pageMapper.map(response)),
-                tap(movies => {
-                    this.store.dispatch({
-                        type: MovieAction.SET_MOVIES,
-                        payload: movies
-                    });
-                }));
+        return this.webApiService.get<PageResponse<MovieResponse>>(requestUri)
+            .pipe(map(page => {
+                return this.pageMapper.map(page);
+            }));
     }
 
     public getMovie(studio: string, movie: string): Observable<any> {
         return this.webApiService.get<any>(`v1/movies/${studio}/${movie}`);
     }
 
-    private buildRequestUri(requestUri: string, options: QueryFilter) {
-        if (!options) {
+    private buildQueryString(requestUri: string, query: QueryFilter) {
+        if (!query || !Object.keys(query).length) {
             return requestUri;
         }
 
-        if (!options.page) {
-            options.page = 1;
-        }
+        const queryString = Object.keys(query).map(key => key + '=' + query[key]).join('&');
 
-        requestUri = `${requestUri}/${options.studio}?page=${options.page}`;
-
-        if (options.search) {
-            requestUri += `&search=${options.search}`;
+        if (queryString) {
+            requestUri = `${requestUri}?${queryString}`;
         }
 
         return requestUri;

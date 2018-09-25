@@ -22,7 +22,7 @@ export class StudioListComponent implements OnInit {
     public select(studio: Studio) {
         this.studioService.setCurrentStudio(studio);
         this.activeStudio = studio;
-        this.router.navigate([studio.id, 'recent', 1]);
+        // this.router.navigate(['recent', 1]);
     }
 
     public ngOnInit() {
@@ -38,7 +38,7 @@ export class StudioListComponent implements OnInit {
         this.studios.subscribe(studios => {
             let studio: Studio;
             if (currentStudio) {
-                studio = studios.find(e => e.id === currentStudio);
+                studio = studios.find(e => e.studioId === currentStudio);
             } else {
                 studio = studios[studios.length - 1];
             }
@@ -47,7 +47,7 @@ export class StudioListComponent implements OnInit {
             this.studioService.setCurrentStudio(studio);
 
             if (!currentStudio) {
-                this.router.navigate([studio.id, 'recent', 1]);
+                // this.router.navigate(['recent', 1]);
             }
         });
     }

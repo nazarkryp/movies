@@ -10,7 +10,7 @@ const routes: Routes = [
         component: MoviesComponent
     },
     {
-        path: ':studio/recent/:page',
+        path: 'recent/:page',
         component: MoviesComponent
     },
     {

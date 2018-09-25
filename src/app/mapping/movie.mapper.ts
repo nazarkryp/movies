@@ -17,10 +17,10 @@ export class MovieMapper implements IMapper<MovieResponse, Movie> {
     public mapFromResponse(response: MovieResponse): Movie {
         const movie = new Movie();
 
-        movie.id = response.id;
-        movie.objectId = response.objectId;
+        movie.movieId = response.movieId;
+        movie.description = response.description;
         movie.date = response.date;
-        movie.link = response.link;
+        movie.uri = response.uri;
         movie.duration = response.duration;
 
         if (response.studio) {

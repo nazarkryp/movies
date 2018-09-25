@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit } from '@angular/core';
 
 @Component({
     selector: 'movies-pagination',
@@ -6,30 +6,54 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
     styleUrls: ['./pagination.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaginationComponent {
-    private _pagesCount: number;
+export class PaginationComponent implements OnInit {
+    private _pageSize: number;
+    private _total: number;
     private range = 2;
-
-    @Input() public currentPage: number;
-    @Output() public changed = new EventEmitter<number>();
+    private maxPagesCount = 20;
 
     public pages: number[];
+    @Output() public changed = new EventEmitter<number>();
 
-    public get pagesCount(): number {
-        return this._pagesCount;
+    @Input() public currentPage: number;
+
+    public get pageSize(): number {
+        return this._pageSize;
     }
 
     @Input()
-    public set pagesCount(value: number) {
-        this._pagesCount = value;
-        this.initializePages(value);
+    public set pageSize(value: number) {
+        this._pageSize = value;
+    }
+
+    public get total(): number {
+        return this._total;
+    }
+
+    @Input()
+    public set total(value: number) {
+        this._total = value;
+    }
+
+
+    public get pagesCount(): number {
+        const pages = Math.round(this.total / this.pageSize);
+
+        return pages;
     }
 
     public showDots(page) {
-        return (page === 2 && this.currentPage - page > this.range) || (page === this.pagesCount - 1 && page - this.currentPage > this.range);
+        const result = (page === 2 && this.currentPage - page > this.range) || (page === this.pagesCount - 1 && page - this.currentPage > this.range);
+
+        return result;
     }
 
+    // tslint:disable-next-line:member-ordering
+    private counter = 0;
     public displayPage(page: number) {
+        // if (this.counter >= this.maxPagesCount) {
+        //     return false;
+        // }
         if (page === 1 || page === this.pagesCount) {
             return true;
         }
@@ -41,6 +65,8 @@ export class PaginationComponent {
         if (this.currentPage > page) {
             return (this.currentPage - page) <= this.range;
         }
+
+        this.counter++;
 
         return true;
     }
@@ -56,8 +82,14 @@ export class PaginationComponent {
         this.changed.emit(this.currentPage + 1);
     }
 
-    private initializePages(pagesCount: number) {
-        this.pages = new Array(pagesCount);
+    public ngOnInit(): void {
+        this.initializePages();
+    }
+
+    private initializePages() {
+        const pagesCount = Math.round(this.total / this.pageSize);
+
+        this.pages = new Array<number>(pagesCount);
 
         for (let i = 0; i < pagesCount; i++) {
             this.pages[i] = i + 1;

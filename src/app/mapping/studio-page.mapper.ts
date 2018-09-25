@@ -17,12 +17,10 @@ export class StudioPageMapper extends PageMapper<MovieResponse, Movie> {
             const page = new StudioPage();
 
             page.studio = this.studioMapper.mapFromResponse(response.studio);
-            page.currentPage = response.currentPage;
-            page.totalCount = response.totalCount;
-            page.pageSize = response.pageSize;
+            page.page = response.page;
+            page.size = response.size;
             page.total = response.total;
             page.data = this.movieMapper.mapFromResponseArray(response.data);
-            page.pagesCount = response.pagesCount;
 
             return page;
         } catch (err) {
