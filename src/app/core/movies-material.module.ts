@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRippleModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -18,7 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatIconModule,
         MatSidenavModule,
         MatListModule,
-        MatDialogModule
+        MatDialogModule,
+        MatMenuModule
     ],
     exports: [
         MatButtonModule,
@@ -28,7 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatIconModule,
         MatSidenavModule,
         MatListModule,
-        MatDialogModule
+        MatDialogModule,
+        MatMenuModule
     ]
 })
 export class MoviesMaterialModule { }

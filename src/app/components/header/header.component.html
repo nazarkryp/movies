@@ -12,22 +12,6 @@
             <span style="color: crimson; font-weight: bold; font-size: 2em;">.</span>
         </div>
     </div>
-    <!-- <div fxLayout="row" fxLayoutAlign="center center" style="width: 100%;">
-        <div class="container">
-            <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
-                <form (ngSubmit)="searchMovies()" [formGroup]="formGroup">
-                    <input class="search" #searchInput formControlName="searchQuery" [class.active]="showSearchBar" type="text" placeholder="Search" (blur)="searchFocusLost()">
-                </form>
-                <button (click)="showSearch()" style="background: transparent; border: none; padding: 0; margin: 0; outline: none; cursor: pointer;">
-                    <mat-icon *ngIf="!showSearchBar">search</mat-icon>
-                    <mat-icon *ngIf="showSearchBar">clear</mat-icon>
-                </button>
-            </div>
-        </div>
-    </div> -->
-    <!-- <div fxLayout="row" fxLayoutAlign="center center">
-
-    </div> -->
     <div class="container">
         <div style="max-width: 50%;">
             <form (ngSubmit)="searchMovies()" [formGroup]="formGroup" style="display: inline-flex;">
@@ -38,9 +22,12 @@
             </form>
         </div>
     </div>
-    <button mat-button *ngIf="currentUser">
-        <span style="font-size: .9em; padding-right: .5rem;">Signed in as <b>{{currentUser.email}}</b></span>
+    <button mat-button fxLayout="row" fxLayoutAlign="center center" [matMenuTriggerFor]="appMenu" *ngIf="currentUser">
+        <span style="font-size: .9em; padding-right: .5rem;">{{currentUser.email}}</span>
         <img style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" [src]="currentUser.picture" alt="user-avatar"/>
+        <mat-menu #appMenu="matMenu">
+            <button mat-menu-item (click)="signOut()">Logout</button>
+        </mat-menu>
     </button>
-        <button mat-flat-button (click)="signIn()" color="primary" *ngIf="!currentUser">Sign In</button>
+    <button mat-flat-button (click)="signIn()" color="primary" *ngIf="!currentUser">Sign In</button>
 </header>

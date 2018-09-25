@@ -14,7 +14,7 @@ import { User } from './models';
 })
 export class UserService {
     constructor(
-        private securityService: TokenProvider,
+        private tokenProvider: TokenProvider,
         private store: Store<fromRoot.UserState>) {
     }
 
@@ -23,13 +23,22 @@ export class UserService {
     }
 
     public setCurrentUser() {
-        const user = this.securityService.retrieveSession();
+        const jwt = this.tokenProvider.getToken();
 
-        if (user) {
+        if (jwt) {
+            const user = this.tokenProvider.parseJwt(jwt);
             this.store.dispatch({
                 type: UserActions.SET_USER,
                 payload: user
             });
         }
+    }
+
+    public signOut() {
+        this.tokenProvider.removeToken();
+
+        this.store.dispatch({
+            type: UserActions.REMOVE_USER
+        });
     }
 }

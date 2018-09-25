@@ -20,16 +20,12 @@ export class TokenProvider {
         location.href = environment.loginUrl;
     }
 
-    public retrieveSession() {
-        let result = null;
+    public getToken() {
+        return this.storageService.get(this.jwtKey);
+    }
 
-        const jwt = this.storageService.get(this.jwtKey);
-
-        if (jwt) {
-            result = this.parseJwt(jwt);
-        }
-
-        return result;
+    public removeToken() {
+        return this.storageService.removeItem(this.jwtKey);
     }
 
     public setToken(fragment: string) {
@@ -43,7 +39,7 @@ export class TokenProvider {
         this.storageService.set(this.jwtKey, jwt);
     }
 
-    private parseJwt(token: string) {
+    public parseJwt(token: string) {
         const base64Url = token.split('.')[1];
         const base64 = base64Url.replace('-', '+').replace('_', '/');
 
