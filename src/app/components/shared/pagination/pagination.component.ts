@@ -9,7 +9,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit
 export class PaginationComponent implements OnInit {
     private _pageSize: number;
     private _total: number;
-    private range = 2;
+    private range = 4;
     private maxPagesCount = 20;
 
     public pages: number[];
@@ -37,7 +37,7 @@ export class PaginationComponent implements OnInit {
 
 
     public get pagesCount(): number {
-        const pages = Math.round(this.total / this.pageSize);
+        const pages = Math.ceil(this.total / this.pageSize);
 
         return pages;
     }
@@ -87,7 +87,7 @@ export class PaginationComponent implements OnInit {
     }
 
     private initializePages() {
-        const pagesCount = Math.round(this.total / this.pageSize);
+        const pagesCount = Math.ceil(this.total / this.pageSize);
 
         this.pages = new Array<number>(pagesCount);
 
