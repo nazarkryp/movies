@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Output } from '@angular/core'
 
 import { MovieService } from 'app/services';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router, ActivationEnd } from '@angular/router';
+import { Router, ActivationEnd, ActivatedRoute } from '@angular/router';
 import { EventEmitter } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Store } from '@ngrx/store';
@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
     }
 
     constructor(
+        private route: ActivatedRoute,
         private router: Router,
         private builder: FormBuilder,
         private breakpointObserver: BreakpointObserver,
@@ -65,10 +66,14 @@ export class HeaderComponent implements OnInit {
     }
 
     public searchMovies() {
-        const value = this.searchQuery.value;
-
-        if (value) {
-            this.router.navigate(['search', this.studio.studioId, value, 1]);
+        if (this.searchQuery.value) {
+            this.router.navigate([], {
+                relativeTo: this.route,
+                queryParams: {
+                    search: this.searchQuery.value
+                },
+                queryParamsHandling: 'merge'
+            });
         }
     }
 

@@ -25,7 +25,7 @@
                 </div>
             </div>
             <footer class="movie-details" fxLayout="column">
-                <a class="movie-link" title="{{movie.title}}">
+                <a class="movie-link" title="{{movie.title}}" [href]="movie.uri" target="_blank">
                     {{movie.title | truncate:50 }}
                 </a>
                 <a>{{movie.studio.name}}</a>

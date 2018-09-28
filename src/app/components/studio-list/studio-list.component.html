@@ -2,9 +2,15 @@
     <h3 class="sidebar-title">Studios</h3>
 </header>
 <main fxLayout="column">
-    <mat-nav-list>
+    <!-- <mat-nav-list>
         <mat-list-item [class.active]="activeStudio && activeStudio.id == studio.id" *ngFor="let studio of studios | async" (click)="select(studio)">
             {{studio.name}}
         </mat-list-item>
-    </mat-nav-list>
+    </mat-nav-list> -->
+
+    <mat-selection-list #studiosList>
+        <mat-list-option *ngFor="let studio of studios | async" (click)="selectionChange(studiosList)" [value]="studio.studioId">
+            {{studio.name}}
+        </mat-list-option>
+    </mat-selection-list>
 </main>

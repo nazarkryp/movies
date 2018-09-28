@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../core/security/user.service';
 import { TokenProvider } from '../core/security/token.provider';
+
 
 @Component({
     selector: 'movies-layout',
@@ -14,6 +17,8 @@ export class MoviesLayoutComponent implements OnInit {
     public menuMode = MenuMode.side;
 
     constructor(
+        private router: Router,
+        private location: Location,
         private route: ActivatedRoute,
         private userService: UserService,
         private tokenProvider: TokenProvider,
@@ -38,20 +43,9 @@ export class MoviesLayoutComponent implements OnInit {
             }
 
             this.tokenProvider.setToken(fragment);
-
-            // const params: { [key: string]: string } = {};
-
-            // fragment.split('&').forEach(e => {
-            //     params[e.split('=')[0]] = e.split('=')[1];
-            // });
-
-            // const token = params['token'];
-
-            // if (token) {
-            //     const accessToken = new AccessToken();
-            //     accessToken.jwtToken = token;
-            //     this.storageService.set('session', accessToken);
-            // }
+            this.userService.setCurrentUser();
+            const path = this.location.path(false);
+            this.location.replaceState(path);
         });
     }
 }

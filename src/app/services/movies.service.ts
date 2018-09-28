@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { MovieMapper, StudioMapper, PageMapper } from 'app/mapping';
+import { MovieMapper, PageMapper } from 'app/mapping';
 import { WebApiService } from 'app/core/communication';
-import { QueryFilter } from 'app/models/common/query-filter';
 import { MovieResponse } from '../models/response';
 import { PageResponse } from 'app/models/response/page';
 import { Movie } from '../models/view';
 import { Page } from 'app/models/common/page';
+import { MoviesQueryFilter } from 'app/models/common/movies-query-filter';
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +23,7 @@ export class MovieService {
         this.pageMapper = new PageMapper(this.movieMapper);
     }
 
-    public getMovies(queryFilter: QueryFilter): Observable<Page<Movie>> {
+    public getMovies(queryFilter: MoviesQueryFilter): Observable<Page<Movie>> {
         const requestUri = this.buildQueryString('v1/movies', queryFilter);
 
         return this.webApiService.get<PageResponse<MovieResponse>>(requestUri)
@@ -36,15 +36,35 @@ export class MovieService {
         return this.webApiService.get<any>(`v1/movies/${studio}/${movie}`);
     }
 
-    private buildQueryString(requestUri: string, query: QueryFilter) {
-        if (!query || !Object.keys(query).length) {
+    private buildQueryString(requestUri: string, queryFilter: MoviesQueryFilter) {
+        if (!queryFilter || !Object.keys(queryFilter).length) {
             return requestUri;
         }
 
-        const queryString = Object.keys(query).map(key => key + '=' + query[key]).join('&');
+        const query = Object.getOwnPropertyNames(queryFilter)
+            .filter(propertyName => propertyName)
+            .map(propertyName => {
+                if (Array.isArray(queryFilter[propertyName])) {
+                    if (!queryFilter[propertyName].length) {
+                        return;
+                    }
 
-        if (queryString) {
-            requestUri = `${requestUri}?${queryString}`;
+                    return queryFilter[propertyName]
+                        .filter(item => item)
+                        .map(item => {
+                            return `${propertyName}=${item}`;
+                        }).join('&');
+                }
+
+                if (queryFilter[propertyName]) {
+                    return `${propertyName}=${queryFilter[propertyName]}`;
+                }
+
+                return null;
+            }).filter(propertyName => propertyName).join('&');
+
+        if (query) {
+            requestUri = `${requestUri}?${query}`;
         }
 
         return requestUri;

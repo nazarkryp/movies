@@ -16,7 +16,7 @@
         <div style="max-width: 50%;">
             <form (ngSubmit)="searchMovies()" [formGroup]="formGroup" style="display: inline-flex;">
                 <input class="search" #searchInput formControlName="searchQuery" type="text" placeholder="Search" (blur)="searchFocusLost()">
-                <button type="submit" style="border: none;">
+                <button mat-flat-button type="submit" style="border: none; width: 140px;">
                     <mat-icon>search</mat-icon>
                 </button>
             </form>

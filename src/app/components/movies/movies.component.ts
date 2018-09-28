@@ -10,7 +10,7 @@ import { Movie, Studio } from 'app/models/view';
 import { MovieDialogComponent } from 'app/components/shared/movie-dialog';
 
 import { Page } from 'app/models/common';
-import { QueryFilter } from 'app/models/common/query-filter';
+import { MoviesQueryFilter } from '../../models/common/movies-query-filter';
 
 @Component({
     selector: 'movies-movies',
@@ -103,19 +103,25 @@ export class MoviesComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
+        const filter = new MoviesQueryFilter();
+
         this.route.paramMap.subscribe(parame => {
             this.pageIndex = +parame.get('page');
-
-            const filter = new QueryFilter();
-            filter.page = this.pageIndex ? this.pageIndex : 1;
+            this.pageIndex = this.pageIndex ? this.pageIndex : 1;
+            filter.page = this.pageIndex;
             filter.size = 24;
 
             if (this.movies) {
                 this.movies.data = [];
             }
 
-            this.movieService.getMovies(filter).subscribe(movies => {
-                this.movies = movies;
+            this.route.queryParamMap.subscribe(params => {
+                filter.studioId = params.getAll('studioId').map(e => +e);
+                filter.search = params.get('search');
+
+                this.movieService.getMovies(filter).subscribe(movies => {
+                    this.movies = movies;
+                });
             });
         });
     }
