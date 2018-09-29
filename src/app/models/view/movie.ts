@@ -1,6 +1,6 @@
 import { Attachment } from './attachment';
 import { Studio } from './studio';
-import { Subscription } from 'rxjs';
+import { Category } from './category';
 
 export class Movie {
     public movieId: number;
@@ -11,6 +11,6 @@ export class Movie {
     public attachments: Attachment[];
     public studio: Studio;
     public selectedAttachment = 0;
-    public subscription: Subscription;
     public duration: string;
+    public categories: Category[];
 }

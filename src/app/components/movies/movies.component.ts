@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { MatDialog } from '@angular/material';
-
-import { interval } from 'rxjs';
 
 import { MovieService } from 'app/services';
 import { Movie, Studio } from 'app/models/view';
@@ -31,46 +29,6 @@ export class MoviesComponent implements OnInit, OnDestroy {
         private router: Router,
         private movieService: MovieService) { }
 
-    public mouseenter(movie: Movie) {
-        if (movie.attachments.length > 1) {
-
-            if (movie.subscription) {
-                movie.subscription.unsubscribe();
-                movie.subscription = null;
-            }
-
-            movie.selectedAttachment = 1;
-
-            if (this.isVideo(movie.attachments[movie.selectedAttachment].uri)) {
-                return;
-            }
-
-            movie.subscription = interval(500).subscribe(() => {
-                if (movie.selectedAttachment < movie.attachments.length - 1) {
-                    movie.selectedAttachment++;
-                } else {
-                    movie.selectedAttachment = 0;
-                }
-            });
-        }
-    }
-
-    public mouseleave(movie: Movie) {
-        if (!movie.attachments.length) {
-            return;
-        }
-        if (this.isVideo(movie.attachments[movie.selectedAttachment].uri)) {
-            movie.selectedAttachment = 0;
-            return;
-        }
-
-        if (movie.subscription) {
-            movie.subscription.unsubscribe();
-            movie.subscription = null;
-            movie.selectedAttachment = 0;
-        }
-    }
-
     public preview(movie: Movie) {
         this.dialog.open(MovieDialogComponent, {
             maxWidth: '1230px',
@@ -98,7 +56,11 @@ export class MoviesComponent implements OnInit, OnDestroy {
         if (this.searchQuery) {
             // this.router.navigate(['search', this.studio.studioId, this.searchQuery, pageIndex]);
         } else {
-            this.router.navigate(['recent', pageIndex]);
+            const extras: NavigationExtras = {
+                queryParamsHandling: 'merge'
+            };
+
+            this.router.navigate(['recent', pageIndex], extras);
         }
     }
 
@@ -118,6 +80,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
             this.route.queryParamMap.subscribe(params => {
                 filter.studioId = params.getAll('studioId').map(e => +e);
                 filter.search = params.get('search');
+                filter.categories = params.getAll('categories');
 
                 this.movieService.getMovies(filter).subscribe(movies => {
                     this.movies = movies;

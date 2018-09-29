@@ -21,7 +21,18 @@ export class TokenProvider {
     }
 
     public getToken() {
-        return this.storageService.get(this.jwtKey);
+        const jwt = this.storageService.get(this.jwtKey);
+
+        // if (jwt) {
+        //     console.log('retrieve jwt');
+        //     const data = this.parseJwt(jwt);
+
+        //     if (new Date(data.exp * 1000) < new Date()) {
+        //         this.removeToken();
+        //     }
+        // }
+
+        return jwt;
     }
 
     public removeToken() {

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { StudioResponse } from 'app/models/response';
+import { StudioResponse, DataResponse } from 'app/models/response';
 import { Studio } from 'app/models/view';
 import { IDataResponseMapper } from './mapper';
-import { DataResponse } from '../models/response/data';
 
 @Injectable({
     providedIn: 'root'

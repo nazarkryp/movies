@@ -1,4 +1,4 @@
-import { DataResponse } from 'app/models/response/data';
+import { DataResponse } from 'app/models/response';
 
 export interface IMapper<TSource, TResult> {
     mapFromResponse(response: TSource): TResult;

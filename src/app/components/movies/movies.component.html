@@ -9,7 +9,7 @@
 <main *ngIf="movies && movies.data;">
     <div class="movies-gallery" [class.loading]="isLoading">
         <div *ngFor="let movie of movies.data; trackBy: trackMovie;">
-            <div mat-ripple class="movie-item" (mouseenter)="mouseenter(movie)" (mouseleave)="mouseleave(movie)" (click)="preview(movie)">
+            <div mat-ripple class="movie-item" (click)="preview(movie)">
                 <img class="movie-thumbnail" [src]="movie.attachments[0]?.uri" alt="media-image" *ngIf="!isVideo(movie.attachments[0]?.uri)">
                 <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[0]?.uri)" loop autoplay muted>
                     <source src="{{movie.attachments[0]?.uri}}">
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <footer class="movie-details" fxLayout="column">
-                <a class="movie-link" title="{{movie.title}}" [href]="movie.uri" target="_blank">
+                <a class="movie-link" title="{{movie.title}}" [routerLink]="['/scene', movie.movieId]">
                     {{movie.title | truncate:50 }}
                 </a>
                 <a>{{movie.studio.name}}</a>

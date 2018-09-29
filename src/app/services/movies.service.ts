@@ -6,10 +6,10 @@ import { map } from 'rxjs/operators';
 import { MovieMapper, PageMapper } from 'app/mapping';
 import { WebApiService } from 'app/core/communication';
 import { MovieResponse } from '../models/response';
-import { PageResponse } from 'app/models/response/page';
+import { PageResponse } from 'app/models/response/page.response';
 import { Movie } from '../models/view';
 import { Page } from 'app/models/common/page';
-import { MoviesQueryFilter } from 'app/models/common/movies-query-filter';
+import { MoviesQueryFilter } from 'app/models/common';
 
 @Injectable({
     providedIn: 'root'
@@ -23,18 +23,27 @@ export class MovieService {
         this.pageMapper = new PageMapper(this.movieMapper);
     }
 
+    //#region API Methods
+
     public getMovies(queryFilter: MoviesQueryFilter): Observable<Page<Movie>> {
         const requestUri = this.buildQueryString('v1/movies', queryFilter);
 
         return this.webApiService.get<PageResponse<MovieResponse>>(requestUri)
-            .pipe(map(page => {
-                return this.pageMapper.map(page);
+            .pipe(map(response => {
+                return this.pageMapper.map(response);
             }));
     }
 
-    public getMovie(studio: string, movie: string): Observable<any> {
-        return this.webApiService.get<any>(`v1/movies/${studio}/${movie}`);
+    public getMovie(movieId: string): Observable<any> {
+        return this.webApiService.get<MovieResponse>(`v1/movies/${movieId}`)
+            .pipe(map(response => {
+                return this.movieMapper.mapFromResponse(response);
+            }));
     }
+
+    //#endregion
+
+    //#region Private Methods
 
     private buildQueryString(requestUri: string, queryFilter: MoviesQueryFilter) {
         if (!queryFilter || !Object.keys(queryFilter).length) {
@@ -69,4 +78,6 @@ export class MovieService {
 
         return requestUri;
     }
+
+    //#endregion
 }

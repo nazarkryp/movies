@@ -1,15 +1,14 @@
-import { Movie, Studio } from '../models/view';
+import { Movie, Studio, StudioPage } from 'app/models/view';
 import { MovieResponse, StudioResponse } from '../models/response';
 import { PageMapper } from './page.mapper';
-import { StudioPage } from '../models/view/studio-page';
-import { StudioPageResponse } from '../models/response/studio-page';
 import { IMapper } from './mapper';
+import { StudioPageResponse } from 'app/models/response';
 
 export class StudioPageMapper extends PageMapper<MovieResponse, Movie> {
     constructor(
-        protected movieMapper: IMapper<MovieResponse, Movie>,
+        protected mapper: IMapper<MovieResponse, Movie>,
         protected studioMapper: IMapper<StudioResponse, Studio>) {
-        super(movieMapper);
+        super(mapper);
     }
 
     public map(response: StudioPageResponse): StudioPage {
@@ -20,7 +19,7 @@ export class StudioPageMapper extends PageMapper<MovieResponse, Movie> {
             page.page = response.page;
             page.size = response.size;
             page.total = response.total;
-            page.data = this.movieMapper.mapFromResponseArray(response.data);
+            page.data = this.mapper.mapFromResponseArray(response.data);
 
             return page;
         } catch (err) {

@@ -9,9 +9,8 @@ import * as fromRoot from '../movies/infrastructure/state/reducer';
 import { WebApiService } from 'app/core/communication';
 import { MovieAction } from 'app/movies/infrastructure/state';
 import { Studio } from 'app/models/view';
-import { StudioResponse } from '../models/response';
 import { StudioMapper } from 'app/mapping';
-import { DataResponse } from '../models/response/data';
+import { DataResponse, StudioResponse } from 'app/models/response';
 
 @Injectable({
     providedIn: 'root'

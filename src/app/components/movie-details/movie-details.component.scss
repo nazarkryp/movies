@@ -15,21 +15,22 @@
 
 .tags {
     margin: 0;
-    list-style-type: none;
-    display: inline-flex;
     padding: 0;
-    padding-bottom: .75rem;
+    list-style-type: none;
+    line-height: 1.5;
+    display: inline-block;
 }
 
 .tag {
-    padding-right: .25rem;
     color: rgba(220, 20, 60, .86);
     padding-right: .25rem;
     text-decoration: none;
+    float: left;
 }
 
 .tag a {
     color: inherit;
+    cursor: pointer;
     padding: inherit;
     text-decoration: inherit;
 }
