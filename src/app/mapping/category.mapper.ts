@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { IMapper } from './mapper';
-import { CategoryResponse } from 'app/models/response';
+import { IDataResponseMapper } from './mapper';
+import { CategoryResponse, DataResponse } from 'app/models/response';
 import { Category } from 'app/models/view';
-
 
 @Injectable({
     providedIn: 'root'
 })
-export class CategoryMapper implements IMapper<CategoryResponse, Category> {
+export class CategoryMapper implements IDataResponseMapper<CategoryResponse, Category> {
     public mapFromResponse(response: CategoryResponse): Category {
         const category = new Category();
 
@@ -20,5 +19,9 @@ export class CategoryMapper implements IMapper<CategoryResponse, Category> {
 
     public mapFromResponseArray(categoryResponse: CategoryResponse[]): Category[] {
         return categoryResponse.map(response => this.mapFromResponse(response));
+    }
+
+    public mapFromDataResponse(categoryResponse: DataResponse<CategoryResponse>): Category[] {
+        return categoryResponse.data.map(response => this.mapFromResponse(response));
     }
 }

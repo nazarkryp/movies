@@ -1,4 +1,4 @@
 export class StudioResponse {
-    public studioId: string;
+    public studioId: number;
     public name: string;
 }

@@ -27,10 +27,19 @@ export class UserService {
 
         if (jwt) {
             const user = this.tokenProvider.parseJwt(jwt);
-            this.store.dispatch({
-                type: UserActions.SET_USER,
-                payload: user
-            });
+            const expired = new Date(user.exp * 1000) < new Date();
+
+            if (expired) {
+                this.tokenProvider.removeToken();
+                this.store.dispatch({
+                    type: UserActions.REMOVE_USER
+                });
+            } else {
+                this.store.dispatch({
+                    type: UserActions.SET_USER,
+                    payload: user
+                });
+            }
         }
     }
 

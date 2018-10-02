@@ -1,5 +1,5 @@
 export class Studio {
-    public studioId: string;
+    public studioId: number;
     public name: string;
-    public isActive: boolean;
+    public selected: boolean;
 }

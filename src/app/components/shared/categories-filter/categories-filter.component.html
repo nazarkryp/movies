@@ -1,0 +1,10 @@
+<header class="sidebar-header">
+    <h3 class="sidebar-title">Categories</h3>
+</header>
+<main fxLayout="column">
+    <mat-selection-list #categoriesList>
+        <mat-list-option *ngFor="let category of categories | async" (click)="selectionChange(categoriesList)" [selected]="category.selected" [value]="category.name">
+            {{category.name}}
+        </mat-list-option>
+    </mat-selection-list>
+</main>

@@ -10,33 +10,27 @@
     text-decoration: none;
 }
 
-form {
+.search-form {
     width: 100%;
+    min-width: 500px;
 }
 
-.search {
-    background: rgb(245, 245, 245);
+.search-form__input {
+    background: rgb(241, 243, 244);
+    color: rgba(0, 0, 0, .65);
     border-radius: 2px;
-    padding: .7rem 1rem;
+    padding: .5rem 1rem;
     box-sizing: border-box;
     line-height: normal;
-    font-family: 'Open Sans', sans-serif;
     border: none;
-    font-size: 1.2em;
     outline: none;
-    font-weight: lighter;
+    // font-weight: lighter;
     width: 100%;
-    opacity: 1;
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -ms-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out; // transform: scaleX(0);
 }
 
-.search.active {
-    transform: scaleX(1);
-    opacity: 1;
+.search-form__submit {
+    background-color: #f1f3f4;
+    color: rgba(0, 0, 0, .65);
 }
 
 .navigation .active {

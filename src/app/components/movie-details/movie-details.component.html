@@ -1,5 +1,5 @@
 <div class="video-container" *ngIf="movie">
-    <video controls>
+    <video [poster]="movie.attachments[0].uri" controls>
         <source src="https://res.cloudinary.com/dpfmyl1mn/video/upload/v1507137526/photocloud/prod/lanafeshchuk/svug6bgevnebjbndgfpt.mp4">
     </video>
     <div class="video-container__details" fxLayout="row" fxLayoutAlign="space-between center">

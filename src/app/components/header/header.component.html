@@ -12,17 +12,18 @@
             <span style="color: crimson; font-weight: bold; font-size: 2em;">.</span>
         </div>
     </div>
-    <div class="container">
+    <div class="container" fxLayout="row" fxLayoutAlign="center center">
         <div style="max-width: 50%;">
-            <form (ngSubmit)="searchMovies()" [formGroup]="formGroup" style="display: inline-flex;">
-                <input class="search" #searchInput formControlName="searchQuery" type="text" placeholder="Search" (blur)="searchFocusLost()">
-                <button mat-flat-button type="submit" style="border: none; width: 140px;">
+            <form class="search-form" (ngSubmit)="searchMovies()" [formGroup]="formGroup" style="display: inline-flex;">
+                <input class="search-form__input" #searchInput formControlName="searchQuery" type="text" placeholder="Search" (blur)="searchFocusLost()">
+                <button class="search-form__submit" mat-flat-button type="submit">
                     <mat-icon>search</mat-icon>
                 </button>
             </form>
         </div>
     </div>
-    <button mat-button fxLayout="row" fxLayoutAlign="center center" [matMenuTriggerFor]="appMenu" *ngIf="currentUser">
+    <div style="min-width: calc(240px - 0.7rem);"></div>
+    <button mat-button fxLayout="row" fxLayoutAlign="center center" [matMenuTriggerFor]="appMenu" *ngIf="currentUser" style="position: absolute; right: 0;">
         <span style="font-size: .9em; padding-right: .5rem;">{{currentUser.email}}</span>
         <img style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" [src]="currentUser.picture" alt="user-avatar"/>
         <mat-menu #appMenu="matMenu">

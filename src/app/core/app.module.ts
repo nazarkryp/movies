@@ -5,25 +5,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { NgProgressModule } from '@ngx-progressbar/core';
+
 import { MoviesMaterialModule, MoviesRoutingModule } from '.';
 
 import { MoviesLayoutComponent } from '../layout/movies-layout.component';
 import { HeaderComponent } from '../components/header/header.component';
 
-import { StudioListComponent } from '../components/studio-list/studio-list.component';
+import { StudioListComponent } from '../components/movies-studios-filter/movies-studios-filter.component';
 
 import { StoreModule } from '@ngrx/store';
 
 import { MoviesModule } from './movies.module';
 import { AuthenticationInterceptor } from '../services/interceptors';
 import { userReducer } from './security/state';
+import { CategoriesFilterComponent } from '../components/shared/categories-filter/categories-filter.component';
 
 
 @NgModule({
     declarations: [
         MoviesLayoutComponent,
         HeaderComponent,
-        StudioListComponent
+        StudioListComponent,
+        CategoriesFilterComponent
     ],
     imports: [
         BrowserModule,
@@ -37,7 +41,8 @@ import { userReducer } from './security/state';
         MoviesModule,
         StoreModule.forRoot({
             user: userReducer
-        })
+        }),
+        NgProgressModule.forRoot()
     ],
     providers: [
         {

@@ -5,6 +5,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../core/security/user.service';
 import { TokenProvider } from '../core/security/token.provider';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { TokenProvider } from '../core/security/token.provider';
 export class MoviesLayoutComponent implements OnInit {
     public menuOpened = true;
     public menuMode = MenuMode.side;
+    public currentUser: Observable<any>;
 
     constructor(
         private router: Router,
@@ -36,6 +38,7 @@ export class MoviesLayoutComponent implements OnInit {
 
     public ngOnInit(): void {
         this.userService.setCurrentUser();
+        this.currentUser = this.userService.getCurrentUser();
 
         this.route.fragment.subscribe(fragment => {
             if (!fragment) {

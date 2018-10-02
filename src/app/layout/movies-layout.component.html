@@ -1,3 +1,4 @@
+<ng-progress [speed]="500" [meteor]="true" [spinner]="false" [color]="'#e91e63'" [trickleSpeed]="300" [thick]="false"></ng-progress>
 <div class="page-wrapper" fxLayout="column" fxLayoutAlign="start center">
     <header class="header" fxLayout="row" fxLayoutAlign="center center">
         <div style="width: 100%;">
@@ -8,29 +9,14 @@
     <main class="main">
         <mat-sidenav-container class="sidenav-container">
             <mat-sidenav class="sidenav" [mode]="menuMode" [opened]="menuOpened">
-                <!-- <div style="padding-top: 2.8rem;">
-                    <mat-nav-list>
-                        <mat-list-item>
-                            Home
-                        </mat-list-item>
-                        <mat-list-item>
-                            Trending
-                        </mat-list-item>
-                    </mat-nav-list>
-                </div> -->
-                <div style="padding-top: 2.8rem;">
-                    <movies-studio-list></movies-studio-list>
+                <div *ngIf="currentUser | async">
+                    <div style="padding-top: 2.8rem;">
+                        <movies-studios-filter></movies-studios-filter>
+                    </div>
+                    <div style="padding-top: 2.8rem;">
+                        <movies-categories-filter></movies-categories-filter>
+                    </div>
                 </div>
-                <!-- <div style="padding-top: 2.8rem;">
-                    <header class="sidebar-header">
-                        <h3 class="sidebar-title">CATEGORIES</h3>
-                    </header>
-                    <mat-nav-list>
-                        <mat-list-item>
-                            #stockings
-                        </mat-list-item>
-                    </mat-nav-list>
-                </div> -->
                 <footer class="footer" fxLayout="row" fxLayoutAlign="center center">
                     <div class="container">
                         <span class="copyright">© 2018 Movies</span>
@@ -38,7 +24,7 @@
                 </footer>
             </mat-sidenav>
             <mat-sidenav-content style="height: calc(100vh - 60px); padding: 2.8rem 1.4rem 1.4rem; box-sizing: border-box;" fxLayout="row" fxLayoutAlign="center start">
-                <div class="container">
+                <div class="container" *ngIf="currentUser | async">
                     <router-outlet></router-outlet>
                 </div>
             </mat-sidenav-content>
