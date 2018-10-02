@@ -11,6 +11,7 @@ import { PromptService } from 'app/services/prompt.service';
 import { Prompt } from '../../../models/common';
 import { map, filter } from 'rxjs/operators';
 import { Observable, merge } from 'rxjs';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'movies-movie-dialog',
@@ -20,6 +21,9 @@ import { Observable, merge } from 'rxjs';
 export class MovieDialogComponent implements OnInit {
     @ViewChild('video')
     private video: any;
+
+    public title = environment.title;
+    public uri = environment.uri;
 
     constructor(
         private store: Store<MovieState>,

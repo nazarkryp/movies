@@ -96,4 +96,20 @@ footer.movie-details {
 
 .movies-footer {
     padding: 4.2rem 0 1.4rem 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.movie-content {
+    min-height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.movie-content__movies {
+    min-height: 100%;
+    box-sizing: border-box;
+    padding-bottom: 110px;
 }

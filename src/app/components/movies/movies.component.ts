@@ -71,7 +71,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
             this.pageIndex = +parame.get('page');
             this.pageIndex = this.pageIndex ? this.pageIndex : 1;
             filter.page = this.pageIndex;
-            filter.size = 4;
+            filter.size = 24;
 
             if (this.movies) {
                 this.movies.data = [];
