@@ -20,6 +20,7 @@ import { movieReducer } from 'app/movies/infrastructure/state';
 import { MovieDialogComponent } from '../components/shared/movie-dialog/movie-dialog.component';
 import { PromptComponent } from '../components/shared/prompt/prompt.component';
 import { SigninComponent } from '../components/signin/signin.component';
+import { MovieItemComponent } from '../components/shared/movie-item/movie-item.component';
 
 export const reducers: ActionReducerMap<any> = {
     movies: movieReducer
@@ -34,6 +35,7 @@ export const reducers: ActionReducerMap<any> = {
         MovieDialogComponent,
         PromptComponent,
         SigninComponent,
+        MovieItemComponent,
     ],
     entryComponents: [
         MovieDialogComponent,

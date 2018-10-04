@@ -1,6 +1,7 @@
 import { Attachment } from './attachment';
 import { Studio } from './studio';
 import { Category } from './category';
+import { Model } from './model';
 
 export class Movie {
     public movieId: number;
@@ -13,4 +14,5 @@ export class Movie {
     public selectedAttachment = 0;
     public duration: string;
     public categories: Category[];
+    public models: Model[];
 }

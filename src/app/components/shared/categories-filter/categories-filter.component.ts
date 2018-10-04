@@ -36,7 +36,7 @@ export class CategoriesFilterComponent implements OnInit {
     public ngOnInit() {
         this.categories = this.categoryService.getCategories()
             .pipe(mergeMap(categories => {
-                return this.route.queryParamMap.pipe(take(1), map(params => {
+                return this.route.queryParamMap.pipe(map(params => {
                     const categoriesNames = params.getAll('categories');
 
                     if (categoriesNames.length && categories) {

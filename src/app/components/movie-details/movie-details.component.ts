@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MovieService } from 'app/services';
 import { Movie } from '../../models/view';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'movies-movie-details',
@@ -11,6 +12,9 @@ import { Movie } from '../../models/view';
 })
 export class MovieDetailsComponent implements OnInit {
     public movie: Movie;
+
+    public title = environment.title;
+    public uri = environment.uri;
 
     constructor(
         private route: ActivatedRoute,

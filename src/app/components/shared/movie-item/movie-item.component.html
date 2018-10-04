@@ -1,0 +1,34 @@
+<div class="movie">
+    <div class="movie__preview">
+        <img [src]="movie.attachments[0].uri">
+    </div>
+        <div class="movie__footer">
+            <a class="movie__footer__title" [routerLink]="['/scene', movie.movieId]">{{movie.title}}</a>
+            <div class="movie__footer__details">
+                <a class="movie__footer__studio" [routerLink]="['/recent', 1]" [queryParams]="{studios: movie.studio.studioId}">{{movie.studio.name}}</a>
+                <span class="movie__footer__time">{{movie.date | date : 'longDate'}}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div mat-ripple class="movie-item" (click)="preview(movie)">
+    <img class="movie-thumbnail" [src]="movie.attachments[0]?.uri" alt="media-image" *ngIf="!isVideo(movie.attachments[0]?.uri)">
+    <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[0]?.uri)" loop autoplay muted>
+        <source src="{{movie.attachments[0]?.uri}}">
+    </video> -->
+
+    <!-- <img class="movie-thumbnail" src="https://instagram.fdnk1-1.fna.fbcdn.net/vp/d8279b3aadecd24f61ae23dd97958c9c/5C252492/t51.2885-15/e35/38833152_236321767077355_1624871769724682240_n.jpg?_nc_eui2=AeFDX-6PsBxXEMM_ktzVM8_43SVYpWVQA1IAFzcO5748QdwI9JSg0GoopvkNHzgzAFahbW-2mrsQJ7sUstfWaj9Fn_n3D_wfd1ewTDGh7o4MXg" [hidden]="isVideo(movie.attachments[movie.selectedAttachment]?.url)"> -->
+    <!-- <img class="movie-thumbnail" src="https://res.cloudinary.com/dpfmyl1mn/image/upload/v1531688331/photocloud/prod/lanafeshchuk/hn8swc9taiasrctj1mqz.jpg" [hidden]="isVideo(movie.attachments[movie.selectedAttachment]?.url)">
+    <video class="movie-thumbnail" *ngIf="isVideo(movie.attachments[movie.selectedAttachment]?.uri)" loop autoplay muted>
+        <source src="https://res.cloudinary.com/dpfmyl1mn/video/upload/v1507137526/photocloud/prod/lanafeshchuk/svug6bgevnebjbndgfpt.mp4">
+    </video> -->
+    <!-- <div class="movie-duration">
+        <span>{{movie.date | date : 'mediumDate'}}</span>
+    </div>
+</div>
+<footer class="movie-details" fxLayout="column">
+    <a class="movie-link" title="{{movie.title}}" [routerLink]="['/scene', movie.movieId]">
+        {{movie.title | truncate:50 }}
+    </a>
+    <a>{{movie.studio.name}}</a>
+</footer> -->

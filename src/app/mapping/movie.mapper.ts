@@ -6,15 +6,17 @@ import { StudioMapper } from './studio.mapper';
 import { MovieResponse } from 'app/models/response';
 import { Movie } from 'app/models/view';
 import { CategoryMapper } from './category.mapper';
+import { ModelMapper } from './model.mapper';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MovieMapper implements IMapper<MovieResponse, Movie> {
     constructor(
-        private attachmentMapper: AttachmentMapper,
-        private categoryMapper: CategoryMapper,
-        private studioMapper: StudioMapper) { }
+        private readonly attachmentMapper: AttachmentMapper,
+        private readonly categoryMapper: CategoryMapper,
+        private readonly modelMapper: ModelMapper,
+        private readonly studioMapper: StudioMapper) { }
 
     public mapFromResponse(response: MovieResponse): Movie {
         const movie = new Movie();
@@ -24,6 +26,10 @@ export class MovieMapper implements IMapper<MovieResponse, Movie> {
         movie.date = response.date;
         movie.uri = response.uri;
         movie.duration = response.duration;
+
+        if (response.models) {
+            movie.models = this.modelMapper.mapFromResponseArray(response.models);
+        }
 
         if (response.studio) {
             movie.studio = this.studioMapper.mapFromResponse(response.studio);

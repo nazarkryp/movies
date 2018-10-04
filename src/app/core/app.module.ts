@@ -20,6 +20,7 @@ import { MoviesModule } from './movies.module';
 import { AuthenticationInterceptor } from '../services/interceptors';
 import { userReducer } from './security/state';
 import { CategoriesFilterComponent } from '../components/shared/categories-filter/categories-filter.component';
+import { PageNotFoundComponent } from '../components/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CategoriesFilterComponent } from '../components/shared/categories-filte
         MoviesLayoutComponent,
         HeaderComponent,
         StudioListComponent,
-        CategoriesFilterComponent
+        CategoriesFilterComponent,
+        PageNotFoundComponent
     ],
     imports: [
         BrowserModule,

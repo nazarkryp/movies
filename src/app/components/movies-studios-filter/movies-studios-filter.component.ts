@@ -36,7 +36,7 @@ export class StudioListComponent implements OnInit {
     public ngOnInit() {
         this.studios = this.studioService.getStudios()
             .pipe(mergeMap(studios => {
-                return this.route.queryParamMap.pipe(take(1), map(params => {
+                return this.route.queryParamMap.pipe(map(params => {
                     const studiosIds = params.getAll('studios');
 
                     if (studiosIds.length && studios) {

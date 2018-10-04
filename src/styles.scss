@@ -3,7 +3,8 @@
 html {
     /* font-family: 'Karla', sans-serif; */
     /* font-family: 'Lora', serif; */
-    font-family: 'Open Sans', serif;
+    // font-family: 'Open Sans', serif;
+    font-family: 'Roboto', serif;
     font-size: .9em;
     color: rgba(0, 0, 0, .87);
 }
@@ -23,9 +24,8 @@ body {
 }
 
 .sidebar-title {
-    font-weight: normal;
-    text-transform: uppercase;
-    color: rgba(0, 0, 0, .65);
+    font-weight: bold;
+    color: rgba(0, 0, 0, .87);
 }
 
 .mat-list .mat-list-item,
@@ -48,7 +48,8 @@ body {
 
 .mat-list-option,
 .mat-list-option:not(.mat-list-item-disabled) {
-    font-size: .9em !important;
+    font-size: 1em !important;
+    color: rgba(0, 0, 0, .65) !important;
 }
 
 .mat-nav-list {

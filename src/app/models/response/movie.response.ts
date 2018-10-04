@@ -1,6 +1,7 @@
 import { AttachmentResponse } from './attachment.response';
 import { StudioResponse } from './studio.response';
 import { CategoryResponse } from './category.response';
+import { ModelResponse } from './model.response';
 
 export class MovieResponse {
     public movieId: number;
@@ -12,4 +13,5 @@ export class MovieResponse {
     public studio: StudioResponse;
     public duration: string;
     public categories: CategoryResponse[];
+    public models: ModelResponse[];
 }
