@@ -16,13 +16,22 @@
 
 .movie-details__details {
     padding-bottom: .75rem;
-    display: block;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-details__item {
+    padding-bottom: .75rem;
+}
+
+.movie-details__item__subtitle {
+    padding-bottom: .75rem;
 }
 
 .movie-details__title {
     font-size: 1.2em;
     font-weight: 600;
-    padding-bottom: .75rem;
+    padding-bottom: .5rem;
     display: block;
 }
 
@@ -37,7 +46,6 @@
 .movie-details__model {
     color: rgba(0, 0, 0, .65);
     font-weight: lighter;
-    font-size: 1.2em;
     padding-right: .25rem;
     text-decoration: none;
     float: left;
@@ -74,4 +82,26 @@
 .movie-details__description {
     line-height: 1.5;
     color: rgba(0, 0, 0, .65);
+}
+
+.movie-details__attachments {
+    display: flex;
+    flex-direction: row;
+    place-content: center space-between;
+    box-sizing: border-box;
+}
+
+.movie-details__attachment {
+    margin-right: 1.4rem
+}
+
+.movie-details__attachments:last-child {
+    margin-right: 0;
+}
+
+.movie-details__attachment img {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
 }

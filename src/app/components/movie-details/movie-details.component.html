@@ -1,52 +1,60 @@
 <div class="movie-details" *ngIf="movie">
     <div>
-        <div fxLayout="row">
-            <video class="movie-details__video" [poster]="movie.attachments[0].uri" controls loop>
-                <source [src]="uri">
-            </video>
-        </div>
-        <div class="movie-details__details" fxLayout="row" fxLayoutAlign="space-between center">
-            <div>
-                <span class="movie-details__title">{{movie.title}}</span>
-                <ul class="movie-details__models">
-                    <li class="movie-details__model" *ngFor="let model of movie.models;">
-                        <a [routerLink]="['/recent', 1]" [queryParams]="{models: model.modelId}">{{model.name}}</a>
+        <video class="movie-details__video" [poster]="movie.attachments[0].uri" controls loop>
+            <source [src]="uri">
+        </video>
+        <div class="movie-details__details">
+            <div class="movie-details__item" fxLayout="row" fxLayoutAlign="space-between center">
+                <div>
+                    <span class="movie-details__title">{{movie.title}}</span>
+                    <ul class="movie-details__models">
+                        <li class="movie-details__model" *ngFor="let model of movie.models;">
+                            <a [routerLink]="['/recent', 1]" [queryParams]="{models: model.modelId}">{{model.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <a mat-button color="primary" [href]="movie.uri" target="_blank">OPEN SOURCE</a>
+            </div>
+            <div class="movie-details__item">
+                <ul class="movie-details__tags">
+                    <li class="movie-details__tag" *ngFor="let category of movie.categories;">
+                        <a [routerLink]="['/recent', 1]" [queryParams]="{categories: category.name}">#{{category.name}}</a>
                     </li>
                 </ul>
             </div>
-            <a mat-button color="primary" [href]="movie.uri" target="_blank">OPEN SOURCE</a>
-        </div>
-        <div>
-            <ul class="movie-details__tags">
-                <li class="movie-details__tag" *ngFor="let category of movie.categories;">
-                    <a [routerLink]="['/recent', 1]" [queryParams]="{categories: category.name}">#{{category.name}}</a>
-                </li>
-            </ul>
-            <div>
+            <div class="movie-details__item">
                 <p class="movie-details__description">
                     {{movie.description}}
                 </p>
             </div>
-        </div>
-    </div>
-    <div class="movie-details__related">
-        <header style="padding-bottom: 1.4rem;">
-            <h3>More videos with Lanafeshchuk</h3>
-        </header>
-        <div>
-            <div fxLayout="row">
-                <img style="width: 100px; height: 75px; object-fit: cover;" src="https://instagram.flwo1-1.fna.fbcdn.net/vp/ee45e6d8512edad0dbd32d334cc23857/5C516B74/t51.2885-15/e35/37029408_207310096778072_4787454093272547328_n.jpg" alt="lanafeshchuk">
-                <div style="padding-left: .75rem;" fxLayout="column" fxLayoutAlign="space-between start">
-                    <span>
-                        <strong>Lanafeshchuk - Sexy sensual girl</strong>
-                    </span>
-                    <div style="width: 100%; text-align: end;">
-                        <span>
-                            24:00
-                        </span>
+            <div class="movie-details__item" *ngIf="movie.attachments.length > 1">
+                <h3 class="movie-details__item__subtitle">More scenes from movie</h3>
+                <div class="movie-details__attachments">
+                    <div class="movie-details__attachment" *ngFor="let attachment of movie.attachments">
+                        <img [src]="attachment.uri" alt="attachment{{attachment.attachmentId}}">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <aside class="movie-details__related" *ngIf="relatedMovies | async as relatedMovies">
+        <header style="padding-bottom: 1.4rem;">
+            <h3>Related movies</h3>
+        </header>
+        <div>
+            <div fxLayout="row" *ngFor="let item of relatedMovies.data;">
+                <img style="width: 100px; height: 75px; object-fit: cover;" [src]="item.attachments[0].uri" alt="{{movie.title}}">
+                <div style="padding-left: .75rem;" fxLayout="column" fxLayoutAlign="space-between start">
+                    <span>
+                        <strong>{{item.title}}</strong>
+                    </span>
+                    <div style="width: 100%; text-align: end;">
+                        <span>
+                            {{movie.duration}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
 </div>
