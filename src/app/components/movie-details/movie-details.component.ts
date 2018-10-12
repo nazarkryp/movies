@@ -39,6 +39,7 @@ export class MovieDetailsComponent implements OnInit {
     private getRelatedMovies(models: number[]) {
         if (models.length) {
             const filter = new MoviesQueryFilter();
+            filter.size = 12;
             filter.models = [models[0]];
             this.relatedMovies = this.movieService.getMovies(filter);
         }

@@ -1,3 +1,5 @@
+@import '../../../assets/scss/theme.scss';
+
 .movie-details {
     display: flex;
 }
@@ -11,7 +13,11 @@
 .movie-details__related {
     width: 350px;
     min-width: 350px;
-    padding-left: .75rem;
+    padding-left: 2.8rem;
+}
+
+.movie-details__related__item {
+    padding-bottom: 1.4rem;
 }
 
 .movie-details__details {
@@ -21,14 +27,21 @@
 }
 
 .movie-details__item {
-    padding-bottom: .75rem;
+    padding-bottom: 2.8rem;
+}
+
+.movie-details__item.underline {
+    // border-bottom: 1px solid #d8d8d8;
+    // margin-bottom: 1.4rem;
 }
 
 .movie-details__item__subtitle {
-    padding-bottom: .75rem;
+    padding-bottom: 1.4rem;
 }
 
 .movie-details__title {
+    // color: mat-color($primary);
+    color: inherit;
     font-size: 1.2em;
     font-weight: 600;
     padding-bottom: .5rem;
@@ -44,11 +57,22 @@
 }
 
 .movie-details__model {
-    color: rgba(0, 0, 0, .65);
-    font-weight: lighter;
+    color: rgba(0, 0, 0, .5);
+    font-size: .9em;
+    font-weight: bold;
     padding-right: .25rem;
     text-decoration: none;
     float: left;
+}
+
+.movie-details__model:hover {
+    color: rgba(0, 0, 0, .3);
+}
+
+.movie-details__categories {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: .75rem;
 }
 
 .movie-details__tags {
@@ -60,6 +84,8 @@
 }
 
 .movie-details__tag {
+    background-color: #eaeaea;
+    border-radius: 2px;
     color: rgba(220, 20, 60, .87);
     padding-right: .25rem;
     text-decoration: none;
@@ -104,4 +130,31 @@
     width: 100%;
     border-radius: 5px;
     object-fit: cover;
+}
+
+.movie-details__related__item__preview {
+    width: 160px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.movie-details__related__item__details {
+    padding-left: .75rem;
+    width: 100%;
+}
+
+.movie-details__related__item__title {
+    font-size: 1em;
+    font-weight: normal;
+}
+
+.movie-details__related__item__duration {
+    background-color: #eaeaea;
+    color: rgba(0, 0, 0, .65);
+    font-weight: bolder;
+    font-size: .8em;
+    border-radius: 2px;
+    padding: .35rem;
+    text-align: center;
 }
