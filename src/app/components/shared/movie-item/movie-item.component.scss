@@ -23,12 +23,15 @@
 }
 
 .movie__footer__title {
-    // color: mat-color($primary);
     color: inherit;
     font-weight: bold;
     text-decoration: none;
     padding-bottom: .75rem;
     cursor: pointer;
+}
+
+.movie__footer__title:hover {
+    color: mat-color($primary);
 }
 
 .movie__footer__details {

@@ -88,3 +88,7 @@ body {
 .cdk-global-scrollblock {
     overflow-y: hidden !important;
 }
+
+.mat-pseudo-checkbox-checked {
+    background: mat-color($primary) !important;
+}

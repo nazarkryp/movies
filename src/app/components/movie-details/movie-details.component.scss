@@ -145,14 +145,16 @@
 }
 
 .movie-details__related__item__title {
-    font-size: 1em;
-    font-weight: normal;
+    cursor: pointer;
+}
+
+.movie-details__related__item__title:hover {
+    color: mat-color($primary);
 }
 
 .movie-details__related__item__duration {
     background-color: #eaeaea;
     color: rgba(0, 0, 0, .65);
-    font-weight: bolder;
     font-size: .8em;
     border-radius: 2px;
     padding: .35rem;
