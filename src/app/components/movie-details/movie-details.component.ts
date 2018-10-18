@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
 
 import { MovieService } from 'app/services';
-import { Movie } from 'app/models/view';
+import { Movie, Attachment } from 'app/models/view';
 import { environment } from 'environments/environment';
 import { MoviesQueryFilter, Page } from 'app/models/common';
 import { PreviewComponent } from '../shared/preview/preview.component';
@@ -39,11 +39,14 @@ export class MovieDetailsComponent implements OnInit {
         });
     }
 
-    public preview(uri: string) {
+    public preview(index: number) {
         this.dialog.open(PreviewComponent, {
             maxWidth: '1230px',
             maxHeight: 'calc(100vh - 24px)',
-            data: uri,
+            data: {
+                attachments: this.movie.attachments,
+                selectedAttachment: index
+            },
             backdropClass: 'movie-dialog-backdrop',
             panelClass: 'movie-dialog-container',
             autoFocus: false

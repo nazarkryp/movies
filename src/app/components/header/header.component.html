@@ -12,7 +12,7 @@
             <span style="color: crimson; font-weight: bold; font-size: 2em;">.</span>
         </div>
     </div>
-    <form class="header__search-form" (ngSubmit)="searchMovies()" [formGroup]="formGroup" style="display: inline-flex;">
+    <form class="header__search-form" (ngSubmit)="searchMovies()" [formGroup]="formGroup" *ngIf="currentUser">
         <input class="search-form__input" #searchInput formControlName="searchQuery" type="text" placeholder="Search" (blur)="searchFocusLost()">
         <button class="search-form__submit" mat-flat-button type="submit" color="primary">
             <mat-icon>search</mat-icon>

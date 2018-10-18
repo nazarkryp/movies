@@ -1,3 +1,17 @@
-<p>
-  signin works!
-</p>
+<div class="signin__container">
+    <header>
+        <h3>Authorize to continue</h3>
+    </header>
+    <main>
+        <mat-form-field appearance="standard">
+            <mat-label>Username</mat-label>
+            <input type="text" matInput placeholder="Username">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="Username">
+        </mat-form-field>
+        <button class="signin__btn primary" mat-flat-button>Sign in</button>
+        <button class="signin__btn" mat-flat-button color="accent" (click)="signInWithGoogle()">Sign in with Google</button>
+    </main>
+</div>

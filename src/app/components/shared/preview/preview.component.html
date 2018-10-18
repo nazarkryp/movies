@@ -1,3 +1,11 @@
-<div>
-    <img class="preview__image" [src]="uri" alt="preview">
+<div class="preview__container">
+    <div class="preview__actions" fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+            <mat-icon *ngIf="selectedAttachment > 0" (click)="previous()">chevron_left</mat-icon>
+        </div>
+        <div>
+            <mat-icon *ngIf="selectedAttachment != attachments.length - 1" (click)="next()">chevron_right</mat-icon>
+        </div>
+    </div>
+    <img class="preview__image" [src]="attachments[selectedAttachment].uri" alt="preview">
 </div>

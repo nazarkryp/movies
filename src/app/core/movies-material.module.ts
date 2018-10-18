@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
     imports: [
@@ -20,7 +22,9 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatSidenavModule,
         MatListModule,
         MatDialogModule,
-        MatMenuModule
+        MatMenuModule,
+        MatInputModule,
+        MatFormFieldModule
     ],
     exports: [
         MatButtonModule,
@@ -31,7 +35,9 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatSidenavModule,
         MatListModule,
         MatDialogModule,
-        MatMenuModule
+        MatMenuModule,
+        MatInputModule,
+        MatFormFieldModule
     ]
 })
 export class MoviesMaterialModule { }

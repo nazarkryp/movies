@@ -7,6 +7,9 @@
             <div class="movie-details__item underline" fxLayout="row" fxLayoutAlign="space-between start">
                 <div>
                     <span class="movie-details__title">{{movie.title}}</span>
+                    <div>
+                        <span class="movie-details__date">Published on {{movie.date | date : 'longDate'}}</span>
+                    </div>
                     <ul class="movie-details__models">
                         <li class="movie-details__model" *ngFor="let model of movie.models;">
                             <a [routerLink]="['/recent', 1]" [queryParams]="{models: model.modelId}">{{model.name}}</a>
@@ -15,18 +18,6 @@
                 </div>
                 <a mat-button [href]="movie.uri" target="_blank">OPEN SOURCE</a>
             </div>
-            <!-- <div class="movie-details__item">
-                <ul class="movie-details__tags">
-                    <li class="movie-details__tag" *ngFor="let category of movie.categories;">
-                        <a [routerLink]="['/recent', 1]" [queryParams]="{categories: category.name}">#{{category.name}}</a>
-                    </li>
-                </ul>
-            </div> -->
-            <!-- <div class="movie-details__item">
-                <button mat-button *ngFor="let category of movie.categories;">
-                    {{category.name}}
-                </button>
-            </div> -->
             <div class="movie-details__item">
                 <h3 class="movie-details__item__subtitle">Description</h3>
                 <p class="movie-details__description">
@@ -36,7 +27,8 @@
             <div class="movie-details__item">
                 <h3 class="movie-details__item__subtitle">Categories</h3>
                 <div class="movie-details__categories">
-                    <a class="movie-details__category" mat-flat-button color="accent" *ngFor="let category of movie.categories;" [routerLink]="['recent', 1]" [queryParams]="{categories: category.name.toLowerCase()}">
+                    <a class="movie-details__category" mat-flat-button color="accent" *ngFor="let category of movie.categories;"
+                        [routerLink]="['recent', 1]" [queryParams]="{categories: category.name.toLowerCase()}">
                         {{category.name}}
                     </a>
                 </div>
@@ -44,7 +36,8 @@
             <div class="movie-details__item" *ngIf="movie.attachments.length > 1">
                 <h3 class="movie-details__item__subtitle">More scenes from movie</h3>
                 <div class="movie-details__attachments">
-                    <div mat-ripple class="movie-details__attachment" *ngFor="let attachment of movie.attachments" (click)="preview(attachment.uri)">
+                    <div mat-ripple class="movie-details__attachment" *ngFor="let attachment of movie.attachments; let index = index;"
+                        (click)="preview(index)">
                         <img [src]="attachment.uri" alt="attachment{{attachment.attachmentId}}">
                     </div>
                 </div>

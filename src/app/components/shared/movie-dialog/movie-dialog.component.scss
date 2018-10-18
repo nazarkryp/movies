@@ -13,15 +13,15 @@
     z-index: 1;
 }
 
-.video-preview--title {
+.video-preview__title {
     font-size: 1.2em;
 }
 
-.video-preview--title:hover {
+.video-preview__title:hover {
     text-decoration: underline;
 }
 
-.video-preview--video {
+.video-preview__video {
     margin: -1px;
     max-height: calc(100vh - 25px);
     vertical-align: bottom;

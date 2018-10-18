@@ -1,16 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, Output } from '@angular/core';
-
-import { MovieService } from 'app/services';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router, ActivationEnd, ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
 import { EventEmitter } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Store } from '@ngrx/store';
-import { MovieState, getCurrentStudio } from '../../movies/infrastructure/state';
-import { select } from '@ngrx/store';
-import { Studio } from '../../models/view';
+
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router, ActivationEnd, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../core/security/user.service';
-import { User } from '../../core/security/models';
+import { SigninComponent } from '../signin/signin.component';
 
 @Component({
     selector: 'movies-header',
@@ -18,9 +14,7 @@ import { User } from '../../core/security/models';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    private currentUser: User;
-    private studio: Studio;
-
+    public currentUser: any;
     public showSearchBar: boolean;
     public mobile: boolean;
 
@@ -39,10 +33,9 @@ export class HeaderComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private builder: FormBuilder,
+        private dialog: MatDialog,
         private breakpointObserver: BreakpointObserver,
-        private store: Store<MovieState>,
-        private userService: UserService,
-        private movieService: MovieService) {
+        private userService: UserService) {
         this.formGroup = this.builder.group({
             searchQuery: new FormControl('', Validators.compose([Validators.maxLength(50)]))
         });
@@ -84,7 +77,13 @@ export class HeaderComponent implements OnInit {
     }
 
     public signIn() {
-        location.href = 'https://localhost:44397/v1/account/authorize';
+        this.dialog.open(SigninComponent, {
+            backdropClass: 'movie-dialog-backdrop',
+            panelClass: 'movie-dialog-container',
+            autoFocus: false
+        });
+        // location.href = 'https://localhost:44397/v1/account/authorize';
+
     }
 
     public signOut() {
@@ -92,6 +91,10 @@ export class HeaderComponent implements OnInit {
     }
 
     public ngOnInit() {
+        this.userService.getCurrentUser().subscribe(currentUser => {
+            this.currentUser = currentUser;
+        });
+
         this.router.events.subscribe(event => {
             if (event instanceof ActivationEnd) {
                 const search = event.snapshot.paramMap.get('searchQuery');
@@ -104,15 +107,6 @@ export class HeaderComponent implements OnInit {
                     this.showSearchBar = true;
                 }
             }
-        });
-
-        this.store.pipe(select(getCurrentStudio))
-            .subscribe((studio) => {
-                this.studio = studio;
-            });
-
-        this.userService.getCurrentUser().subscribe((currentUser) => {
-            this.currentUser = currentUser;
         });
     }
 }

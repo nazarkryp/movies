@@ -1,8 +1,8 @@
 <div class="video-preview" (click)="play()">
     <header class="video-preview--header">
-        <span class="video-preview--title">{{title}}</span>
+        <span class="video-preview__title">{{title}}</span>
     </header>
-    <video #video class="video-preview--video" autoplay loop controls>
+    <video #video class="video-preview__video" autoplay loop controls>
         <source [src]="uri">
     </video>
 </div>

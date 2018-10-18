@@ -42,7 +42,8 @@ export const reducers: ActionReducerMap<any> = {
     entryComponents: [
         MovieDialogComponent,
         PromptComponent,
-        PreviewComponent
+        PreviewComponent,
+        SigninComponent
     ],
     imports: [
         MoviesRoutingModule,
