@@ -14,7 +14,7 @@ import { Category } from 'app/models/view';
     styleUrls: ['./categories-filter.component.scss']
 })
 export class CategoriesFilterComponent implements OnInit {
-    public categories: Observable<Category[]>;
+    public categories: Category[];
 
     constructor(
         private readonly router: Router,
@@ -34,23 +34,35 @@ export class CategoriesFilterComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.categories = this.categoryService.getCategories()
+        this.categoryService.getCategories()
             .pipe(mergeMap(categories => {
                 return this.route.queryParamMap.pipe(map(params => {
                     const categoriesNames = params.getAll('categories');
 
+                    categories.forEach(category => {
+                        category.selected = false;
+                    });
+
                     if (categoriesNames.length && categories) {
                         categoriesNames.forEach(categoryName => {
-                            const category = categories.find(e => e.name.toLowerCase() === categoryName.toLowerCase());
+                            let category = categories.find(e => e.name.toLowerCase() === categoryName.toLowerCase());
 
                             if (category) {
                                 category.selected = true;
+                            } else {
+                                category = new Category();
+                                category.name = categoryName;
+                                category.selected = true;
+                                categories.unshift(category);
                             }
                         });
                     }
 
                     return categories;
                 }));
-            }));
+            }))
+            .subscribe(categories => {
+                this.categories = categories;
+            });
     }
 }

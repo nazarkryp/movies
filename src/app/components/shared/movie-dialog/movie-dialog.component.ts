@@ -1,16 +1,11 @@
-import { Component, OnInit, Inject, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Movie } from 'app/models/view';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { MovieService } from 'app/services';
-import { Store } from '@ngrx/store';
-import { MovieState } from 'app/movies/infrastructure/state/reducer';
-
-import * as fromRoot from 'app/movies/infrastructure/state/reducer';
 import { PromptService } from 'app/services/prompt.service';
 import { Prompt } from '../../../models/common';
-import { map, filter } from 'rxjs/operators';
-import { Observable, merge } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { merge } from 'rxjs';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -26,9 +21,7 @@ export class MovieDialogComponent implements OnInit {
     public uri = environment.uri;
 
     constructor(
-        private store: Store<MovieState>,
         private dialogRef: MatDialogRef<MovieDialogComponent>,
-        private movieService: MovieService,
         private promptService: PromptService,
         @Inject(MAT_DIALOG_DATA) public movie: Movie) {
         this.dialogRef.disableClose = true;

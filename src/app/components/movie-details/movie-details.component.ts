@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 import { Observable } from 'rxjs';
 
@@ -7,6 +8,7 @@ import { MovieService } from 'app/services';
 import { Movie } from 'app/models/view';
 import { environment } from 'environments/environment';
 import { MoviesQueryFilter, Page } from 'app/models/common';
+import { PreviewComponent } from '../shared/preview/preview.component';
 
 @Component({
     selector: 'movies-movie-details',
@@ -21,6 +23,7 @@ export class MovieDetailsComponent implements OnInit {
     public uri = environment.uri;
 
     constructor(
+        private dialog: MatDialog,
         private route: ActivatedRoute,
         private movieService: MovieService) { }
 
@@ -33,6 +36,17 @@ export class MovieDetailsComponent implements OnInit {
                     this.movie = movieDetails;
                     this.getRelatedMovies(this.movie.models.map(e => e.modelId));
                 });
+        });
+    }
+
+    public preview(uri: string) {
+        this.dialog.open(PreviewComponent, {
+            maxWidth: '1230px',
+            maxHeight: 'calc(100vh - 24px)',
+            data: uri,
+            backdropClass: 'movie-dialog-backdrop',
+            panelClass: 'movie-dialog-container',
+            autoFocus: false
         });
     }
 

@@ -21,6 +21,7 @@ import { MovieDialogComponent } from '../components/shared/movie-dialog/movie-di
 import { PromptComponent } from '../components/shared/prompt/prompt.component';
 import { SigninComponent } from '../components/signin/signin.component';
 import { MovieItemComponent } from '../components/shared/movie-item/movie-item.component';
+import { PreviewComponent } from '../components/shared/preview/preview.component';
 
 export const reducers: ActionReducerMap<any> = {
     movies: movieReducer
@@ -36,10 +37,12 @@ export const reducers: ActionReducerMap<any> = {
         PromptComponent,
         SigninComponent,
         MovieItemComponent,
+        PreviewComponent,
     ],
     entryComponents: [
         MovieDialogComponent,
-        PromptComponent
+        PromptComponent,
+        PreviewComponent
     ],
     imports: [
         MoviesRoutingModule,

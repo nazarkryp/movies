@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <footer class="movies-footer" fxLayout="row" fxLayoutAlign="center center" *ngIf="movies && movies.data">
+    <footer class="movies-footer" fxLayout="row" fxLayoutAlign="center center" *ngIf="movies && movies.data && movies.size < movies.total">
         <movies-pagination [pageSize]="movies.size" [total]="movies.total" [currentPage]="pageIndex" (changed)="pageChanged($event)"></movies-pagination>
     </footer>
 </div>

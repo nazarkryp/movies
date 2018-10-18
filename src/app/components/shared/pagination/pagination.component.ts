@@ -24,6 +24,7 @@ export class PaginationComponent implements OnInit {
     @Input()
     public set pageSize(value: number) {
         this._pageSize = value;
+        this.initializePages();
     }
 
     public get total(): number {
@@ -33,6 +34,7 @@ export class PaginationComponent implements OnInit {
     @Input()
     public set total(value: number) {
         this._total = value;
+        this.initializePages();
     }
 
 
@@ -83,10 +85,13 @@ export class PaginationComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.initializePages();
     }
 
     private initializePages() {
+        if (!this.total || !this.pageSize) {
+            return;
+        }
+
         const pagesCount = Math.ceil(this.total / this.pageSize);
 
         this.pages = new Array<number>(pagesCount);

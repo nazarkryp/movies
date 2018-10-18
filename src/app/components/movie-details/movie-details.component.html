@@ -13,7 +13,7 @@
                         </li>
                     </ul>
                 </div>
-                <a mat-button [href]="movie.uri" target="_blank" disabled>OPEN SOURCE</a>
+                <a mat-button [href]="movie.uri" target="_blank">OPEN SOURCE</a>
             </div>
             <!-- <div class="movie-details__item">
                 <ul class="movie-details__tags">
@@ -36,7 +36,7 @@
             <div class="movie-details__item">
                 <h3 class="movie-details__item__subtitle">Categories</h3>
                 <div class="movie-details__categories">
-                    <a mat-flat-button color="accent" *ngFor="let category of movie.categories;" [routerLink]="['recent', 1]" [queryParams]="{categories: category.name.toLowerCase()}">
+                    <a class="movie-details__category" mat-flat-button color="accent" *ngFor="let category of movie.categories;" [routerLink]="['recent', 1]" [queryParams]="{categories: category.name.toLowerCase()}">
                         {{category.name}}
                     </a>
                 </div>
@@ -44,7 +44,7 @@
             <div class="movie-details__item" *ngIf="movie.attachments.length > 1">
                 <h3 class="movie-details__item__subtitle">More scenes from movie</h3>
                 <div class="movie-details__attachments">
-                    <div class="movie-details__attachment" *ngFor="let attachment of movie.attachments">
+                    <div mat-ripple class="movie-details__attachment" *ngFor="let attachment of movie.attachments" (click)="preview(attachment.uri)">
                         <img [src]="attachment.uri" alt="attachment{{attachment.attachmentId}}">
                     </div>
                 </div>
@@ -56,7 +56,7 @@
         <div class="movie-details__related__item" fxLayout="row" *ngFor="let item of (relatedMovies | async)?.data">
             <img class="movie-details__related__item__preview" [src]="item.attachments[0].uri" alt="{{movie.title}}">
             <div class="movie-details__related__item__details" fxLayout="column" fxLayoutAlign="space-between start">
-                <a class="movie-details__related__item__title">{{item.title}}</a>
+                <a class="movie-details__related__item__title" [routerLink]="['/scene', item.movieId]">{{item.title}}</a>
                 <div class="movie-details__related__item__duration">
                     {{movie.duration}}
                 </div>
