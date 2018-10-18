@@ -7,7 +7,10 @@ import { Movie } from 'app/models/view';
     templateUrl: './movie-item.component.html',
     styleUrls: ['./movie-item.component.scss']
 })
-export class MovieItemComponent {
+export class MovieItemComponent implements OnInit {
     @Input('movie')
     public movie: Movie;
+
+    public ngOnInit() {
+    }
 }

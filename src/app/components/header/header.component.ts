@@ -77,12 +77,12 @@ export class HeaderComponent implements OnInit {
     }
 
     public signIn() {
-        this.dialog.open(SigninComponent, {
-            backdropClass: 'movie-dialog-backdrop',
-            panelClass: 'movie-dialog-container',
-            autoFocus: false
-        });
-        // location.href = 'https://localhost:44397/v1/account/authorize';
+        // this.dialog.open(SigninComponent, {
+        //     backdropClass: 'movie-dialog-backdrop',
+        //     panelClass: 'movie-dialog-container',
+        //     autoFocus: false
+        // });
+        location.href = 'https://localhost:44397/v1/account/authorize';
 
     }
 
