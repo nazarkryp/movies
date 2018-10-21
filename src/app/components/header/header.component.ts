@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { EventEmitter } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -24,6 +24,9 @@ export class HeaderComponent implements OnInit {
 
     @Output('menuOpened')
     public menuOpened = new EventEmitter();
+
+    @Input('opened')
+    public opened: boolean;
 
     public get searchQuery(): FormControl {
         return this.formGroup.get('searchQuery') as FormControl;

@@ -6,7 +6,6 @@ html {
     /* font-family: 'Lora', serif; */
     // font-family: 'Open Sans', serif;
     font-family: 'Roboto', serif;
-    font-size: .9em;
     color: rgba(0, 0, 0, .87);
 }
 
@@ -21,7 +20,7 @@ body {
 }
 
 .sidebar-header {
-    padding: 0 .75rem .75rem 1.4rem;
+    padding: 0 .75rem .75rem .75rem;
 }
 
 .sidebar-title {
@@ -29,13 +28,18 @@ body {
     color: rgba(0, 0, 0, .87);
 }
 
+.mat-list, .mat-nav-list, .mat-selection-list {
+    padding-top: 0px !important;
+}
+
+
 .mat-list .mat-list-item,
 .mat-list .mat-list-option,
 .mat-nav-list .mat-list-item,
 .mat-nav-list .mat-list-option,
 .mat-selection-list .mat-list-item,
 .mat-selection-list .mat-list-option {
-    height: 40px;
+    height: 40px !important;
 }
 
 .mat-list .mat-list-item .mat-list-item-content,
@@ -44,13 +48,17 @@ body {
 .mat-nav-list .mat-list-option .mat-list-item-content,
 .mat-selection-list .mat-list-item .mat-list-item-content,
 .mat-selection-list .mat-list-option .mat-list-item-content {
-    padding: .75rem;
+    // padding: .75rem;
+}
+
+.mat-list-option.selected {
+    color: crimson !important;
 }
 
 .mat-list-option,
 .mat-list-option:not(.mat-list-item-disabled) {
-    font-size: 1em !important;
-    color: rgba(0, 0, 0, .65) !important;
+    // font-size: 1em !important;
+    // color: rgba(0, 0, 0, .65) !important;
 }
 
 .mat-nav-list {
@@ -73,7 +81,7 @@ body {
 .mat-nav-list .mat-list-option .mat-list-item-content-reverse,
 .mat-selection-list .mat-list-item .mat-list-item-content-reverse,
 .mat-selection-list .mat-list-option .mat-list-item-content-reverse {
-    padding: 0 1.4rem !important;
+    padding: 0 .75rem !important;
 }
 
 .movie-dialog-container .mat-dialog-container {
@@ -87,6 +95,10 @@ body {
 
 .cdk-global-scrollblock {
     overflow-y: hidden !important;
+}
+
+.mat-list-option .mat-pseudo-checkbox {
+    display: none !important;
 }
 
 .mat-pseudo-checkbox-checked {

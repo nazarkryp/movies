@@ -3,7 +3,7 @@
 </header>
 <main fxLayout="column">
     <mat-selection-list #categoriesList>
-        <mat-list-option *ngFor="let category of categories" (click)="selectionChange(categoriesList)" [selected]="category.selected" [value]="category.name">
+        <mat-list-option *ngFor="let category of categories" [ngClass]="{ 'selected' : category.selected }" (click)="selectionChange(categoriesList)" [selected]="category.selected" [value]="category.name">
             {{category.name}}
         </mat-list-option>
     </mat-selection-list>

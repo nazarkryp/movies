@@ -3,7 +3,7 @@
 </header>
 <main fxLayout="column">
     <mat-selection-list #studiosList>
-        <mat-list-option *ngFor="let studio of studios | async" (click)="selectionChange(studiosList)" [value]="studio.studioId" [selected]="studio.selected">
+        <mat-list-option *ngFor="let studio of studios | async" [ngClass]="{ 'selected' : studio.selected }" (click)="selectionChange(studiosList)" [value]="studio.studioId" [selected]="studio.selected">
             {{studio.name}}
         </mat-list-option>
     </mat-selection-list>

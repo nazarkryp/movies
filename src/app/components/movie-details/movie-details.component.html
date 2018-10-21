@@ -1,4 +1,4 @@
-<div class="movie-details" *ngIf="movie">
+<div class="movie-details" *ngIf="movie" fxLayout="row" fxLayoutAlign="center">
     <div>
         <video class="movie-details__video" [poster]="movie.attachments[0].uri" controls loop>
             <source [src]="uri">

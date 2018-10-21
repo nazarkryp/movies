@@ -1,9 +1,18 @@
 <div class="movie-content">
-    <header class="movies-header" fxLayout="row" fxLayoutAlign="space-between start">
+    <header class="movies-header">
+        <div fxLayout="row">
+            <h1>
+                <a routerLink="/">
+                    Movies
+                </a>
+            </h1>
+        </div>
+    </header>
+    <!-- <header class="movies-header" fxLayout="row" fxLayoutAlign="space-between start">
         <h3 class="movies-title">LATEST UPDATES
             <ng-container *ngIf="movies?.total">({{movies.total}})</ng-container>
         </h3>
-    </header>
+    </header> -->
     <div class="movie-content__movies" [ngClass]="{ 'movie-content__movies--inactive' : isLoading}">
         <div *ngIf="movies && movies.data;">
             <div class="movies-gallery">

@@ -1,30 +1,36 @@
 <ng-progress [speed]="500" [meteor]="true" [spinner]="false" [color]="'#e91e63'" [trickleSpeed]="300" [thick]="false"></ng-progress>
 <div class="page-wrapper" fxLayout="column" fxLayoutAlign="start center">
-    <header class="header" fxLayout="row" fxLayoutAlign="center center">
+    <!-- <header class="header" fxLayout="row" fxLayoutAlign="center center">
         <div style="width: 100%;">
             <movies-header (menuOpened)="openMenu()"></movies-header>
         </div>
-    </header>
+    </header> -->
 
     <main class="main">
         <mat-sidenav-container class="sidenav-container">
             <mat-sidenav class="sidenav" [mode]="menuMode" [opened]="menuOpened">
-                <div *ngIf="currentUser | async">
-                    <div style="padding-top: 2.8rem;">
-                        <movies-studios-filter></movies-studios-filter>
-                    </div>
-                    <div style="padding-top: 2.8rem;">
-                        <movies-categories-filter></movies-categories-filter>
-                    </div>
+                <div style="padding: 1.4rem .75rem 1.4rem;">
+                    <mat-icon mat-ripple style="cursor: pointer; position: relative;" (click)="openMenu()">menu</mat-icon>
                 </div>
-                <footer class="footer" fxLayout="row" fxLayoutAlign="center center">
-                    <div class="container">
-                        <span class="copyright">© 2018 Movies</span>
+                <div style="height: 100%;">
+                    <div *ngIf="currentUser | async">
+                        <div style="padding-bottom: 1.4rem;">
+                            <movies-studios-filter></movies-studios-filter>
+                        </div>
+                        <div style="padding-bottom: 1.4rem;">
+                            <movies-categories-filter></movies-categories-filter>
+                        </div>
                     </div>
-                </footer>
+                    <footer class="footer">
+                        <div class="container">
+                            <span class="copyright">© 2018 Movies</span>
+                        </div>
+                    </footer>
+                </div>
             </mat-sidenav>
-            <mat-sidenav-content style="height: calc(100vh - 60px); padding: 2.8rem 1.4rem 1.4rem; box-sizing: border-box;" fxLayout="row" fxLayoutAlign="center start">
-                <div class="container" *ngIf="currentUser | async">
+            <mat-sidenav-content style="height: calc(100vh); padding: .75rem .75rem 0; box-sizing: border-box;">
+                <movies-header [opened]="menuOpened" (menuOpened)="openMenu()"></movies-header>
+                <div *ngIf="currentUser | async">
                     <router-outlet></router-outlet>
                 </div>
             </mat-sidenav-content>

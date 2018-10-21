@@ -1,27 +1,23 @@
 <header class="header" fxLayout="row" fxLayoutAlign="space-between center">
-    <div style="min-width: calc(240px - 0.7rem);" fxLayout="row" fxLayoutAlign="start center" *ngIf="!showSearchBar || !mobile">
+    <!-- <div style="min-width: calc(250px - 0.7rem);" fxLayout="row" fxLayoutAlign="start center" *ngIf="!showSearchBar || !mobile">
         <div style="padding-right: .7rem;">
-            <button mat-icon-button (click)="showMenu()">
-                <mat-icon>menu</mat-icon>
+            <mat-icon mat-ripple style="cursor: pointer; position: relative;" (click)="showMenu()">menu</mat-icon>
+        </div>
+    </div> -->
+    <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%;" *ngIf="currentUser">
+        <form class="header__search-form" (ngSubmit)="searchMovies()" [formGroup]="formGroup">
+            <mat-icon mat-ripple style="cursor: pointer; position: relative; margin-right: .75rem;" *ngIf="!opened" (click)="showMenu()">menu</mat-icon>
+            <mat-icon class="search-form__icon">search</mat-icon>
+            <input class="search-form__input" #searchInput formControlName="searchQuery" type="text" placeholder="Search movies" (blur)="searchFocusLost()">
+        </form>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <span style="margin-right: .75rem; font-size: .9em;">{{currentUser.email}}</span>
+            <button class="account-button" [matMenuTriggerFor]="userMenu">
+                <img class="account-button__avatar" [src]="currentUser.picture" alt="user-avatar" />
             </button>
         </div>
-        <div fxLayout="row" *ngIf="!mobile">
-            <a routerLink="/">
-                <h1>Movies</h1>
-            </a>
-            <span style="color: crimson; font-weight: bold; font-size: 2em;">.</span>
-        </div>
     </div>
-    <form class="header__search-form" (ngSubmit)="searchMovies()" [formGroup]="formGroup" *ngIf="currentUser">
-        <input class="search-form__input" #searchInput formControlName="searchQuery" type="text" placeholder="Search" (blur)="searchFocusLost()">
-        <button class="search-form__submit" mat-flat-button type="submit" color="primary">
-            <mat-icon>search</mat-icon>
-        </button>
-    </form>
     <button mat-flat-button (click)="signIn()" color="primary" *ngIf="!currentUser">Sign In</button>
-    <button class="account-button" [matMenuTriggerFor]="userMenu" *ngIf="currentUser">
-        <img class="account-button__avatar" [src]="currentUser.picture" alt="user-avatar"/>
-    </button>
 </header>
 <mat-menu #userMenu="matMenu" yPosition="below" style="position: absolute;">
     <button mat-menu-item (click)="signOut()">Logout</button>

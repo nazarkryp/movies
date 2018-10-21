@@ -7,15 +7,13 @@
 }
 
 .main {
-    min-height: calc(100vh - 60px); // padding: 4.2rem 0 1.4rem;
-    // box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.26);
-    // z-index: 1;
+    min-height: calc(100vh - 60px);
 }
 
 .footer {
-    padding: 1.4rem .7rem;
-    position: absolute;
-    bottom: 0;
+    padding: .75rem 1.4rem;
+    // position: absolute;
+    // bottom: 0;
 }
 
 .copyright {
@@ -38,10 +36,13 @@
 }
 
 .sidenav {
-    width: 240px;
-    background: rgb(245, 245, 245);
+    width: 300px;
 }
 
 .mat-drawer-content {
     overflow-y: overlay;
+}
+
+.mat-drawer-container {
+    background: white;
 }
