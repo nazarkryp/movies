@@ -1,18 +1,17 @@
 <ng-progress [speed]="500" [meteor]="true" [spinner]="false" [color]="'#e91e63'" [trickleSpeed]="300" [thick]="false"></ng-progress>
 <div class="page-wrapper" fxLayout="column" fxLayoutAlign="start center">
-    <!-- <header class="header" fxLayout="row" fxLayoutAlign="center center">
-        <div style="width: 100%;">
-            <movies-header (menuOpened)="openMenu()"></movies-header>
-        </div>
-    </header> -->
-
     <main class="main">
         <mat-sidenav-container class="sidenav-container">
             <mat-sidenav class="sidenav" [mode]="menuMode" [opened]="menuOpened">
-                <div style="padding: 1.4rem .75rem 1.4rem;">
-                    <mat-icon mat-ripple style="cursor: pointer; position: relative;" (click)="openMenu()">menu</mat-icon>
+                <div class="sidenav__menu" fxLayout="row" fxLayoutAlign="start start">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon mat-ripple style="cursor: pointer; position: relative; margin-right: .75rem;" (click)="openMenu()">menu</mat-icon>
+                        <h1>
+                            <a style="text-decoration: none; color: inherit;" routerLink="/">Movies</a>
+                        </h1>
+                    </div>
                 </div>
-                <div style="height: 100%;">
+                <div>
                     <div *ngIf="currentUser | async">
                         <div style="padding-bottom: 1.4rem;">
                             <movies-studios-filter></movies-studios-filter>
@@ -28,7 +27,7 @@
                     </footer>
                 </div>
             </mat-sidenav>
-            <mat-sidenav-content style="height: calc(100vh); padding: .75rem .75rem 0; box-sizing: border-box;">
+            <mat-sidenav-content class="sidenav-content">
                 <movies-header [opened]="menuOpened" (menuOpened)="openMenu()"></movies-header>
                 <div *ngIf="currentUser | async">
                     <router-outlet></router-outlet>

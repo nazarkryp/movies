@@ -11,9 +11,10 @@
 }
 
 .footer {
+    box-sizing: border-box;
     padding: .75rem 1.4rem;
-    // position: absolute;
-    // bottom: 0;
+    position: absolute;
+    bottom: 0;
 }
 
 .copyright {
@@ -39,8 +40,16 @@
     width: 300px;
 }
 
+.sidenav__menu {
+    padding: .75rem 0 0 .75rem;
+    height: 100px;
+}
+
 .mat-drawer-content {
     overflow-y: overlay;
+    height: calc(100vh);
+    padding: 0 1.4rem 0 .75rem;
+    box-sizing: border-box;
 }
 
 .mat-drawer-container {

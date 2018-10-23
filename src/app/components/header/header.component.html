@@ -1,17 +1,18 @@
-<header class="header" fxLayout="row" fxLayoutAlign="space-between center">
-    <!-- <div style="min-width: calc(250px - 0.7rem);" fxLayout="row" fxLayoutAlign="start center" *ngIf="!showSearchBar || !mobile">
-        <div style="padding-right: .7rem;">
-            <mat-icon mat-ripple style="cursor: pointer; position: relative;" (click)="showMenu()">menu</mat-icon>
-        </div>
-    </div> -->
-    <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%;" *ngIf="currentUser">
+<header class="header" fxLayout="row" fxLayoutAlign="space-between start">
+    <div class="header__logo infinite fadeInLeft delay-2s" fxLayout="row" fxLayoutAlign="start center" [ngClass]="{ 'animated' : !opened }" *ngIf="!opened">
+        <mat-icon mat-ripple style="cursor: pointer; position: relative; margin-right: .75rem;" (click)="showMenu()">menu</mat-icon>
+        <h1>
+            <a routerLink="/">Movies</a>
+        </h1>
+    </div>
+    <div class="header__widgets" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="currentUser">
         <form class="header__search-form" (ngSubmit)="searchMovies()" [formGroup]="formGroup">
-            <mat-icon mat-ripple style="cursor: pointer; position: relative; margin-right: .75rem;" *ngIf="!opened" (click)="showMenu()">menu</mat-icon>
             <mat-icon class="search-form__icon">search</mat-icon>
-            <input class="search-form__input" #searchInput formControlName="searchQuery" type="text" placeholder="Search movies" (blur)="searchFocusLost()">
+            <input class="search-form__input" #searchInput formControlName="searchQuery" type="text" placeholder="Search movies"
+                (blur)="searchFocusLost()">
         </form>
         <div fxLayout="row" fxLayoutAlign="start center">
-            <span style="margin-right: .75rem; font-size: .9em;">{{currentUser.email}}</span>
+            <span style="font-weight: bold; margin-right: .75rem; font-size: .9em;">{{currentUser.email}}</span>
             <button class="account-button" [matMenuTriggerFor]="userMenu">
                 <img class="account-button__avatar" [src]="currentUser.picture" alt="user-avatar" />
             </button>
