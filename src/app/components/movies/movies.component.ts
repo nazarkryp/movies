@@ -77,17 +77,13 @@ export class MoviesComponent implements OnInit, OnDestroy {
             filter.page = this.pageIndex;
             filter.size = 24;
 
-            // if (this.movies) {
-            //     this.movies.data = [];
-            // }
-
             if (this.querySubscription) {
                 this.querySubscription.unsubscribe();
             }
 
             this.querySubscription = this.route.queryParamMap.subscribe(params => {
                 filter.studios = params.getAll('studios').map(e => +e);
-                filter.models = params.getAll('models').map(e => +e);
+                filter.models = params.getAll('models').map(e => e);
                 filter.search = params.get('search');
                 filter.categories = params.getAll('categories');
 
@@ -97,6 +93,10 @@ export class MoviesComponent implements OnInit, OnDestroy {
 
                 this.isLoading = true;
                 this.movieSubscription = this.movieService.getMovies(filter).subscribe(movies => {
+                    if (this.movies) {
+                        this.movies.data = [];
+                    }
+
                     this.movies = movies;
                     this.isLoading = false;
                 }, () => { this.isLoading = false; });

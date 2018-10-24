@@ -51,7 +51,7 @@ export class CategoriesFilterComponent implements OnInit {
                                 category.selected = true;
                             } else {
                                 category = new Category();
-                                category.name = categoryName;
+                                category.name = categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
                                 category.selected = true;
                                 categories.unshift(category);
                             }

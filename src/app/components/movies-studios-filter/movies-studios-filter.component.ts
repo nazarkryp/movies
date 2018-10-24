@@ -39,6 +39,10 @@ export class StudioListComponent implements OnInit {
                 return this.route.queryParamMap.pipe(map(params => {
                     const studiosIds = params.getAll('studios');
 
+                    studios.forEach(studio => {
+                        studio.selected = false;
+                    });
+
                     if (studiosIds.length && studios) {
                         studiosIds.forEach(studioId => {
                             const studio = studios.find(e => e.studioId === +studioId);

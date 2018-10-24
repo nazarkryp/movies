@@ -49,6 +49,10 @@ export class MovieService {
             }));
     }
 
+    public assignMissingCategory(movieId: number, categoryId: number) {
+        return this.webApiService.put<any>(`v1/movies/${movieId}/categories/${categoryId}`, null);
+    }
+
     //#endregion
 
     //#region Private Methods

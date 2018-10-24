@@ -1,5 +1,5 @@
 <header class="header" fxLayout="row" fxLayoutAlign="space-between start">
-    <div class="header__logo infinite fadeInLeft delay-2s" fxLayout="row" fxLayoutAlign="start center" [ngClass]="{ 'animated' : !opened }" *ngIf="!opened">
+    <div class="header__logo infinite fadeInRight delay-2s" fxLayout="row" fxLayoutAlign="start center" [ngClass]="{ 'animated' : !opened }" *ngIf="!opened">
         <mat-icon mat-ripple style="cursor: pointer; position: relative; margin-right: .75rem;" (click)="showMenu()">menu</mat-icon>
         <h1>
             <a routerLink="/">Movies</a>

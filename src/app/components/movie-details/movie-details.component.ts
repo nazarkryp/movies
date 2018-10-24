@@ -39,6 +39,23 @@ export class MovieDetailsComponent implements OnInit {
         });
     }
 
+    public addMissingCategory(categoryId: number) {
+        this.movieService.assignMissingCategory(this.movie.movieId, categoryId)
+            .subscribe(() => {
+                this.movie.categories.push({ categoryId: categoryId, name: 'stockings', selected: false });
+            }, error => console.log(error));
+    }
+
+    public hasCategory(categoryId: number) {
+        const category = this.movie.categories.find(e => e.categoryId === categoryId);
+
+        if (category) {
+            return true;
+        }
+
+        return false;
+    }
+
     public preview(index: number) {
         this.dialog.open(PreviewComponent, {
             maxWidth: '1230px',
