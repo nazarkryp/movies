@@ -16,7 +16,7 @@
                         </li>
                     </ul>
                 </div>
-                <a mat-button [href]="movie.uri" target="_blank">OPEN SOURCE</a>
+                <a mat-flat-button disabled [href]="movie.uri" target="_blank">OPEN ON {{movie.studio.name | uppercase}}</a>
             </div>
             <div class="movie-details__item">
                 <h3 class="movie-details__item__subtitle">Description</h3>

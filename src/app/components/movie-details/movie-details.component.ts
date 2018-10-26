@@ -34,7 +34,7 @@ export class MovieDetailsComponent implements OnInit {
             this.movieService.getMovie(movieId)
                 .subscribe(movieDetails => {
                     this.movie = movieDetails;
-                    this.getRelatedMovies(this.movie.models.map(e => e.modelId));
+                    this.getRelatedMovies(this.movie.models.map(e => e.name));
                 });
         });
     }
@@ -70,7 +70,7 @@ export class MovieDetailsComponent implements OnInit {
         });
     }
 
-    private getRelatedMovies(models: number[]) {
+    private getRelatedMovies(models: string[]) {
         if (models.length) {
             const filter = new MoviesQueryFilter();
             filter.size = 12;

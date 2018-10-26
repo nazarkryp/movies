@@ -1,5 +1,6 @@
 <header class="header" fxLayout="row" fxLayoutAlign="space-between start">
-    <div class="header__logo infinite fadeInRight delay-2s" fxLayout="row" fxLayoutAlign="start center" [ngClass]="{ 'animated' : !opened }" *ngIf="!opened">
+    <div class="header__logo infinite fadeInRight delay-2s" fxLayout="row" fxLayoutAlign="start center" [ngClass]="{ 'animated' : !opened }"
+        *ngIf="!opened">
         <mat-icon mat-ripple style="cursor: pointer; position: relative; margin-right: .75rem;" (click)="showMenu()">menu</mat-icon>
         <h1>
             <a routerLink="/">Movies</a>
@@ -12,7 +13,7 @@
                 (blur)="searchFocusLost()">
         </form>
         <div fxLayout="row" fxLayoutAlign="start center">
-            <span style="font-weight: bold; margin-right: .75rem; font-size: .9em;">{{currentUser.email}}</span>
+            <span style="margin-right: .75rem; font-size: .9em;">{{currentUser.email}}</span>
             <button class="account-button" [matMenuTriggerFor]="userMenu">
                 <img class="account-button__avatar" [src]="currentUser.picture" alt="user-avatar" />
             </button>
